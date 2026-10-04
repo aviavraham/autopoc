@@ -153,3 +153,14 @@ Implement comprehensive cleanup functionality to address resource accumulation a
 | URL-encode branch names in GitHub protection API paths | ✅ Done |
 | Require status checks and invalidate stale approvals | ✅ Done |
 | Add regression coverage for the hardened policy | ✅ Done |
+
+---
+
+# AutoPoC Report Video Feature Ticket
+
+## Phase 1: Ticket Definition ✅
+
+| Task | Status |
+|------|--------|
+| Define scope and Definition of Done for report-driven explanatory videos | ✅ Done |
+| Create Jira Feature AIPCC-32887 in the AIPCC project | ✅ Done |

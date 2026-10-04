@@ -263,3 +263,19 @@ Add `__main__.py` or CLI entry points to:
 - URL-encode GitHub default branch names before using them in REST API paths.
 - Require configured status checks and invalidate stale approvals after new commits.
 - Add regression assertions covering the hardened branch-protection policy.
+
+---
+
+# AutoPoC Report Video Feature Ticket
+
+## Progress
+
+| Phase | Status | Notes |
+|-------|--------|-------|
+| Phase 1: Ticket definition | ✅ Done | Jira Feature AIPCC-32887 created with scope and Definition of Done |
+
+## Phase 1: Ticket Definition ✅
+
+### 1.1 Create Jira feature ticket — ✅
+- Created [AIPCC-32887](https://redhat.atlassian.net/browse/AIPCC-32887) in the AIPCC project.
+- Captured report-driven video generation scope and acceptance criteria for background, setup, testing, evidence-based suitability conclusion, and report linkage.
