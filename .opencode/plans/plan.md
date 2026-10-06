@@ -164,3 +164,9 @@ Implement comprehensive cleanup functionality to address resource accumulation a
 |------|--------|
 | Define scope and Definition of Done for report-driven explanatory videos | ✅ Done |
 | Create Jira Feature AIPCC-32887 in the AIPCC project | ✅ Done |
+
+## Phase 2: Slidev Feasibility Epic ✅
+
+| Task | Status |
+|------|--------|
+| Fill Jira Epic AIPCC-33008 with Slidev feasibility scope and Definition of Done | ✅ Done |

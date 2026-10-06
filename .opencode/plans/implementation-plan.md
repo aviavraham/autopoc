@@ -273,9 +273,16 @@ Add `__main__.py` or CLI entry points to:
 | Phase | Status | Notes |
 |-------|--------|-------|
 | Phase 1: Ticket definition | ✅ Done | Jira Feature AIPCC-32887 created with scope and Definition of Done |
+| Phase 2: Slidev feasibility Epic | ✅ Done | AIPCC-33008 filled with feasibility scope, technical constraints, and Definition of Done |
 
 ## Phase 1: Ticket Definition ✅
 
 ### 1.1 Create Jira feature ticket — ✅
 - Created [AIPCC-32887](https://redhat.atlassian.net/browse/AIPCC-32887) in the AIPCC project.
 - Captured report-driven video generation scope and acceptance criteria for background, setup, testing, evidence-based suitability conclusion, and report linkage.
+
+## Phase 2: Slidev Feasibility Epic ✅
+
+### 2.1 Fill Jira Epic AIPCC-33008 — ✅
+- Added a bounded evaluation of Slidev with AutoPoC, Playwright, and the existing workflow-validation/recording capabilities.
+- Recorded the documented recording/export behavior, automation questions, sample-video deliverable, and feasibility recommendation criteria.
