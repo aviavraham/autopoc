@@ -170,3 +170,21 @@ Implement comprehensive cleanup functionality to address resource accumulation a
 | Task | Status |
 |------|--------|
 | Fill Jira Epic AIPCC-33008 with Slidev feasibility scope and Definition of Done | ✅ Done |
+
+## Phase 3: Headless Presentation and UI Evidence Requirements ✅
+
+| Task | Status |
+|------|--------|
+| Document the headless post-report presentation step and proposed execution approach | ✅ Done |
+| Document UI screenshots, scenario recordings, and Playwright traces during original tests | ✅ Done |
+| Document evidence preservation, source linkage, and remaining output/runtime decisions | ✅ Done |
+
+Details: [Headless report presentations and UI test evidence](../../docs/report-presentation-plan.md).
+
+## Phase 4: Sample Presentation and Recording Feasibility — Pending
+
+| Task | Status |
+|------|--------|
+| Archive evidence from a representative completed end-to-end PoC | Pending |
+| Generate and verify a sample Slidev presentation and PDF headlessly | Pending |
+| Evaluate recording/composition with UI clips and record the feasibility recommendation | Pending |

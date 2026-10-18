@@ -274,6 +274,8 @@ Add `__main__.py` or CLI entry points to:
 |-------|--------|-------|
 | Phase 1: Ticket definition | ✅ Done | Jira Feature AIPCC-32887 created with scope and Definition of Done |
 | Phase 2: Slidev feasibility Epic | ✅ Done | AIPCC-33008 filled with feasibility scope, technical constraints, and Definition of Done |
+| Phase 3: Headless presentation and UI evidence requirements | ✅ Done | Documented the requested headless step and proposed capture/evidence flow; implementation choices remain under evaluation |
+| Phase 4: Sample presentation and recording feasibility | Pending | Validate the proposed flow with one completed end-to-end PoC |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -286,3 +288,19 @@ Add `__main__.py` or CLI entry points to:
 ### 2.1 Fill Jira Epic AIPCC-33008 — ✅
 - Added a bounded evaluation of Slidev with AutoPoC, Playwright, and the existing workflow-validation/recording capabilities.
 - Recorded the documented recording/export behavior, automation questions, sample-video deliverable, and feasibility recommendation criteria.
+
+## Phase 3: Headless Presentation and UI Evidence Requirements ✅
+
+### 3.1 Document headless generation and UI capture requirements — ✅
+- Added [the presentation plan](../../docs/report-presentation-plan.md) covering a headless post-report step without an interactive Slidev login or local operator installation.
+- Recorded screenshots at meaningful UI test checkpoints, recordings of selected scenarios, and Playwright traces captured during the original validation run.
+- Defined run/scenario evidence linkage, credential handling, and preservation of ephemeral run artifacts for repeatable presentation generation.
+- Distinguished AutoPoC's content-generation model from Slidev's model-free rendering.
+- Kept presentation/video output scope, narration, storage, and runtime limits open; the separate Job and non-blocking failure behavior are recommendations pending validation.
+
+## Phase 4: Sample Presentation and Recording Feasibility — Pending
+
+### 4.1 Validate one completed PoC — Pending
+- Archive the report, state, test results, sanitized logs, available traces, and UI evidence when applicable.
+- Generate and inspect a sample Slidev deck and PDF in the headless container environment.
+- Evaluate recording and composition with actual UI clips; document limitations and an adoption recommendation for AIPCC-33008.
