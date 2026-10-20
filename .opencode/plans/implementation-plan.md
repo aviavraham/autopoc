@@ -275,7 +275,7 @@ Add `__main__.py` or CLI entry points to:
 | Phase 1: Ticket definition | ✅ Done | Jira Feature AIPCC-32887 created with scope and Definition of Done |
 | Phase 2: Slidev feasibility Epic | ✅ Done | AIPCC-33008 filled with feasibility scope, technical constraints, and Definition of Done |
 | Phase 3: Headless presentation and UI evidence requirements | ✅ Done | Documented the requested headless step and proposed capture/evidence flow; implementation choices remain under evaluation |
-| Phase 4: Sample presentation and recording feasibility | Pending | Validate the proposed flow with one completed end-to-end PoC |
+| Phase 4: Sample presentation and recording feasibility | In progress | Omnigent evidence archive and headless Slidev/PDF sample complete; recording/composition evaluation remains pending |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -298,9 +298,17 @@ Add `__main__.py` or CLI entry points to:
 - Distinguished AutoPoC's content-generation model from Slidev's model-free rendering.
 - Kept presentation/video output scope, narration, storage, and runtime limits open; the separate Job and non-blocking failure behavior are recommendations pending validation.
 
-## Phase 4: Sample Presentation and Recording Feasibility — Pending
+## Phase 4: Sample Presentation and Recording Feasibility — In progress
 
-### 4.1 Validate one completed PoC — Pending
-- Archive the report, state, test results, sanitized logs, available traces, and UI evidence when applicable.
-- Generate and inspect a sample Slidev deck and PDF in the headless container environment.
-- Evaluate recording and composition with actual UI clips; document limitations and an adoption recommendation for AIPCC-33008.
+### 4.1 Archive one completed PoC — ✅
+- Archived the Omnigent run `autopoc-omnigent-8554`: pinned report/plan/evaluation/blog/manifests, original test JSON, sanitized runner and both build logs, and selected job/build metadata.
+- Indexed claims and source hashes; labeled later UI/cluster observations separately.
+- Recorded missing original browser/distributed traces, UI recordings and workspace state export instead of inventing those artifacts.
+
+### 4.2 Generate and inspect the sample Slidev deck — ✅
+- Created `presentations/omnigent-2026-10-20/` with 12 stakeholder slides and 4 technical appendix slides.
+- Built a static browser deck and exported/visually inspected a 16-page PDF with headless Chromium.
+- Documented reproducible commands, original test coverage, temporary storage, source-branch drift, SCC/report discrepancy and source-linked evidence.
+
+### 4.3 Recording and composition feasibility — Pending
+- Evaluate recording and composition with actual UI clips; document limitations and an adoption recommendation for AIPCC-33008. No video capability is claimed by this presentation sample.

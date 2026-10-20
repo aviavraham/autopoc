@@ -181,10 +181,14 @@ Implement comprehensive cleanup functionality to address resource accumulation a
 
 Details: [Headless report presentations and UI test evidence](../../docs/report-presentation-plan.md).
 
-## Phase 4: Sample Presentation and Recording Feasibility — Pending
+## Phase 4: Sample Presentation and Recording Feasibility — In progress
 
 | Task | Status |
 |------|--------|
-| Archive evidence from a representative completed end-to-end PoC | Pending |
-| Generate and verify a sample Slidev presentation and PDF headlessly | Pending |
+| Archive evidence from a representative completed end-to-end PoC | ✅ Done — Omnigent run autopoc-omnigent-8554, reports, original test JSON, sanitized runner/build logs and later observations |
+| Generate and verify a sample Slidev presentation and PDF headlessly | ✅ Done — 12 main slides plus 4 appendix slides, static browser build and 16-page PDF |
 | Evaluate recording/composition with UI clips and record the feasibility recommendation | Pending |
+
+Sample: `presentations/omnigent-2026-10-20/`. Original browser traces and UI
+recordings were not captured by this run's five HTTP checks. The included UI
+screenshot is explicitly a later observation; video feasibility remains open.
