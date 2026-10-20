@@ -1,11 +1,12 @@
 # Omnigent AutoPoC run review
 
 A stakeholder presentation of run `autopoc-omnigent-8554` on 20 October 2026.
-Twelve main slides, approximately ten minutes, followed by four evidence slides.
+Fourteen main slides, including two animated TopoLoop walkthroughs, followed
+by four evidence slides.
 
 ## Present or edit
 
-Requires Node.js 22.12 or newer. From this directory:
+Requires Node.js 22.18 or newer. From this directory:
 
 ```bash
 npm ci
@@ -14,6 +15,7 @@ npm run dev
 
 Open <http://localhost:3030/>. Edit `slides.md` and `style.css` to revise the
 deck. Speaker notes include evidence references, precise scope and caveats.
+The setup topology is slide 7 and the five-check scenario flow is slide 8.
 Use the arrow keys to navigate, or open `/presenter/` for presenter mode.
 
 ## Build and export
@@ -37,6 +39,32 @@ npm run export -- --executable-path /usr/bin/google-chrome
 the lock file, evidence, the PDF and the built static website. Extract it and
 serve `dist/` from a static server with SPA fallback, or use the commands above.
 Opening `dist/index.html` directly as a `file:` URL is not supported.
+
+## Topology and scenario animations
+
+TopoLoop's unmodified runtime is vendored under `vendor/topoloop/`, pinned to
+commit `8631cf7955ebf40a579aab4ce3d0cca50d215c21`. Its MIT license and bundled
+font OFL are preserved there and included in the browser build's assets.
+
+- `specs/omnigent-setup.ts` defines eight resources and three acts: build/push,
+  deployment/storage and HTTPS access. Namespace names appear in node labels.
+- `specs/omnigent-scenarios.ts` builds five acts from the original archived
+  test results. Each request follows runner, Route, Service and server.
+- `components/RunTopoLoop.vue` integrates Slidev, the common red/charcoal theme,
+  inactive-slide cleanup, reduced-motion preference and still-frame/play control.
+- Browser loops are 30 and 50 seconds. Playback timing is illustrative, and
+  displayed HTTP durations come from the original results. No deployed test
+  endpoint is called by these animations.
+- Node labels follow the active path for readability. The existing static
+  architecture slide retains the full serving/storage diagram.
+- PDF/print export freezes setup at 7 seconds and scenarios at 47 seconds.
+  The scenario status board retains all five original outcomes.
+- Log lines prefixed with `#` explain the reconstruction. Other excerpts quote
+  original logs or the original result JSON.
+
+These are animated explanations of the saved evidence, not original traces,
+packet captures, scenario recordings or new test runs. To edit the graphs,
+change the specs rather than the vendored library.
 
 ## Evidence and interpretation
 

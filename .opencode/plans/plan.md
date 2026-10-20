@@ -186,7 +186,7 @@ Details: [Headless report presentations and UI test evidence](../../docs/report-
 | Task | Status |
 |------|--------|
 | Archive evidence from a representative completed end-to-end PoC | ✅ Done — Omnigent run autopoc-omnigent-8554, reports, original test JSON, sanitized runner/build logs and later observations |
-| Generate and verify a sample Slidev presentation and PDF headlessly | ✅ Done — 12 main slides plus 4 appendix slides, static browser build and 16-page PDF |
+| Generate and verify a sample Slidev presentation and PDF headlessly | ✅ Done — 14 main slides plus 4 appendix slides, including animated TopoLoop setup and scenario walkthroughs, static browser build and 18-page PDF |
 | Evaluate recording/composition with UI clips and record the feasibility recommendation | Pending |
 
 Sample: `presentations/omnigent-2026-10-20/`. Original browser traces and UI

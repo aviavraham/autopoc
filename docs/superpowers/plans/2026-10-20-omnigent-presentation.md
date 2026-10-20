@@ -41,6 +41,30 @@ Use Slidev's native static build and Playwright PDF exporter.
 - Independent final content review found no material issues.
 - ZIP archive integrity check passed. Video work remains outside this delivery.
 
+## Follow-up: TopoLoop setup and scenario walkthroughs
+
+User requested TopoLoop topology and scenario flow added to the existing deck.
+The result has fourteen main slides plus the existing four-slide appendix.
+
+- [x] Vendor the unmodified runtime at commit
+  `8631cf7955ebf40a579aab4ce3d0cca50d215c21`, retain MIT/OFL attribution and pin
+  the Vue/Three dependencies. Node minimum is now 22.18.
+- [x] Add an eight-resource setup spec with three acts and a five-act scenario
+  spec derived directly from original result JSON. Label illustrative timing.
+- [x] Integrate active-slide rendering, reduced-motion preference, evidence
+  loading/error handling, still-frame controls and frozen PDF frames.
+- [x] Complete all-act rendering/label checks, inspect the revised 18-page PDF,
+  repackage sources and commit this follow-up.
+
+Follow-up verification: both native specs validate; all three setup acts and
+five scenario acts render with no active-label intersections at the inspected
+frames. Reduced-motion default, explicit playback and missing-evidence fallback
+were exercised in Chromium. The updated PDF has 18 pages; both new pages were
+visually inspected. Seven archived source hashes remain unchanged and all 14
+vendored runtime files match the pinned upstream revision. MIT/OFL assets are
+served by the static preview, authored-file pre-commit checks pass, ZIP
+integrity passes, and independent content/code review found no material issues.
+
 ## Verification focus
 
 - Five HTTP smoke checks prove reachability and expected response text only.

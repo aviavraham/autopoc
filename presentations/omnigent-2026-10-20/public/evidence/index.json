@@ -49,26 +49,39 @@
       "deployment.yaml",
       "report.md"
     ],
-    "slide_7_recovery": [
+    "slide_9_recovery": [
       "build-1.sanitized.log.gz",
       "build-2.sanitized.log.gz",
       "runner.sanitized.log.gz",
       "report.md"
     ],
-    "slide_8_tests": [
+    "slide_10_tests": [
       "test-results.json",
       "poc_test.py.txt"
     ],
-    "slide_9_deliverables": [
+    "slide_11_deliverables": [
       "report.md",
       "plan.md",
       "blog.md"
     ],
-    "slides_10_12": [
+    "slides_12_14": [
       "report.md",
       "plan.md",
       "deployment.yaml",
       "run-summary.json"
+    ],
+    "slide_7_setup_topology": [
+      "deployment.yaml",
+      "report.md",
+      "run-summary.json",
+      "build-1.sanitized.log.gz",
+      "build-2.sanitized.log.gz",
+      "runner.sanitized.log.gz"
+    ],
+    "slide_8_scenario_flow": [
+      "test-results.json",
+      "poc_test.py.txt",
+      "report.md"
     ]
   },
   "later_ui_capture": {
@@ -76,5 +89,21 @@
     "image": "../assets/omnigent-login.png",
     "note": "Later browser observation; not an original validation result"
   },
-  "external_reference": "https://kubernetes.io/docs/concepts/workloads/pods/user-namespaces/"
+  "external_reference": "https://kubernetes.io/docs/concepts/workloads/pods/user-namespaces/",
+  "animation": {
+    "renderer": "TopoLoop",
+    "upstream": "https://github.com/r-bit-rry/topoloop",
+    "commit": "8631cf7955ebf40a579aab4ce3d0cca50d215c21",
+    "kind": "Animated reconstruction, not original trace capture",
+    "setup_loop_seconds": 30,
+    "scenario_loop_seconds": 50,
+    "pdf_poster_seconds": {
+      "setup": 7,
+      "scenarios": 47
+    },
+    "specs": [
+      "specs/omnigent-setup.ts",
+      "specs/omnigent-scenarios.ts"
+    ]
+  }
 }

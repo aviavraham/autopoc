@@ -236,6 +236,51 @@ Sources: public/evidence/deployment.yaml; report.md, section 6.
 -->
 
 ---
+layout: none
+---
+
+<RunTopoLoop kind="setup" />
+
+<!--
+Animated setup topology reconstructed from this run's source, build and
+deployment artifacts. Three ten-second acts illustrate build/push, deployment
+and access through Route/Service. Animation timing is illustrative; original
+build durations and job timestamps remain in the evidence slides. Edges show
+build/deployment relationships as well as request routing; they are not packet
+captures. Labels identify runner, build and deployed application namespaces.
+Only the server and UI are deployed; no model or external agent host is shown.
+The SQLite store is emptyDir and not durable. Log lines prefixed with # are
+explanatory reconstruction, while other excerpts quote the archived logs.
+Sources: public/evidence/deployment.yaml; report.md; run-summary.json;
+build-1.sanitized.log.gz; build-2.sanitized.log.gz; runner.sanitized.log.gz.
+Renderer: https://github.com/r-bit-rry/topoloop/tree/8631cf7955ebf40a579aab4ce3d0cca50d215c21
+The PDF freezes this animation at second 7. A still-frame/play control is
+available in the browser, and reduced-motion preference starts on the still.
+Labels follow the active path to keep each stage readable; the animation
+reveals all eight resources across its three acts. The preceding architecture
+slide retains the complete static serving/storage topology for PDF readers.
+-->
+
+---
+layout: none
+---
+
+<RunTopoLoop kind="scenarios" />
+
+<!--
+Five ten-second acts illustrate the five original pre-auth HTTP checks in
+order: health, version, server info, root HTML and login HTML. All requests
+follow the same test runner, HTTPS Route, Service and server path. The graph
+does not claim a measured distributed trace or database operation. Durations
+and statuses are read from archived original-run test-results.json. The
+browser does not issue test requests: this is an animated reconstruction.
+No user authentication, agent execution or JavaScript UI action was validated.
+The PDF freezes the final act at second 47 with all five original outcomes on
+the status board. Lines prefixed # are explanatory, not original log lines.
+Sources: public/evidence/test-results.json; poc_test.py.txt; report.md.
+-->
+
+---
 layout: default
 ---
 

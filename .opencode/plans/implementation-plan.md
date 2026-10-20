@@ -306,9 +306,10 @@ Add `__main__.py` or CLI entry points to:
 - Recorded missing original browser/distributed traces, UI recordings and workspace state export instead of inventing those artifacts.
 
 ### 4.2 Generate and inspect the sample Slidev deck — ✅
-- Created `presentations/omnigent-2026-10-20/` with 12 stakeholder slides and 4 technical appendix slides.
-- Built a static browser deck and exported/visually inspected a 16-page PDF with headless Chromium.
+- Created `presentations/omnigent-2026-10-20/` with 14 stakeholder slides and 4 technical appendix slides.
+- Built a static browser deck and exported/visually inspected an 18-page PDF with headless Chromium.
 - Documented reproducible commands, original test coverage, temporary storage, source-branch drift, SCC/report discrepancy and source-linked evidence.
+- Added two TopoLoop slides: eight-resource setup topology with three acts and five-check scenario flow driven by the archived original results. Preserved pinned upstream source/licenses, reduced-motion behavior, still-frame controls and deterministic PDF frames.
 
 ### 4.3 Recording and composition feasibility — Pending
 - Evaluate recording and composition with actual UI clips; document limitations and an adoption recommendation for AIPCC-33008. No video capability is claimed by this presentation sample.
