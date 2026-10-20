@@ -179,7 +179,7 @@ Implement comprehensive cleanup functionality to address resource accumulation a
 | Document UI screenshots, scenario recordings, and Playwright traces during original tests | ✅ Done |
 | Document evidence preservation, source linkage, and remaining output/runtime decisions | ✅ Done |
 
-Details: [Headless report presentations and UI test evidence](../../docs/report-presentation-plan.md).
+Details: [Presentation session handoff and automation plan](../../docs/report-presentation-plan.md).
 
 ## Phase 4: Sample Presentation and Recording Feasibility — In progress
 
@@ -192,3 +192,11 @@ Details: [Headless report presentations and UI test evidence](../../docs/report-
 Sample: `presentations/omnigent-2026-10-20/`. Original browser traces and UI
 recordings were not captured by this run's five HTTP checks. The included UI
 screenshot is explicitly a later observation; video feasibility remains open.
+
+## Phase 5: Presentation Automation Handoff
+
+| Task | Status |
+|------|--------|
+| Document completed work, repositories/tools, reproduction commands, evidence limits, and integration points | ✅ Done |
+| Define the evidence-bundle contract and implementation sequence for post-report generation | ✅ Done — roadmap documented; implementation pending |
+| Implement evidence preservation, generic renderer, Job integration, and durable publication | Pending |

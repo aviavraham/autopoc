@@ -276,6 +276,7 @@ Add `__main__.py` or CLI entry points to:
 | Phase 2: Slidev feasibility Epic | ✅ Done | AIPCC-33008 filled with feasibility scope, technical constraints, and Definition of Done |
 | Phase 3: Headless presentation and UI evidence requirements | ✅ Done | Documented the requested headless step and proposed capture/evidence flow; implementation choices remain under evaluation |
 | Phase 4: Sample presentation and recording feasibility | In progress | Omnigent evidence archive and headless Slidev/PDF sample complete; recording/composition evaluation remains pending |
+| Phase 5: Presentation automation handoff | Documentation ✅ Done; implementation pending | Session record, repositories/tools, reproduction and staged integration roadmap documented |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -313,3 +314,16 @@ Add `__main__.py` or CLI entry points to:
 
 ### 4.3 Recording and composition feasibility — Pending
 - Evaluate recording and composition with actual UI clips; document limitations and an adoption recommendation for AIPCC-33008. No video capability is claimed by this presentation sample.
+
+## Phase 5: Presentation Automation Handoff
+
+### 5.1 Document session and continuation plan — ✅
+- Updated [the presentation handoff](../../docs/report-presentation-plan.md) with completed work, repository roles and pinned revisions, tools, sample commands, source files, and evidence boundaries.
+- Verified the integration targets against the current OpenCode skill/YAML-state runtime, runner scripts, and container definitions.
+- Defined an immutable evidence bundle, a separate headless renderer Job, independent presentation status, publishing, and acceptance checks.
+- Added the handoff to the root README documentation index.
+
+### 5.2 Implement post-report presentation generation — Pending
+- Preserve original structured results and state before runner termination; validate sanitization and provenance.
+- Generalize the sample, package a renderer image, connect an optional post-report extension, and publish durable artifact links.
+- Keep capture/video evaluation separate from the presentation MVP. No automatic generation capability is claimed by the documentation work.
