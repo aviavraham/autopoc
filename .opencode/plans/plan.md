@@ -199,4 +199,5 @@ screenshot is explicitly a later observation; video feasibility remains open.
 |------|--------|
 | Document completed work, repositories/tools, reproduction commands, evidence limits, and integration points | ✅ Done |
 | Define the evidence-bundle contract and implementation sequence for post-report generation | ✅ Done — roadmap documented; implementation pending |
+| Add local HTTP instructions for development and built previews, prerequisites, URLs, and server shutdown | ✅ Done |
 | Implement evidence preservation, generic renderer, Job integration, and durable publication | Pending |

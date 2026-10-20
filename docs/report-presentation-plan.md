@@ -123,7 +123,10 @@ All paths below are under
   claim/source mapping and hashes, alongside reports, manifests, result JSON,
   selected events, and compressed sanitized logs.
 
-From the AutoPoC repository root:
+### Run locally over HTTP
+
+Requires Node.js 22.18 or newer and npm. From the AutoPoC repository root,
+install the pinned dependencies and start Slidev's development HTTP server:
 
 ```bash
 cd presentations/omnigent-2026-10-20
@@ -131,8 +134,31 @@ npm ci
 npm run dev
 ```
 
-The local editing preview is `http://localhost:3030/`; presenter mode is
-`http://localhost:3030/presenter/`. For built output:
+Open <http://localhost:3030/> in your browser. Presenter mode is
+<http://localhost:3030/presenter/>. Editing `slides.md` or `style.css`
+refreshes the development preview.
+
+To serve the built website instead, stop the development server with
+**Ctrl+C**, then run these commands from the same presentation directory:
+
+```bash
+npm run build
+npm run preview
+```
+
+Open <http://localhost:4173/>. This uses Vite's local HTTP server to serve
+`dist/`. Keep the terminal running while viewing either preview; **Ctrl+C**
+stops the server. If using a separate terminal, change into
+`presentations/omnigent-2026-10-20/` before running the commands.
+
+These localhost URLs work on the computer running the server and are not
+publicly hosted links. No container or cluster connection is needed to serve
+the saved presentation. Open the HTTP URL rather than opening
+`dist/index.html` directly as a file.
+
+### Export and package
+
+From the presentation directory:
 
 ```bash
 npm run build
@@ -148,9 +174,7 @@ is used and a browser download is unavailable, install with
 `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci`.
 
 Outputs are `dist/`, `output/omnigent-autopoc.pdf`, and
-`output/omnigent-presentation.zip`. Run `npm run preview` in a separate
-terminal to serve the built deck at
-`http://localhost:4173/`. These are temporary local URLs, not published links.
+`output/omnigent-presentation.zip`.
 Deploy `dist/` to a server with SPA fallback for a durable browser URL;
 opening the HTML directly through `file:` is unsupported.
 See [Slidev export](https://sli.dev/guide/exporting.html) and

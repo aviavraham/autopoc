@@ -322,6 +322,7 @@ Add `__main__.py` or CLI entry points to:
 - Verified the integration targets against the current OpenCode skill/YAML-state runtime, runner scripts, and container definitions.
 - Defined an immutable evidence bundle, a separate headless renderer Job, independent presentation status, publishing, and acceptance checks.
 - Added the handoff to the root README documentation index.
+- Added a dedicated local HTTP section with Node/npm prerequisites, Slidev and Vite commands, localhost URLs, directory guidance, and Ctrl+C shutdown instructions.
 
 ### 5.2 Implement post-report presentation generation — Pending
 - Preserve original structured results and state before runner termination; validate sanitization and provenance.
