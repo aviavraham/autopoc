@@ -18,14 +18,21 @@ future deliverable. The existing 18-slide Omnigent deck remains the successful
 reference, not the default length of an executive summary.
 
 The [executive presentation and video design](superpowers/specs/2026-10-26-executive-summary-design.md)
-defines the full feature and its acceptance criteria. It recommends six slides
-lasting about two minutes, bounded headless rendering in an executive-enabled
-worker image, and reuse of the existing Drive uploader when configured.
-The separate renderer Job discussed below remains a later deployment option.
-These are design recommendations; runtime implementation has not started.
+defines the full feature and its acceptance criteria. Following Astra review,
+the cluster design uses a separate renderer Job with its own resource limits,
+durable render inputs and recovery checkpoints. The six-slide, roughly
+two-minute narrative remains the default recommendation. Drive publishing
+requires retry-safe upload IDs; every artifact writer must preserve shared
+history. Runtime implementation has not started and remains on hold.
 
 The [evidence collector plan](superpowers/plans/2026-10-26-presentation-evidence.md)
 is a prerequisite within this feature, rather than its complete scope.
+
+The active implementation sequence is in sections 6.3–6.7 of
+[implementation-plan.md](../.opencode/plans/implementation-plan.md): artifact
+preservation, durable recovery, deck/video rendering, cluster isolation and
+end-to-end publication. The original roadmap below is historical context;
+the revised executive design governs where they differ.
 
 ## Completed sample and original roadmap
 

@@ -268,6 +268,12 @@ Add `__main__.py` or CLI entry points to:
 
 # AutoPoC Report Video Feature Ticket
 
+The ticket and sample milestones below retain their historical record. For
+implementation, use Phase 6 and the revised executive design as the current
+scope: silent presentation video in Phase 1, Google TTS in Phase 2, and a
+separate renderer Job with durable input/recovery material. Older architecture
+recommendations are not execution instructions.
+
 ## Progress
 
 | Phase | Status | Notes |
@@ -275,9 +281,9 @@ Add `__main__.py` or CLI entry points to:
 | Phase 1: Ticket definition | ✅ Done | Jira Feature AIPCC-32887 created with scope and Definition of Done |
 | Phase 2: Slidev feasibility Epic | ✅ Done | AIPCC-33008 filled with feasibility scope, technical constraints, and Definition of Done |
 | Phase 3: Headless presentation and UI evidence requirements | ✅ Done | Documented the requested headless step and proposed capture/evidence flow; implementation choices remain under evaluation |
-| Phase 4: Sample presentation and recording feasibility | In progress | Omnigent evidence archive and headless Slidev/PDF sample complete; recording/composition evaluation remains pending |
+| Phase 4: Sample presentation and recording feasibility | Sample complete; video work transferred | Omnigent archive and Slidev/PDF complete; executive recording belongs to Phase 6, original UI clip composition is optional later work |
 | Phase 5: Presentation automation handoff | Documentation ✅ Done; implementation pending | Session record, repositories/tools, reproduction and staged integration roadmap documented |
-| Phase 6: Executive presentation and video scope | Design documented; implementation pending | Four requested topics, report linkage, silent Phase 1 video and Google TTS Phase 2 |
+| Phase 6: Executive presentation and video scope | Astra findings incorporated in documents; implementation on hold | Four topics, durable recovery, independent reconciliation, isolated renderer Job, silent Phase 1 video and Google TTS Phase 2 |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -300,7 +306,7 @@ Add `__main__.py` or CLI entry points to:
 - Distinguished AutoPoC's content-generation model from Slidev's model-free rendering.
 - Kept presentation/video output scope, narration, storage, and runtime limits open; the separate Job and non-blocking failure behavior are recommendations pending validation.
 
-## Phase 4: Sample Presentation and Recording Feasibility — In progress
+## Phase 4: Sample Presentation and Recording Feasibility — Historical milestone
 
 ### 4.1 Archive one completed PoC — ✅
 - Archived the Omnigent run `autopoc-omnigent-8554`: pinned report/plan/evaluation/blog/manifests, original test JSON, sanitized runner and both build logs, and selected job/build metadata.
@@ -313,8 +319,8 @@ Add `__main__.py` or CLI entry points to:
 - Documented reproducible commands, original test coverage, temporary storage, source-branch drift, SCC/report discrepancy and source-linked evidence.
 - Added two TopoLoop slides: eight-resource setup topology with three acts and five-check scenario flow driven by the archived original results. Preserved pinned upstream source/licenses, reduced-motion behavior, still-frame controls and deterministic PDF frames.
 
-### 4.3 Recording and composition feasibility — Pending
-- Evaluate recording and composition with actual UI clips; document limitations and an adoption recommendation for AIPCC-33008. No video capability is claimed by this presentation sample.
+### 4.3 Recording and composition feasibility — Transferred
+- Executive presentation recording is required Phase 1 work in section 6.5. Composition with actual UI test clips is optional later work and is not a prerequisite for the silent executive video. No video capability is claimed by the existing sample.
 
 ## Phase 5: Presentation Automation Handoff
 
@@ -325,10 +331,9 @@ Add `__main__.py` or CLI entry points to:
 - Added the handoff to the root README documentation index.
 - Added a dedicated local HTTP section with Node/npm prerequisites, Slidev and Vite commands, localhost URLs, directory guidance, and Ctrl+C shutdown instructions.
 
-### 5.2 Implement post-report presentation generation — Pending
-- Preserve original structured results and state before runner termination; validate sanitization and provenance.
-- Generalize the sample, package a renderer image, connect an optional post-report extension, and publish durable artifact links.
-- Keep capture/video evaluation separate from the presentation MVP. No automatic generation capability is claimed by the documentation work.
+### 5.2 Implement post-report presentation generation — Superseded by Phase 6
+- The active Phase 1 deliverables are executive Markdown, editable Slidev/TopoLoop source, browser build, PDF and a silent MP4, with durable inputs, recovery and report links.
+- Use the ordered work in sections 6.3–6.7. Original UI capture is optional later work; Google TTS narration is Phase 2. Runtime implementation remains pending.
 
 ### 5.3 Plan the evidence collector milestone — ✅
 - Resumed from the saved handoff on 26 October 2026 and checked the current OpenCode workflow, CLI, dependency declarations, and repository state.
@@ -344,3 +349,37 @@ Add `__main__.py` or CLI entry points to:
 - Recorded the user's phase boundary: silent on-screen-text video first, Google TTS voice-over in Phase 2.
 - Updated the authoritative handoff and collector plan to reflect the expanded scope; feature implementation remains pending.
 - An independent builder review identified one material ambiguity; clarified automated content/publication checks with no per-run human approval gate. Design approval and implementation planning remain pending.
+
+### 6.2 Incorporate Astra assessment — ✅
+- Revised the design, collector plan and handoff for all six findings: report lifecycle, durable recovery material, attempt history, extension resume, resource isolation and conflicting active scope.
+- Changed the cluster execution choice to a separate renderer Job. Synchronized silent video as a Phase 1 requirement and Google TTS as Phase 2.
+- Added acceptance cases for report → extension → blog persistence, original workspace deletion, interrupted uploads, completed-blog resume and forced renderer failure.
+- These are documentation corrections only. Implementation remains on hold while the user reviews; a detailed whole-feature implementation plan is still required.
+
+### 6.3 Preserve source evidence and artifact history — Pending
+- Implement collector-plan Task 0 first: stable staging before checkout changes and common append-only run-specific artifact publishing for plan, tests, report and blog.
+- Implement indexed run/scenario/execution/attempt records, including internal retries, explicit final-execution selection and incomplete-result handling.
+- Primary targets: `src/autopoc/evidence.py`, common artifact persistence tooling, `cli_tools.py`, run-poc/blog-create instructions and state schema.
+- Acceptance: local Git workflow tests preserve all artifact kinds and links through later blog writes/concurrent pushes; failure → recovery → pass retains original history and correct final totals.
+
+### 6.4 Seal durable render inputs and implement recovery — Pending
+- Generate and review four-topic narrative JSON; seal it with scene data, canonical report/evidence and pinned renderer/template identity in `render-inputs.zip`.
+- Extend `src/autopoc/tools/google_drive_tools.py` with preallocated upload IDs, durable upload intents and verification of ambiguous completion. Persist run-specific recovery checkpoints through the common Git artifact writer.
+- Add extension reconciliation independent of the 11-phase cursor, including a standalone recovery command. Checkpoint Job submission, per-artifact validation/publication and report-link persistence.
+- Acceptance: remove the original workspace/Job and recover from published material alone; interrupt at every boundary without duplicate uploads, PoC replay or skipped extension work after blog completion.
+
+### 6.5 Implement executive rendering and silent video — Pending
+- Extract trusted Slidev/TopoLoop templates from the sample; validate narrative, citations, counts and topology rather than executing generated code.
+- Implement scene readiness/error signals, explicit animation resets, PDF poster frames and scheduled recording; finalize Playwright capture, encode MP4 and verify it with ffprobe.
+- Produce all Phase 1 outputs; keep Google TTS out of this implementation.
+- Acceptance: Omnigent, failed/incomplete, CLI-only and larger-suite fixtures; six-slide reference recording contains the four required topics, visible animations and readable conclusions without blank/loading frames.
+
+### 6.6 Isolate cluster execution — Pending
+- Add a dedicated renderer Dockerfile and Job template with explicit CPU/memory/scratch limits, deadline, cleanup and scoped service account permissions. Connect launcher/status tooling without placing Chromium/ffmpeg under the orchestrator's container memory limit.
+- Verify durable input retrieval before dispatch. Persist Job identity and reconcile existing work after interruption; use measured renderer resource requirements for the deployment profile.
+- Acceptance: arbitrary UID, CPU-only WebGL and no runtime dependency downloads; forced OOM, disk exhaustion, timeout and rejected Job admission preserve orchestrator state and allow the blog to proceed.
+
+### 6.7 Publish executive links and validate end to end — Pending
+- Publish validated outputs independently; a failed video must not hide a valid deck/PDF. Persist report links as a new revision derived from the immutable canonical report.
+- Record local-only/storage-blocked, partial and complete outcomes honestly; full completion requires durable Phase 1 artifacts and report links.
+- Acceptance: a real cluster run produces a viewable deck/PDF and silent MP4, survives recovery checks, and retains the linked report after blog publication. Preserve measured resource/runtime evidence and full verification commands in the execution record.

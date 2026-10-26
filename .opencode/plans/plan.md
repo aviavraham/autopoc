@@ -181,17 +181,18 @@ Implement comprehensive cleanup functionality to address resource accumulation a
 
 Details: [Presentation session handoff and automation plan](../../docs/report-presentation-plan.md).
 
-## Phase 4: Sample Presentation and Recording Feasibility — In progress
+## Phase 4: Sample Presentation and Recording Feasibility — Historical milestone
 
 | Task | Status |
 |------|--------|
 | Archive evidence from a representative completed end-to-end PoC | ✅ Done — Omnigent run autopoc-omnigent-8554, reports, original test JSON, sanitized runner/build logs and later observations |
 | Generate and verify a sample Slidev presentation and PDF headlessly | ✅ Done — 14 main slides plus 4 appendix slides, including animated TopoLoop setup and scenario walkthroughs, static browser build and 18-page PDF |
-| Evaluate recording/composition with UI clips and record the feasibility recommendation | Pending |
+| Evaluate recording/composition | Executive recording transferred to Phase 6; UI clip composition is optional later work |
 
 Sample: `presentations/omnigent-2026-10-20/`. Original browser traces and UI
 recordings were not captured by this run's five HTTP checks. The included UI
-screenshot is explicitly a later observation; video feasibility remains open.
+screenshot is explicitly a later observation. The Phase 1 executive video
+records the presentation and does not depend on original UI clips.
 
 ## Phase 5: Presentation Automation Handoff
 
@@ -201,7 +202,7 @@ screenshot is explicitly a later observation; video feasibility remains open.
 | Define the evidence-bundle contract and implementation sequence for post-report generation | ✅ Done — roadmap documented; implementation pending |
 | Add local HTTP instructions for development and built previews, prerequisites, URLs, and server shutdown | ✅ Done |
 | Prepare the evidence collector implementation plan from the saved handoff | ✅ Done — `docs/superpowers/plans/2026-10-26-presentation-evidence.md`; implementation pending |
-| Implement evidence preservation, generic renderer, Job integration, and durable publication | Pending |
+| Implement evidence preservation, generic renderer, Job integration, silent video and durable publication | Pending — active work is defined in Phase 6 |
 
 ## Phase 6: Executive Presentation and Video Scope
 
@@ -210,4 +211,10 @@ screenshot is explicitly a later observation; video feasibility remains open.
 | Specify an automatic executive deck and presentation video covering purpose, strategy, execution, and report-based platform suitability | ✅ Done — full design documented; implementation pending |
 | Record silent video for Phase 1 and Google TTS voice-over for Phase 2 | ✅ Done — user preference captured |
 | Check the expanded design with an independent builder review | ✅ Done — clarified unattended content/publication checks |
+| Incorporate the Astra assessment across the design and active plans | ✅ Done — documentation only; implementation on hold |
+| Preserve report/artifact history and indexed test attempts | Pending — implementation-plan section 6.3 |
+| Implement durable render inputs, upload intents and independent recovery | Pending — section 6.4 |
+| Implement executive Slidev/TopoLoop rendering and silent MP4 | Pending — section 6.5 |
+| Isolate and verify the renderer Job under resource failures | Pending — section 6.6 |
+| Publish report links and run cluster acceptance | Pending — section 6.7 |
 | Approve the design and implement report integration, rendering, video generation and publishing | Pending |
