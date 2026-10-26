@@ -23,10 +23,76 @@ the cluster design uses a separate renderer Job with its own resource limits,
 durable render inputs and recovery checkpoints. The six-slide, roughly
 two-minute narrative remains the default recommendation. Drive publishing
 requires retry-safe upload IDs; every artifact writer must preserve shared
-history. Runtime implementation has not started and remains on hold.
+history. Implementation is authorized and implemented in the feature branch;
+the current rollout and validation status is recorded below.
 
 The [evidence collector plan](superpowers/plans/2026-10-26-presentation-evidence.md)
 is a prerequisite within this feature, rather than its complete scope.
+
+## Implementation status — 26 October 2026
+
+Evidence capture/verification, sealed inputs, the trusted six-scene renderer,
+silent H264 video, retry-safe Drive publication and independent recovery/report
+link reconciliation are implemented. Astra's five implementation findings were
+fixed and passed scoped re-review. The supported suite passes 366 tests with
+83.48% coverage; pinned Ruff, Pyright and both Node renderer tests pass.
+
+The UBI renderer image was published as
+`quay.io/aicatalyst/autopoc-executive-renderer@sha256:f65ec5e266f743ce2ace49f978db1c99e68d8430527c9d4710ee56a4bfdab76d`.
+A constrained local reference passed with read-only root, arbitrary UID,
+2 CPUs, 3 GiB memory and 4 GiB scratch; its short diagnostic video is not the
+two-minute executive deliverable. The reference took 68.539 seconds and peaked
+at 2,465,705,984 bytes. The image predates the optional local OAuth credential
+injection added afterward; normal service-account operation is unchanged.
+
+Cluster RBAC was applied and server validation passed; the renderer has no
+workload API token or Job creation permission. Full cluster acceptance is still
+open: the first test PVC could not attach, and subsequent scratch-only test
+outputs were not successfully verified/exported before access expired. Do not
+claim a successful OCP render from these tests. OOM, scratch exhaustion and
+admission-failure acceptance also remain open.
+
+The configured Google service account returns `invalid_grant: account not found`.
+The user authorized temporary personal Drive OAuth. Sign-in and Drive API access
+were verified, with credentials stored privately on this computer only; the
+cluster Secret was not replaced. No public-sharing permissions were added.
+The private reference folder is
+[AutoPoC executive reference](https://drive.google.com/drive/folders/1mbb7KOpbaynyqzAdNQmWXHGI6UwMnZtF).
+
+The full six-scene reference was rendered locally using the published image:
+119.966667-second silent H264, 1280×720, 30 fps, six-page PDF and both ZIPs.
+Elapsed rendering time was 226.673 seconds with a 2,046,562,304-byte cgroup
+memory peak. All output hashes were checked after export. Output directory:
+`/home/aavraham/chatgpt/repositories/autopoc/presentations/omnigent-2026-10-20/output/executive-2026-10-26/`.
+Sealed inputs have SHA-256
+`f7be9f5a0db2af6ac1124f65630fce0644a257f52937fdb3b0c29789dbfbf901`.
+These are presentation renders from archived evidence, not another PoC execution.
+
+Full-length outputs were uploaded and downloaded for SHA-256 verification;
+all six artifact receipts are published. The reference checkpoint is complete
+and the canonical report's new linked revision is preserved in the local
+acceptance Git repository. Personal Drive publication succeeded; this does not
+establish unattended service-account publication inside OCP.
+
+- [Executive PDF](https://drive.google.com/file/d/1zDeXSlUknmO_g5kszy0p888EbAENyR5s/view)
+- [Silent two-minute video](https://drive.google.com/file/d/1pyRLdAad3YBsCv9FmIovqy31nWP3Da3D/view)
+- [Browser presentation ZIP](https://drive.google.com/file/d/1-SH0tZxZBpoSfUkYxTN7l9vBf9UT7FxQ/view)
+- [Editable source ZIP](https://drive.google.com/file/d/12j2y_yykAh7_QPuDMWGFbrSE6G1HNksS/view)
+- [Executive summary](https://drive.google.com/file/d/1Ia6dJ_eju605l394so-mr0fxG1ysSdh5/view)
+- [Manifest](https://drive.google.com/file/d/1Bzfimzir8Q-GzPS6gdRbth410JcuoURP/view)
+- [PoC report with executive links](https://drive.google.com/file/d/1UMgoJ5iuzkLeeuWF4f9pgiJmT-CPky7K/view)
+
+Actual Drive input recovery was also verified from a freshly initialized local
+controller that used only the saved artifact remote and Drive checkpoint, with
+no original worker staging directory. This is a local recovery acceptance check,
+not an OCP worker-deletion test.
+
+Next: renew OCP access locally,
+finish actual cluster/failure acceptance with working service credentials, then
+build/deploy the main AutoPoC worker containing these tools and skills. The main
+worker was not rebuilt or rolled out during this implementation. Model-service
+narrative review acceptance remains open: reference receipts are explicitly
+labeled synthetic infrastructure fixtures. Google TTS remains Phase 2.
 
 The active implementation sequence is in sections 6.3–6.7 of
 [implementation-plan.md](../.opencode/plans/implementation-plan.md): artifact

@@ -202,7 +202,7 @@ records the presentation and does not depend on original UI clips.
 | Define the evidence-bundle contract and implementation sequence for post-report generation | ✅ Done — roadmap documented; implementation pending |
 | Add local HTTP instructions for development and built previews, prerequisites, URLs, and server shutdown | ✅ Done |
 | Prepare the evidence collector implementation plan from the saved handoff | ✅ Done — `docs/superpowers/plans/2026-10-26-presentation-evidence.md`; implementation pending |
-| Implement evidence preservation, generic renderer, Job integration, silent video and durable publication | Pending — active work is defined in Phase 6 |
+| Implement evidence preservation, generic renderer, Job integration, silent video and durable publication | Core implementation ✅ — active rollout/acceptance is defined in Phase 6 |
 
 ## Phase 6: Executive Presentation and Video Scope
 
@@ -211,10 +211,15 @@ records the presentation and does not depend on original UI clips.
 | Specify an automatic executive deck and presentation video covering purpose, strategy, execution, and report-based platform suitability | ✅ Done — full design documented; implementation pending |
 | Record silent video for Phase 1 and Google TTS voice-over for Phase 2 | ✅ Done — user preference captured |
 | Check the expanded design with an independent builder review | ✅ Done — clarified unattended content/publication checks |
-| Incorporate the Astra assessment across the design and active plans | ✅ Done — documentation only; implementation on hold |
-| Preserve report/artifact history and indexed test attempts | In progress — ✅ common artifact writer and staging; indexed evidence follows in section 6.3 |
-| Implement durable render inputs, upload intents and independent recovery | Pending — section 6.4 |
-| Implement executive Slidev/TopoLoop rendering and silent MP4 | Pending — section 6.5 |
-| Isolate and verify the renderer Job under resource failures | Pending — section 6.6 |
-| Publish report links and run cluster acceptance | Pending — section 6.7 |
+| Incorporate the Astra assessment across the design and active plans | ✅ Done — implementation review also closed five findings |
+| Preserve report/artifact history and indexed test attempts | ✅ Done — capture, collector/verifier, immutable Git writer and fixtures |
+| Implement durable render inputs, upload intents and independent recovery | ✅ Code/recovery tests and actual personal Drive reference publication |
+| Implement executive Slidev/TopoLoop rendering and silent MP4 | ✅ Full six-scene/two-minute local reference verified and uploaded |
+| Isolate and verify the renderer Job under resource failures | Packaging/RBAC ✅; OCP render and resource-failure acceptance open |
+| Publish report links and run cluster acceptance | Link/reconciliation code and personal Drive reference ✅; cluster acceptance open |
 | Approve the design and implement report integration, rendering, video generation and publishing | Implementation authorized 26 October; in progress |
+
+Verification: 366 supported tests, 83.48% coverage, pinned Ruff clean, Pyright
+zero errors and two Node tests passed. Renderer image published to Quay by digest;
+main worker rebuild/rollout remains open. Personal Google OAuth credentials are
+local only while the production service-account credential is repaired.

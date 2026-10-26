@@ -283,7 +283,7 @@ recommendations are not execution instructions.
 | Phase 3: Headless presentation and UI evidence requirements | ✅ Done | Documented the requested headless step and proposed capture/evidence flow; implementation choices remain under evaluation |
 | Phase 4: Sample presentation and recording feasibility | Sample complete; video work transferred | Omnigent archive and Slidev/PDF complete; executive recording belongs to Phase 6, original UI clip composition is optional later work |
 | Phase 5: Presentation automation handoff | Documentation ✅ Done; implementation pending | Session record, repositories/tools, reproduction and staged integration roadmap documented |
-| Phase 6: Executive presentation and video scope | Implementation in progress | Artifact preservation implemented and reviewed; evidence collection and renderer integration follow |
+| Phase 6: Executive presentation and video scope | Core implementation ✅; rollout/acceptance open | Evidence, renderer, publication/recovery implemented; personal Drive reference validation underway; OCP and worker rollout remain |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -356,31 +356,27 @@ recommendations are not execution instructions.
 - Added acceptance cases for report → extension → blog persistence, original workspace deletion, interrupted uploads, completed-blog resume and forced renderer failure.
 - These are documentation corrections only. Implementation remains on hold while the user reviews; a detailed whole-feature implementation plan is still required.
 
-### 6.3 Preserve source evidence and artifact history — In progress
+### 6.3 Preserve source evidence and artifact history — ✅
 - ✅ Collector Task 0: implemented the common append-only Git writer and CLI; migrated evaluation/plan/tests/report/blog artifact instructions to stable staging and immutable revisions. Independent scoped review passed. Verified 71 affected tests, including real competing Git writers and source-checkout preservation.
-- Implement collector-plan Task 0 first: stable staging before checkout changes and common append-only run-specific artifact publishing for plan, tests, report and blog.
-- Implement indexed run/scenario/execution/attempt records, including internal retries, explicit final-execution selection and incomplete-result handling.
-- Primary targets: `src/autopoc/evidence.py`, common artifact persistence tooling, `cli_tools.py`, run-poc/blog-create instructions and state schema.
-- Acceptance: local Git workflow tests preserve all artifact kinds and links through later blog writes/concurrent pushes; failure → recovery → pass retains original history and correct final totals.
+- Implemented indexed capture, explicit final execution and incomplete-result handling, sanitized verified evidence ZIPs and historical/synthetic fixtures. Actual child-process/HTTP retry tests cover original attempts; collection never replays PoC tests.
+- Evidence review found quoted-credential and index-metadata scan bypasses; both fixed with RED→GREEN regression tests and scoped re-review.
 
-### 6.4 Seal durable render inputs and implement recovery — Pending
-- Generate and review four-topic narrative JSON; seal it with scene data, canonical report/evidence and pinned renderer/template identity in `render-inputs.zip`.
-- Extend `src/autopoc/tools/google_drive_tools.py` with preallocated upload IDs, durable upload intents and verification of ambiguous completion. Persist run-specific recovery checkpoints through the common Git artifact writer.
-- Add extension reconciliation independent of the 11-phase cursor, including a standalone recovery command. Checkpoint Job submission, per-artifact validation/publication and report-link persistence.
-- Acceptance: remove the original workspace/Job and recover from published material alone; interrupt at every boundary without duplicate uploads, PoC replay or skipped extension work after blog completion.
+### 6.4 Seal durable render inputs and implement recovery — ✅ implementation; live acceptance open
+- Implemented hash-bound review receipts, four-topic JSON and bounded graphs/scenes, pinned image identities and sealed inputs. Existing OpenCode performs production content review; manual reference review receipts are labeled synthetic.
+- Added preallocated Drive IDs, upload intents/receipts, verified downloads, append-only Git checkpoints with a bounded immutable input fallback, standalone recovery and phase-independent reconciliation.
+- Ten real-Git/fake-provider recovery tests pass, including missing receipts, pending input upload, pre-UID submission and immutable/symlink-safe recovery. Real personal Drive reference publication passed with verified inputs and all six output receipts.
 
-### 6.5 Implement executive rendering and silent video — Pending
-- Extract trusted Slidev/TopoLoop templates from the sample; validate narrative, citations, counts and topology rather than executing generated code.
-- Implement scene readiness/error signals, explicit animation resets, PDF poster frames and scheduled recording; finalize Playwright capture, encode MP4 and verify it with ffprobe.
-- Produce all Phase 1 outputs; keep Google TTS out of this implementation.
-- Acceptance: Omnigent, failed/incomplete, CLI-only and larger-suite fixtures; six-slide reference recording contains the four required topics, visible animations and readable conclusions without blank/loading frames.
+### 6.5 Implement executive rendering and silent video — ✅ local implementation
+- Implemented trusted Slidev/TopoLoop components, JSON-only narrative, explicit scene readiness/reset/still frames, source/static ZIPs, PDF, executive Markdown and silent H264 MP4 with ffprobe validation.
+- Local host and constrained UBI renders passed. Full six-scene reference: 119.966667-second silent H264 at 1280x720/30 fps; 226.673-second render, peak 2,046,562,304 bytes. PDF text, topology, execution and conclusions visually inspected; two Node boundary tests pass. Broader live fixture/resource acceptance remains open. Google TTS stays Phase 2.
 
-### 6.6 Isolate cluster execution — Pending
-- Add a dedicated renderer Dockerfile and Job template with explicit CPU/memory/scratch limits, deadline, cleanup and scoped service account permissions. Connect launcher/status tooling without placing Chromium/ffmpeg under the orchestrator's container memory limit.
-- Verify durable input retrieval before dispatch. Persist Job identity and reconcile existing work after interruption; use measured renderer resource requirements for the deployment profile.
-- Acceptance: arbitrary UID, CPU-only WebGL and no runtime dependency downloads; forced OOM, disk exhaustion, timeout and rejected Job admission preserve orchestrator state and allow the blog to proceed.
+### 6.6 Isolate cluster execution — ✅ packaging; OCP acceptance open
+- Published renderer digest `sha256:f65ec5e266f743ce2ace49f978db1c99e68d8430527c9d4710ee56a4bfdab76d` under `quay.io/aicatalyst/autopoc-executive-renderer`. Added Job/RBAC/launcher configuration; renderer has no workload token or RoleBinding.
+- Constrained local test: arbitrary UID, read-only root, network disabled, 2 CPUs/3 GiB/4 GiB scratch; 68.539 seconds, peak 2,465,705,984 bytes for short diagnostic. No runtime dependency downloads.
+- OCP reference outputs remain unverified: test PVC attach failed; scratch-only export failed before renewed authentication. Forced OOM/disk/admission acceptance and worker-image rollout remain open.
 
-### 6.7 Publish executive links and validate end to end — Pending
-- Publish validated outputs independently; a failed video must not hide a valid deck/PDF. Persist report links as a new revision derived from the immutable canonical report.
-- Record local-only/storage-blocked, partial and complete outcomes honestly; full completion requires durable Phase 1 artifacts and report links.
-- Acceptance: a real cluster run produces a viewable deck/PDF and silent MP4, survives recovery checks, and retains the linked report after blog publication. Preserve measured resource/runtime evidence and full verification commands in the execution record.
+### 6.7 Publish executive links and validate end to end — implementation ✅; live validation in progress
+- Implemented independent output validation/publication, durable receipts and report-link revisions after blog completion. Partial failures retain valid presentation/PDF artifacts.
+- Google service account is invalid. User authorized temporary personal OAuth; all six reference artifacts uploaded and downloaded for hash verification. Checkpoint complete; report links persisted in the local reference Git remote after completed-blog state. Personal credentials stay local; cluster Secret unchanged.
+- Current verification: 366 supported tests passed, 83.48% coverage; pinned Ruff clean; Pyright zero errors; two Node tests passed. Astra's five implementation findings closed with scoped re-review.
+- Remaining acceptance: real OCP render/publication and failure scenarios, model-service narrative review and main-worker build/rollout. No original PoC test replay; no claim of production rollout.

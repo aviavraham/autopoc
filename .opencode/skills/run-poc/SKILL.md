@@ -25,6 +25,8 @@ Automated Proof-of-Concept pipeline for deploying GitHub projects on OpenShift A
 ## Before You Start
 
 1. **Read the state file** if it exists: `$AUTOPOC_WORK_DIR/poc-state.yaml` (default work dir: `/workspace` in pods, `/tmp/autopoc` locally). If a state file exists with completed phases, resume from the last incomplete phase.
+   First reconcile any independent executive checkpoint following
+   `references/executive-summary.md`, even if report/blog already completed.
 
 2. **Verify credentials** are available as environment variables:
    - LLM: `ANTHROPIC_API_KEY` or (`VERTEX_PROJECT` + `VERTEX_LOCATION`)
@@ -244,11 +246,11 @@ Evaluation written (or skipped on failure). Pipeline continues regardless.
 
    if [ -n "$EXISTING_REPO" ]; then
      echo "Repository $GITHUB_ORG/$PROJECT_NAME already exists"
-     
+
      # Check if it's an AutoPoC repository using topics
      REPO_TOPICS=$(gh api "/repos/$GITHUB_ORG/$PROJECT_NAME/topics" --jq '.names[]' 2>/dev/null || echo "")
      IS_AUTOPOC=$(echo "$REPO_TOPICS" | grep -q "autopoc" && echo "true" || echo "false")
-     
+
      if [ "$IS_AUTOPOC" = "true" ]; then
        echo "Existing repository is AutoPoC-created. Force-syncing with source..."
        # Force sync the existing AutoPoC repository
@@ -276,7 +278,7 @@ Evaluation written (or skipped on failure). Pipeline continues regardless.
      # Create new fork
      echo "Creating new fork..."
      gh repo fork "$OWNER/$REPO" --org "$GITHUB_ORG" --clone=false
-     
+
      # Set AutoPoC topics on the new fork
      AUTOPOC_TOPICS='["autopoc", "poc", "automated-deployment", "openshift"]'
      echo "Setting AutoPoC topics on $GITHUB_ORG/$PROJECT_NAME..."
@@ -284,7 +286,7 @@ Evaluation written (or skipped on failure). Pipeline continues regardless.
 
      # Protect the default branch before pushing any AutoPoC changes.
      protect_github_default_branch
-     
+
      # Configure remotes
      cd "$WORK_DIR/repos/$PROJECT_NAME"
      git remote rename origin upstream 2>/dev/null || true
@@ -354,7 +356,8 @@ Fork URL recorded in state.
      --file "poc-plan.md=$STAGING_DIR/poc-plan.md"
    ```
 
-6. Update `poc-state.yaml` with poc_type, scenarios, infrastructure, and poc_plan_path.
+6. Update `poc-state.yaml` with poc_type, scenarios, infrastructure, and
+   poc_plan_path pointing at `$STAGING_DIR/poc-plan.md`.
 
 ### Exit condition
 PoC plan written with at least one scenario defined.
@@ -371,10 +374,10 @@ PoC plan written with at least one scenario defined.
    ```bash
    # Check if we're retrying (build_retries > 0 in state)
    BUILD_RETRIES=$(python3 -c "import yaml; state = yaml.safe_load(open('$WORK_DIR/poc-state.yaml')); print(state.get('retries', {}).get('build_retries', 0))" 2>/dev/null || echo "0")
-   
+
    if [ "$BUILD_RETRIES" -gt 0 ]; then
      echo "Cleaning up previous build failure (retry #$BUILD_RETRIES)..."
-     
+
      # Clean up based on build strategy
      BUILD_STRATEGY="${AUTOPOC_BUILD_STRATEGY:-podman}"
      if [ "$BUILD_STRATEGY" = "openshift" ]; then
@@ -394,12 +397,12 @@ PoC plan written with at least one scenario defined.
          done
        fi
      fi
-     
+
      # Clean up old build logs (keep only the most recent)
      if [ -d "$WORK_DIR/repos/$PROJECT_NAME" ]; then
        find "$WORK_DIR/repos/$PROJECT_NAME" -name "build-*.log" -type f | sort -V | head -n -1 | xargs rm -f 2>/dev/null || true
      fi
-     
+
      echo "Build cleanup completed"
    fi
    ```
@@ -560,18 +563,18 @@ All component images built and pushed successfully.
    ```bash
    # Check if we're retrying (deploy_retries > 0 in state)
    DEPLOY_RETRIES=$(python3 -c "import yaml; state = yaml.safe_load(open('$WORK_DIR/poc-state.yaml')); print(state.get('retries', {}).get('deploy_retries', 0))" 2>/dev/null || echo "0")
-   
+
    if [ "$DEPLOY_RETRIES" -gt 0 ]; then
      echo "Cleaning up previous deployment failure (retry #$DEPLOY_RETRIES)..."
-     
+
      # Target namespace for the deployment
      DEPLOY_NAMESPACE="poc-$PROJECT_NAME"
-     
+
      # Capture failure state before cleanup for debugging
      echo "Capturing failure state before cleanup..."
      kubectl get pods,deployments,services,configmaps,secrets -n "$DEPLOY_NAMESPACE" -o wide > "$WORK_DIR/failure-state-$DEPLOY_RETRIES.log" 2>/dev/null || true
      kubectl get events -n "$DEPLOY_NAMESPACE" --sort-by='.lastTimestamp' > "$WORK_DIR/failure-events-$DEPLOY_RETRIES.log" 2>/dev/null || true
-     
+
      # Get pod logs before cleanup (for debugging)
      kubectl get pods -n "$DEPLOY_NAMESPACE" --no-headers 2>/dev/null | while read -r pod_name ready status restarts age; do
        if [ -n "$pod_name" ] && [ "$pod_name" != "No" ]; then
@@ -579,15 +582,15 @@ All component images built and pushed successfully.
          kubectl logs "$pod_name" -n "$DEPLOY_NAMESPACE" --all-containers=true > "$WORK_DIR/pod-logs-$pod_name-$DEPLOY_RETRIES.log" 2>/dev/null || true
        fi
      done
-     
+
      # Clean up all deployment resources except namespace
      echo "Cleaning up deployment resources in namespace: $DEPLOY_NAMESPACE"
      kubectl delete deployments,services,configmaps,secrets,jobs,pods --all -n "$DEPLOY_NAMESPACE" --ignore-not-found=true --timeout=60s
-     
+
      # Wait for cleanup to complete
      echo "Waiting for resource cleanup to complete..."
      sleep 10
-     
+
      # Verify namespace is clean
      REMAINING_RESOURCES=$(kubectl get all -n "$DEPLOY_NAMESPACE" --no-headers 2>/dev/null | wc -l)
      if [ "$REMAINING_RESOURCES" -gt 0 ]; then
@@ -596,7 +599,7 @@ All component images built and pushed successfully.
      else
        echo "Namespace successfully cleaned"
      fi
-     
+
      echo "Deployment cleanup completed. Failure state preserved in $WORK_DIR/failure-*.log files"
    fi
    ```
@@ -707,18 +710,26 @@ All pods healthy and service URLs recorded.
 1. Read scenarios and routes from state.
 
 2. **Write a Python test script** (`poc_test.py`) following `references/poc-execute.md`:
-   - Use only Python stdlib + `urllib.request`
+   - Use Python stdlib plus the installed `autopoc.capture.AttemptRecorder` helper
    - Implement each scenario from the PoC plan
-   - Include retry logic (services may take time to start)
+   - Record each real HTTP/CLI/exec attempt before retrying (services may take time to start)
    - Output structured JSON results to stdout
 
 3. Execute the test script:
    ```bash
    cd "$WORK_DIR/repos/$PROJECT_NAME"
-   python poc_test.py "$SERVICE_URL" 2>&1
+   python -m autopoc.cli_tools capture-execution \
+     --state "$WORK_DIR/poc-state.yaml" \
+     --script "$WORK_DIR/repos/$PROJECT_NAME/poc_test.py" \
+     --service-url "$SERVICE_URL"
    ```
 
-4. Parse the JSON results from stdout.
+4. Read the wrapper's JSON and `poc_execute` state even if it exits nonzero.
+   It preserves private stdout/stderr separately and records the original test
+   exit code, invocation identity and every structured retry in
+   `$WORK_DIR/attempt-index.json`. Missing/inconsistent stdout or interrupted
+   scenarios stay incomplete. Never reconstruct missing attempts from a final
+   pass; keep earlier executions when routing to fixes or retrying.
 
 5. If tests fail, debug with kubectl:
    ```bash
@@ -742,7 +753,8 @@ All pods healthy and service URLs recorded.
      --file "poc_test.py=$STAGING_DIR/poc_test.py"
    ```
 
-8. Update `poc-state.yaml` with test results.
+8. Retain the wrapper's results and capture metadata in `poc-state.yaml`.
+   Finalize capture before retry/stop handling so failures remain in history.
 
 ### Exit condition
 Test results recorded in state (pass or fail).
@@ -817,19 +829,43 @@ Test results recorded in state (pass or fail).
    report revision with `--head report --head executive` to update both pointers
    atomically. The blog writer preserves all report revisions.
 
+8. Collect and verify the original run evidence without rerunning tests:
+   ```bash
+   python -m autopoc.cli_tools evidence-create \
+     --state "$WORK_DIR/poc-state.yaml" \
+     --attempt-index "$WORK_DIR/attempt-index.json" \
+     --output-dir "$WORK_DIR/evidence-bundles"
+   ```
+   Save returned bundle path, archive SHA-256, eligibility and gaps in the
+   independent `evidence` block. Record sanitized collection errors there and
+   continue to the optional blog without changing test outcomes. A missing or
+   empty report is ineligible; an incomplete validation remains incomplete in
+   the summary. Collection is local, not durable publication. On startup/resume,
+   retry missing collection from staged inputs even after report/blog completion.
+   Full executive rendering/publication uses the separate extension checkpoint;
+   never claim a presentation or video exists from an evidence bundle alone.
+
+9. **Generate the executive presentation and silent video** following
+   `references/executive-summary.md` when a renderer digest and durable storage
+   are configured. Generate/review four-topic narrative with the existing model,
+   seal verified inputs, dispatch the separate renderer Job and reconcile real
+   artifact links. This extension runs for usable failure reports too; blog
+   eligibility and Google Docs success do not gate it. Record skipped/blocked,
+   failed, partial or complete status independently and continue to phase 11.
+
 ### Exit condition
 Report written and committed.
 
 ---
 
  ## Phase 11: Blog Post (Conditional)
- 
+
  **Purpose**: Generate a developer blog post about the PoC deployment.
- 
+
  **Only execute this phase if a majority of test scenarios passed.**
- 
+
  ### Steps
- 
+
  1. Count pass/fail from `poc_execute.results` in state.
  2. If majority passed: invoke the `blog-create` skill with the PoC context.
  3. The blog-create skill handles the content generation (draft, review loop, finalize).
@@ -847,7 +883,7 @@ Report written and committed.
       --project-name "$PROJECT_NAME"
     ```
     If `GOOGLE_DOCS_FOLDER_ID` is not set, log a warning and continue.
- 
+
  ### Exit condition
  Blog post written, linted, and uploaded to Google Docs (or upload skipped only if `GOOGLE_DOCS_FOLDER_ID` is not set). Phase is skipped entirely only if tests didn't pass.
 

@@ -1,6 +1,6 @@
 # AutoPoC executive presentation and video design
 
-Status: revised following Astra review; implementation remains on hold.
+Status: implementation authorized; runtime and recovery acceptance in progress.
 Updated: 26 October 2026.
 
 ## Requested outcome
@@ -223,6 +223,13 @@ unresolved citation conflicts, or secret-scan failures block publication and
 record an independent failure. Human review belongs to initial feature
 acceptance and configuration of the destination's access policy.
 
+The first durable recovery commit includes the bounded, verified sealed input
+ZIP as a Git fallback, alongside preallocated upload identities. Later small
+checkpoints retain that immutable path/commit. This closes worker loss before
+the initial Drive upload: recovery verifies the Git copy, completes the known
+Drive input/descriptor intents, then dispatches. Videos and rendered binary
+outputs remain in Drive; the fallback is limited to the 24 MiB input envelope.
+
 Keep raw responses, secrets, credential files and unreviewed logs out of public
 assets. Treat report/repository text as untrusted content. Render narrative
 as escaped text in trusted components; never execute model-written Vue,
@@ -374,5 +381,6 @@ the design and synchronized plans:
 5. Resource failure: separate renderer Job and forced-failure acceptance tests.
 6. Plan conflict: silent video is explicitly part of the active Phase 1 work.
 
-These are documented corrections, not implemented or deployment-validated
-capabilities. Implementation remains on hold during the user's review.
+Implementation was authorized on 26 October. Track actual code, review fixes
+and local/cluster verification in the active implementation plan; documented
+acceptance criteria alone are not evidence of deployed capability.

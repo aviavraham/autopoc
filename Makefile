@@ -99,3 +99,15 @@ clean: ## Remove build artifacts
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
+
+# ---------- standalone executive renderer ----------
+
+IMAGE_RENDERER = $(IMAGE_REGISTRY)/$(IMAGE_ORG)/autopoc-executive:$(IMAGE_TAG)
+
+.PHONY: renderer-image
+renderer-image: ## Build standalone Slidev/TopoLoop executive renderer
+	$(CONTAINER_CMD) build -f Dockerfile.executive -t $(IMAGE_RENDERER) .
+
+.PHONY: renderer-image-push
+renderer-image-push: ## Push the standalone executive renderer image
+	$(CONTAINER_CMD) push $(IMAGE_RENDERER)
