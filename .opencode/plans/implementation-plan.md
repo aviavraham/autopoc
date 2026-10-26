@@ -328,3 +328,8 @@ Add `__main__.py` or CLI entry points to:
 - Preserve original structured results and state before runner termination; validate sanitization and provenance.
 - Generalize the sample, package a renderer image, connect an optional post-report extension, and publish durable artifact links.
 - Keep capture/video evaluation separate from the presentation MVP. No automatic generation capability is claimed by the documentation work.
+
+### 5.3 Plan the evidence collector milestone — ✅
+- Resumed from the saved handoff on 26 October 2026 and checked the current OpenCode workflow, CLI, dependency declarations, and repository state.
+- Added `docs/superpowers/plans/2026-10-26-presentation-evidence.md` with the bundle contract, collector/verifier and CLI interfaces, original-result capture instructions, test coverage, and publication boundary.
+- Collection implementation, storage integration, and automatic rendering remain pending. The plan is ready for review and execution-method selection.
