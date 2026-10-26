@@ -202,3 +202,12 @@ screenshot is explicitly a later observation; video feasibility remains open.
 | Add local HTTP instructions for development and built previews, prerequisites, URLs, and server shutdown | ✅ Done |
 | Prepare the evidence collector implementation plan from the saved handoff | ✅ Done — `docs/superpowers/plans/2026-10-26-presentation-evidence.md`; implementation pending |
 | Implement evidence preservation, generic renderer, Job integration, and durable publication | Pending |
+
+## Phase 6: Executive Presentation and Video Scope
+
+| Task | Status |
+|------|--------|
+| Specify an automatic executive deck and presentation video covering purpose, strategy, execution, and report-based platform suitability | ✅ Done — full design documented; implementation pending |
+| Record silent video for Phase 1 and Google TTS voice-over for Phase 2 | ✅ Done — user preference captured |
+| Check the expanded design with an independent builder review | ✅ Done — clarified unattended content/publication checks |
+| Approve the design and implement report integration, rendering, video generation and publishing | Pending |

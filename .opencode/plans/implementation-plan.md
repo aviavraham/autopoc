@@ -277,6 +277,7 @@ Add `__main__.py` or CLI entry points to:
 | Phase 3: Headless presentation and UI evidence requirements | ✅ Done | Documented the requested headless step and proposed capture/evidence flow; implementation choices remain under evaluation |
 | Phase 4: Sample presentation and recording feasibility | In progress | Omnigent evidence archive and headless Slidev/PDF sample complete; recording/composition evaluation remains pending |
 | Phase 5: Presentation automation handoff | Documentation ✅ Done; implementation pending | Session record, repositories/tools, reproduction and staged integration roadmap documented |
+| Phase 6: Executive presentation and video scope | Design documented; implementation pending | Four requested topics, report linkage, silent Phase 1 video and Google TTS Phase 2 |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -333,3 +334,13 @@ Add `__main__.py` or CLI entry points to:
 - Resumed from the saved handoff on 26 October 2026 and checked the current OpenCode workflow, CLI, dependency declarations, and repository state.
 - Added `docs/superpowers/plans/2026-10-26-presentation-evidence.md` with the bundle contract, collector/verifier and CLI interfaces, original-result capture instructions, test coverage, and publication boundary.
 - Collection implementation, storage integration, and automatic rendering remain pending. The plan is ready for review and execution-method selection.
+
+## Phase 6: Executive Presentation and Video Scope
+
+### 6.1 Record expanded feature requirements — ✅
+- Added `docs/superpowers/specs/2026-10-26-executive-summary-design.md` for automatic executive Slidev/TopoLoop presentations and videos based on the PoC report.
+- Defined repository purpose, testing strategy, actual execution and report-based OpenShift/Kubernetes suitability as required topics in both outputs.
+- Included report Executive Summary links, reusable headless recording/encoding, independent failure states, and configurable publication through existing tooling.
+- Recorded the user's phase boundary: silent on-screen-text video first, Google TTS voice-over in Phase 2.
+- Updated the authoritative handoff and collector plan to reflect the expanded scope; feature implementation remains pending.
+- An independent builder review identified one material ambiguity; clarified automated content/publication checks with no per-run human approval gate. Design approval and implementation planning remain pending.

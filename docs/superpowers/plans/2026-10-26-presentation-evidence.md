@@ -10,6 +10,8 @@
 
 **Spec:** [Session handoff and automation roadmap](../../report-presentation-plan.md), evidence contract and implementation step 1. This plan implements collection and verification within that step; durable storage remains pending.
 
+**Expanded feature:** The user subsequently requested an executive Slidev/TopoLoop deck and a video, with Google TTS voice-over in Phase 2. See the [full feature design](../specs/2026-10-26-executive-summary-design.md). This collector remains a dependency and does not replace the presentation/video deliverables.
+
 ## Global Constraints
 
 - Preserve all 11 existing phases, their outcomes, and resume behavior.
@@ -33,7 +35,7 @@
 - Keep statuses `pass`, `fail`, `error`, and `skip`, finite nonnegative durations, scenario identity, and failure details. Derive totals from results rather than trusting supplied summary counts. Never archive response bodies under `output`.
 - State snapshot includes run/project identity, phase statuses, selected evaluation data, built image references, deployed resource identities, scenario outcomes, retries, and capture gaps. Exclude configuration/env values and raw free-form tool output. Record omitted fields instead of calling this a complete workspace backup.
 - Resolve optional report/plan/evaluation inputs within the run workspace, rejecting symlinks and paths escaping that root. Reject oversized files and malformed structures before producing output; set a 20 MiB total uncompressed input limit for this first version.
-- Apply a documented sanitizer to retained free text and scan the completed payload before writing. Cover credential assignments, bearer tokens, private key blocks, recognized token formats, and supplied credential environment values. Unhandled suspicious material fails collection without echoing the value. Sanitization cannot certify the absence of every possible secret; require publication review until a broader policy is validated.
+- Apply a documented sanitizer to retained free text and scan the completed payload before writing. Cover credential assignments, bearer tokens, private key blocks, recognized token formats, and supplied credential environment values. Unhandled suspicious material fails collection without echoing the value. Sanitization cannot certify the absence of every possible secret. The expanded executive feature requires automated checks for configured publication; unknown policy versions or scan failures block publishing, without adding a per-run human approval gate. Initial policy/destination acceptance remains a development check.
 - Output `<output-dir>/<run-id>/<sha256-of-archive>.zip`. Write privately to a temporary file, validate it, and publish without overwriting an existing file. The index hashes every payload member; the CLI returns the archive hash. The verifier checks version, safe unique paths, declared sizes/hashes, required members and result consistency without extracting the ZIP.
 
 ## Review Focus

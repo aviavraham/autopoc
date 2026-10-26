@@ -1,6 +1,33 @@
 # AutoPoC presentation session handoff and automation plan
 
-Updated: 20 October 2026.
+Updated: 26 October 2026.
+
+## Executive summary feature scope
+
+The requested AutoPoC feature now includes an automatically generated Slidev
+presentation **and a video of that presentation**, both written for executives.
+Each must cover repository purpose, testing strategy, how the tests actually
+ran, and the report's conclusions about suitability for OpenShift/Kubernetes.
+Link the outputs from the report's Executive Summary and a standalone
+`executive-summary.md`.
+
+Phase 1 produces a silent video with on-screen text. **Google TTS voice-over
+belongs to Phase 2**, as explicitly requested on 26 October. Video recording
+is now part of the first feature milestone; it is no longer only a possible
+future deliverable. The existing 18-slide Omnigent deck remains the successful
+reference, not the default length of an executive summary.
+
+The [executive presentation and video design](superpowers/specs/2026-10-26-executive-summary-design.md)
+defines the full feature and its acceptance criteria. It recommends six slides
+lasting about two minutes, bounded headless rendering in an executive-enabled
+worker image, and reuse of the existing Drive uploader when configured.
+The separate renderer Job discussed below remains a later deployment option.
+These are design recommendations; runtime implementation has not started.
+
+The [evidence collector plan](superpowers/plans/2026-10-26-presentation-evidence.md)
+is a prerequisite within this feature, rather than its complete scope.
+
+## Completed sample and original roadmap
 
 The Omnigent run now has an editable Slidev presentation, animated TopoLoop
 diagrams, a static browser build, a PDF, and a packaged evidence archive.
@@ -11,7 +38,7 @@ session; automatic presentation generation is not yet part of AutoPoC.
 The next implementation step is to preserve a complete, sanitized evidence
 bundle during the original run. A separate renderer can then turn that bundle
 into a presentation without repeating the PoC or requiring an operator's
-desktop. Video composition remains a later feasibility task.
+desktop. The executive video scope above extends this original roadmap.
 
 Related work: [AIPCC-32887](https://redhat.atlassian.net/browse/AIPCC-32887)
 and [AIPCC-33008](https://redhat.atlassian.net/browse/AIPCC-33008).
@@ -326,11 +353,12 @@ completed report bundle even if the optional blog or renderer later fails.
    to the selected destination, persist links, and add them to the report/run
    summary. Acceptance: authorized viewers can open a durable site/PDF link,
    and two rendering attempts preserve the original evidence unchanged.
-6. **Evaluate capture and video separately.** For genuine browser tests,
+6. **Capture original browser evidence when applicable.** For genuine browser tests,
    capture screenshots, selected recordings, and Playwright traces during
-   original execution, including failures. Evaluate Playwright recording and
-   ffmpeg composition/narration afterward. A later demo remains a distinct
-   replay; API/CLI-only projects skip browser capture.
+   original execution, including failures. Original UI recordings remain
+   separate from the executive presentation video now required in Phase 1.
+   A later demo remains a distinct replay; API/CLI-only projects skip browser
+   capture but can still produce an executive deck and video.
 
 Verification should cover failed/error/skipped results, absent or oversized
 graphs, malicious embedded content, redaction, archive hashes, unavailable
@@ -341,8 +369,10 @@ an automated regression suite. Add relevant skill assertions in
 [`tests/test_skill_files.py`](../tests/test_skill_files.py).
 
 Start with step 1 and a fixture derived from the committed Omnigent evidence.
-The MVP ends at step 5: evidence-linked editable source, browser site, PDF,
-and downloadable bundle generated automatically after the report. Narration,
-summary video, capture budgets, artifact retention, and storage/hosting choice
-remain engineering decisions. Slidev's documented CLI exports are not a
-video pipeline; see [recording](https://sli.dev/features/recording).
+The original presentation-only MVP through step 5 now expands to include a
+silent executive video and artifact links in the report's Executive Summary.
+Google TTS narration follows in Phase 2. Original browser capture budgets,
+artifact retention, and web-hosting choice remain engineering decisions.
+Slidev's documented CLI exports are not a video pipeline; headless recording
+and ffmpeg encoding are separate steps in the new design. See
+[recording](https://sli.dev/features/recording).
