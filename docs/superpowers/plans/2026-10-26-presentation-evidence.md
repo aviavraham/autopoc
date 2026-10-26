@@ -53,11 +53,11 @@
 
 **Files:** Add a common artifact persistence helper under `src/autopoc/`; update the artifact-writing sections of `.opencode/skills/run-poc/SKILL.md` and `.opencode/skills/blog-create/SKILL.md`; add local Git integration tests under `tests/`.
 
-- [ ] Reproduce fresh report disappearance after switching branches, and report/link loss after the blog's branch reset, using temporary local repositories.
-- [ ] Stage generated plan/evaluation/report files outside the source checkout before any branch operation; save canonical pre-link report identity and path in state.
-- [ ] Implement the design's run-specific, append-only artifact protocol across plan, tests, report and blog. Base writes on the current artifact-branch head, use ordinary pushes with bounded conflict reconciliation, and never change an existing immutable revision or the protected default branch.
-- [ ] Verify plan → tests → report → executive links → blog preserves all files. Exercise concurrent writers and verify competing updates are retained or fail explicitly without force-pushing.
-- [ ] Run the integration and affected skill tests; commit this prerequisite before adding post-report collection.
+- [x] Reproduce fresh report disappearance after switching branches, and report/link loss after the blog's branch reset, using temporary local repositories.
+- [x] Stage generated plan/evaluation/report files outside the source checkout before any branch operation; save canonical pre-link report identity and path in state.
+- [x] Implement the design's run-specific, append-only artifact protocol across plan, tests, report and blog. Base writes on the current artifact-branch head, use ordinary pushes with bounded conflict reconciliation, and never change an existing immutable revision or the protected default branch.
+- [x] Verify plan → tests → report → executive links → blog preserves all files. Exercise concurrent writers and verify competing updates are retained or fail explicitly without force-pushing.
+- [x] Run the integration and affected skill tests; commit this prerequisite before adding post-report collection.
 
 ## Task 1: Collector and verifier
 

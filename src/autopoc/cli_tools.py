@@ -308,11 +308,14 @@ def cmd_google_drive_upload(args: argparse.Namespace) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
+    from autopoc.artifacts import register_artifact_commands
+
     parser = argparse.ArgumentParser(
         prog="autopoc-tools",
         description="Standalone CLI wrappers for AutoPoC tools",
     )
     sub = parser.add_subparsers(dest="command", required=True)
+    register_artifact_commands(sub)
 
     # llm-proxy
     p = sub.add_parser("llm-proxy", help="Resolve LLM env vars via OGX proxy")

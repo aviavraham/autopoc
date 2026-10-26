@@ -76,6 +76,31 @@ Read `references/retry-strategy.md` for the complete retry logic.
 
 Maintain a progressive YAML state file at `$WORK_DIR/poc-state.yaml`. Read `references/state-schema.md` for the complete schema.
 
+Before the first phase, generate `project.run_id` once using `uuid.uuid4().hex`
+and persist it in state. On resume, reuse the saved identifier; never generate
+another run ID or substitute the four-digit Job suffix. Validate IDs as 1–128
+ASCII letters, digits, underscores or hyphens, beginning with a letter or digit.
+Set `RUN_ID` from this saved value. Create a private staging directory outside
+the source checkout:
+
+```bash
+STAGING_DIR="$WORK_DIR/evidence/$RUN_ID/staging"
+mkdir -p "$STAGING_DIR"
+chmod 700 "$STAGING_DIR"
+```
+
+Immediately copy generated evaluation, plan and report documents to this staging
+area before any checkout/branch change. Publish only sanitized and validated
+copies. All plan/test/report/blog writers use `artifact-publish`: it creates a
+separate temporary Git repository from the current remote `autopoc-artifacts`
+head (or an orphan branch when absent), appends immutable content revisions at
+`runs/<run_id>/<kind>/<revision>/`, updates per-kind head pointers, and performs
+ordinary pushes with bounded conflict retries. Never reset, stash, switch or
+force-push the source checkout to publish artifacts. Save returned revision,
+path and commit in state. Publication failures remain explicit and never erase
+previous artifacts or change test outcomes.
+
+
 **Update the state file after completing each phase.** This is critical for:
 - Tracking retry counters
 - Providing context to later phases
@@ -136,7 +161,11 @@ At least one component identified. If zero components found, set error and stop.
 
 3. Write the evaluation to `$WORK_DIR/repos/$PROJECT_NAME/.autopoc/rhoai-evaluation.md`.
 
-4. Update `poc-state.yaml` with evaluation results.
+4. Update `poc-state.yaml` with evaluation results. Write the sanitized evaluation
+   document immediately to `$STAGING_DIR/evaluation.md` outside the checkout.
+   Once the fork remote exists, publish it through `artifact-publish --kind evaluation`
+   with `--file "evaluation.md=$STAGING_DIR/evaluation.md"`, the saved run ID and
+   repository path. Record publication separately from the evaluation outcome.
 
 ### Exit condition
 Evaluation written (or skipped on failure). Pipeline continues regardless.
@@ -316,17 +345,13 @@ Fork URL recorded in state.
    vale --output=JSON "$WORK_DIR/repos/$PROJECT_NAME/poc-plan.md" 2>/dev/null || true
    ```
 
-5. Commit to the `autopoc-artifacts` branch:
+5. Stage and publish the plan with the common append-only helper:
    ```bash
    cd "$WORK_DIR/repos/$PROJECT_NAME"
-   CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-   git stash --quiet 2>/dev/null || true
-   git checkout -B autopoc-artifacts
-   git add poc-plan.md
-   git commit -m "Add PoC plan" --allow-empty
-   git push origin autopoc-artifacts --force
-   git checkout "$CURRENT_BRANCH"
-   git stash pop --quiet 2>/dev/null || true
+   cp "poc-plan.md" "$STAGING_DIR/poc-plan.md"
+   python -m autopoc.cli_tools artifact-publish \
+     --repo "$WORK_DIR/repos/$PROJECT_NAME" --run-id "$RUN_ID" --kind plan \
+     --file "poc-plan.md=$STAGING_DIR/poc-plan.md"
    ```
 
 6. Update `poc-state.yaml` with poc_type, scenarios, infrastructure, and poc_plan_path.
@@ -708,17 +733,13 @@ All pods healthy and service URLs recorded.
    - "exec format error" -> container fix (back to Phase 5)
    Check `retries.container_fix_retries` < `retries.max_container_fix_retries`.
 
-7. Commit test artifacts to the `autopoc-artifacts` branch:
+7. Stage and publish test artifacts with the common append-only helper:
    ```bash
    cd "$WORK_DIR/repos/$PROJECT_NAME"
-   CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-   git stash --quiet 2>/dev/null || true
-   git checkout -B autopoc-artifacts
-   git add poc_test.py
-   git commit -m "Add PoC test script" --allow-empty
-   git push origin autopoc-artifacts --force
-   git checkout "$CURRENT_BRANCH"
-   git stash pop --quiet 2>/dev/null || true
+   cp "poc_test.py" "$STAGING_DIR/poc_test.py"
+   python -m autopoc.cli_tools artifact-publish \
+     --repo "$WORK_DIR/repos/$PROJECT_NAME" --run-id "$RUN_ID" --kind tests \
+     --file "poc_test.py=$STAGING_DIR/poc_test.py"
    ```
 
 8. Update `poc-state.yaml` with test results.
@@ -779,20 +800,22 @@ Test results recorded in state (pass or fail).
    vale --output=JSON "$WORK_DIR/repos/$PROJECT_NAME/poc-report.md" 2>/dev/null || true
    ```
 
-6. Commit to the `autopoc-artifacts` branch:
+6. Finalize the canonical pre-link report snapshot outside the checkout, then publish:
    ```bash
    cd "$WORK_DIR/repos/$PROJECT_NAME"
-   CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-   git stash --quiet 2>/dev/null || true
-   git checkout -B autopoc-artifacts
-   git add poc-report.md
-   git commit -m "Add PoC report" --allow-empty
-   git push origin autopoc-artifacts --force
-   git checkout "$CURRENT_BRANCH"
-   git stash pop --quiet 2>/dev/null || true
+   cp "poc-report.md" "$STAGING_DIR/poc-report.md"
+   python -m autopoc.cli_tools artifact-publish \
+     --repo "$WORK_DIR/repos/$PROJECT_NAME" --run-id "$RUN_ID" --kind report \
+     --file "poc-report.md=$STAGING_DIR/poc-report.md"
    ```
 
-7. Update `poc-state.yaml` with report path.
+7. Update `poc-state.yaml` with `report_path` pointing at the staged copy,
+   `canonical_report_path`, and `canonical_report_sha256` (SHA-256 of its bytes).
+   Save the returned artifact revision and commit. Never mutate this canonical
+   pre-link report when adding executive links. Derive a new report file from it,
+   replacing only a delimited generated-links block; publish that new file as a
+   report revision with `--head report --head executive` to update both pointers
+   atomically. The blog writer preserves all report revisions.
 
 ### Exit condition
 Report written and committed.

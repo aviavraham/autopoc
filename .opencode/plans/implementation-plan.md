@@ -283,7 +283,7 @@ recommendations are not execution instructions.
 | Phase 3: Headless presentation and UI evidence requirements | ✅ Done | Documented the requested headless step and proposed capture/evidence flow; implementation choices remain under evaluation |
 | Phase 4: Sample presentation and recording feasibility | Sample complete; video work transferred | Omnigent archive and Slidev/PDF complete; executive recording belongs to Phase 6, original UI clip composition is optional later work |
 | Phase 5: Presentation automation handoff | Documentation ✅ Done; implementation pending | Session record, repositories/tools, reproduction and staged integration roadmap documented |
-| Phase 6: Executive presentation and video scope | Astra findings incorporated in documents; implementation on hold | Four topics, durable recovery, independent reconciliation, isolated renderer Job, silent Phase 1 video and Google TTS Phase 2 |
+| Phase 6: Executive presentation and video scope | Implementation in progress | Artifact preservation implemented and reviewed; evidence collection and renderer integration follow |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -356,7 +356,8 @@ recommendations are not execution instructions.
 - Added acceptance cases for report → extension → blog persistence, original workspace deletion, interrupted uploads, completed-blog resume and forced renderer failure.
 - These are documentation corrections only. Implementation remains on hold while the user reviews; a detailed whole-feature implementation plan is still required.
 
-### 6.3 Preserve source evidence and artifact history — Pending
+### 6.3 Preserve source evidence and artifact history — In progress
+- ✅ Collector Task 0: implemented the common append-only Git writer and CLI; migrated evaluation/plan/tests/report/blog artifact instructions to stable staging and immutable revisions. Independent scoped review passed. Verified 71 affected tests, including real competing Git writers and source-checkout preservation.
 - Implement collector-plan Task 0 first: stable staging before checkout changes and common append-only run-specific artifact publishing for plan, tests, report and blog.
 - Implement indexed run/scenario/execution/attempt records, including internal retries, explicit final-execution selection and incomplete-result handling.
 - Primary targets: `src/autopoc/evidence.py`, common artifact persistence tooling, `cli_tools.py`, run-poc/blog-create instructions and state schema.

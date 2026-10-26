@@ -212,9 +212,9 @@ records the presentation and does not depend on original UI clips.
 | Record silent video for Phase 1 and Google TTS voice-over for Phase 2 | ✅ Done — user preference captured |
 | Check the expanded design with an independent builder review | ✅ Done — clarified unattended content/publication checks |
 | Incorporate the Astra assessment across the design and active plans | ✅ Done — documentation only; implementation on hold |
-| Preserve report/artifact history and indexed test attempts | Pending — implementation-plan section 6.3 |
+| Preserve report/artifact history and indexed test attempts | In progress — ✅ common artifact writer and staging; indexed evidence follows in section 6.3 |
 | Implement durable render inputs, upload intents and independent recovery | Pending — section 6.4 |
 | Implement executive Slidev/TopoLoop rendering and silent MP4 | Pending — section 6.5 |
 | Isolate and verify the renderer Job under resource failures | Pending — section 6.6 |
 | Publish report links and run cluster acceptance | Pending — section 6.7 |
-| Approve the design and implement report integration, rendering, video generation and publishing | Pending |
+| Approve the design and implement report integration, rendering, video generation and publishing | Implementation authorized 26 October; in progress |
