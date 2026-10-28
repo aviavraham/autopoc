@@ -97,3 +97,24 @@ def test_unreviewed_or_unsupported_claims_cannot_be_sealed(tmp_path, change):
             tmp_path / "sealed",
             renderer_image="quay.io/org/image@sha256:" + "b" * 64,
         )
+
+
+def test_seal_rejects_topology_the_renderer_would_refuse(tmp_path):
+    """Seal-time graph checks must match renderer/render.mjs, which requires all three arrays."""
+    run = tmp_path / "run"
+    run.mkdir()
+    evidence, narrative, review = inputs(run)
+    document = json.loads(narrative.read_text())
+    document["topology"] = {"nodes": [{"id": "a", "label": "A"}], "edges": []}
+    narrative.write_text(json.dumps(document))
+    review_document = json.loads(review.read_text())
+    review_document["narrative_sha256"] = hashlib.sha256(narrative.read_bytes()).hexdigest()
+    review.write_text(json.dumps(review_document))
+    with pytest.raises(ValueError, match="graph"):
+        seal_inputs(
+            evidence,
+            narrative,
+            review,
+            tmp_path / "durable",
+            renderer_image="quay.io/org/image@sha256:" + "b" * 64,
+        )

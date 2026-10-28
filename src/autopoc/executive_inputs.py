@@ -111,11 +111,15 @@ def _validate(data: dict[str, bytes]) -> dict:
     ):
         raise ValueError("Explicit limitations are required")
     for graph in (narrative.get("topology"), narrative.get("scenario_flow")):
+        # Require the arrays rather than defaulting them: renderer/render.mjs
+        # rejects a graph with a missing nodes/edges/acts key, and a seal that
+        # accepts one only defers the failure to an aborted render.
         if graph is not None and (
             not isinstance(graph, dict)
-            or len(graph.get("nodes", [])) > 12
-            or len(graph.get("edges", [])) > 20
-            or len(graph.get("acts", [])) > 5
+            or not all(isinstance(graph.get(key), list) for key in ("nodes", "edges", "acts"))
+            or len(graph["nodes"]) > 12
+            or len(graph["edges"]) > 20
+            or len(graph["acts"]) > 5
         ):
             raise ValueError("Topology exceeds executive graph limits")
     durations = scenes.get("durations")

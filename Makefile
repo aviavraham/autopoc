@@ -68,6 +68,10 @@ lock: ## Regenerate requirements.lock from pyproject.toml
 test: ## Run unit and integration tests with coverage
 	$(PYTHON) -m pytest tests/ --ignore=tests/e2e -q --cov --cov-report=term-missing
 
+.PHONY: test-renderer
+test-renderer: ## Run renderer tests (Node only, no npm install needed)
+	cd renderer && node --test *.test.mjs
+
 .PHONY: test-e2e
 test-e2e: ## Run end-to-end tests (requires local infra)
 	$(PYTHON) -m pytest tests/e2e/ --e2e -v

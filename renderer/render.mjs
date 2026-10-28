@@ -53,6 +53,17 @@ export async function prepareDeck(input, output) {
   return { narrative, scenes }
 }
 
+/** Mark what a capture failure actually invalidated. A broken scene is broken
+ *  in the deck and the PDF too; a video-pipeline failure leaves them usable. */
+export function failedArtifacts(manifest, error) {
+  manifest.artifacts.video = { status: 'failed', error: 'Video recording or validation failed' }
+  if (error?.contentFailure)
+    for (const kind of ['deck', 'pdf'])
+      if (manifest.artifacts[kind])
+        manifest.artifacts[kind] = { status: 'failed', error: 'Scene content failed to initialize' }
+  return manifest
+}
+
 function run(command, args, cwd, timeout = 120000) {
   return new Promise((accept, reject) => {
     const child = spawn(command, args, { cwd, stdio: ['ignore', 'pipe', 'pipe'] })
@@ -114,7 +125,13 @@ export async function render(input, output) {
         await page.goto(`${url}/${i+1}?embedded`, { waitUntil: 'networkidle', timeout: 30000 })
         await page.locator('[data-executive-ready="true"]').waitFor({ timeout: 30000 })
         const fatal = await page.locator('.tl-fatal').allTextContents()
-        if (fatal.length || pageErrors.length) throw new Error('Scene initialization failed: ' + JSON.stringify({ slide:i+1, pageErrors, fatal }))
+        if (fatal.length || pageErrors.length) {
+          // The deck and the PDF embed this same component and data, so the
+          // defect is in the content, not in the video pipeline.
+          const error = new Error('Scene initialization failed: ' + JSON.stringify({ slide:i+1, pageErrors, fatal }))
+          error.contentFailure = true
+          throw error
+        }
         await page.evaluate(() => window.dispatchEvent(new Event('executive-reset')))
         await page.locator('[data-executive-ready="true"]').waitFor({ timeout: 30000 })
         await page.screenshot({ path: join(output, 'frames', `${i+1}.png`) })
@@ -142,7 +159,7 @@ export async function render(input, output) {
         || Math.abs(Number(probe.format.duration)-expected) > 1 || !(Number(video.nb_frames) > 0)) throw new Error('Invalid video format/duration')
     manifest.artifacts.video = { status: 'validated', path: 'executive-summary.mp4', duration_seconds: Number(probe.format.duration), width:1280, height:720, fps:video.avg_frame_rate }
   } catch (error) {
-    manifest.artifacts.video = { status: 'failed', error: 'Video recording or validation failed' }
+    failedArtifacts(manifest, error)
     console.error(error.message)
   } finally { await browser?.close(); await new Promise(accept => server.close(accept)) }
   for (const artifact of Object.values(manifest.artifacts)) if (artifact.status === 'validated' && artifact.path !== 'source/dist') {

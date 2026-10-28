@@ -31,3 +31,25 @@ test('missing topics and unsupported durations cannot render', async () => {
     await assert.rejects(prepareDeck(root, join(root, 'deck')))
   } finally { await rm(root, { recursive: true, force: true }) }
 })
+
+test('a scene-content failure also invalidates the deck and the PDF', async () => {
+  const { failedArtifacts } = await import('./render.mjs')
+  const manifest = { artifacts: { deck: { status: 'validated', path: 'source/dist' },
+                                  pdf: { status: 'validated', path: 'executive-summary.pdf' } } }
+  const fatal = new Error('Scene initialization failed')
+  fatal.contentFailure = true
+  failedArtifacts(manifest, fatal)
+  assert.equal(manifest.artifacts.deck.status, 'failed')
+  assert.equal(manifest.artifacts.pdf.status, 'failed')
+  assert.equal(manifest.artifacts.video.status, 'failed')
+})
+
+test('a video-only failure keeps the deck and the PDF', async () => {
+  const { failedArtifacts } = await import('./render.mjs')
+  const manifest = { artifacts: { deck: { status: 'validated', path: 'source/dist' },
+                                  pdf: { status: 'validated', path: 'executive-summary.pdf' } } }
+  failedArtifacts(manifest, new Error('ffmpeg exited non-zero'))
+  assert.equal(manifest.artifacts.deck.status, 'validated')
+  assert.equal(manifest.artifacts.pdf.status, 'validated')
+  assert.equal(manifest.artifacts.video.status, 'failed')
+})

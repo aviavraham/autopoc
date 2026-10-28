@@ -7,6 +7,7 @@
     "node": ">=22.18.0"
   },
   "scripts": {
+    "test": "node --test *.test.mjs",
     "dev": "slidev slides.md --port 3030",
     "build": "slidev build slides.md --out dist",
     "preview": "vite preview --host localhost --port 4173 --strictPort",
