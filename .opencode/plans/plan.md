@@ -220,6 +220,7 @@ records the presentation and does not depend on original UI clips.
 | Approve the design and implement report integration, rendering, video generation and publishing | Implementation authorized 26 October; in progress |
 | Correct PR-readiness test race and sample license whitespace | ✅ 28 October — 366 supported tests passed; committed caac1e3 |
 | Verify a restricted OCP reference through the published image entrypoint | ✅ 28 October — six-page PDF, silent120sMP4, all output hashes verified; 178.895s, peak1,841,668,096 bytes |
+| Push the feature branch and open a draft PR in the user's fork | ✅ [aviavraham/autopoc#1](https://github.com/aviavraham/autopoc/pull/1), targeting fork master |
 
 Verification: 366 supported tests, 83.48% coverage, pinned Ruff clean, Pyright
 zero errors and two Node tests passed. Renderer image published to Quay by digest;

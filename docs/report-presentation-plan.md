@@ -2,6 +2,12 @@
 
 Updated: 28 October 2026.
 
+Draft PR: [aviavraham/autopoc#1](https://github.com/aviavraham/autopoc/pull/1),
+from `codex/aipcc-33008-slidev-epic` to `master` in the user's fork. The user
+requested this destination; no merge or upstream default-branch push occurred.
+The unrelated local `opencode.json` edit is excluded. Remaining acceptance and
+rollout items below are recorded in the PR description.
+
 ## Executive summary feature scope
 
 The requested AutoPoC feature now includes an automatically generated Slidev

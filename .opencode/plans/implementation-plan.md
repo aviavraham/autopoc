@@ -386,4 +386,9 @@ recommendations are not execution instructions.
 - Removed trailing whitespace from the two sample font-license copies without changing their text.
 - Fresh verification: 366 supported tests passed, 83.48% coverage; focused renderer suite 11 passed; Ruff clean. Unrelated `opencode.json` remains excluded.
 - Renewed OCP access. The repository shell sets a different kubeconfig from the default used by `oc login`; acceptance commands explicitly select the renewed `/home/aavraham/.kube/config`.
-- ✅ Restricted OCP render/export passed. The first new attempt rejected ConfigMap symlinks; the passing harness copies input to a regular scratch file. Production path validation is unchanged. Updated AGENTS.md and prepared a reviewable PR description; PR creation has not been requested explicitly.
+- ✅ Restricted OCP render/export passed. The first new attempt rejected ConfigMap symlinks; the passing harness copies input to a regular scratch file. Production path validation is unchanged. Updated AGENTS.md and prepared a reviewable PR description.
+
+### 6.9 Publish a draft PR to the user's fork — ✅ 28 October 2026
+- Pushed `codex/aipcc-33008-slidev-epic` to the `aavraham` remote, `aviavraham/autopoc`, at the user's request.
+- Opened [draft PR #1](https://github.com/aviavraham/autopoc/pull/1) against that fork's `master`; GitHub reports it mergeable. The description records actual validation and remaining rollout/acceptance work.
+- Attached the PR to this task. Unrelated `opencode.json` remains uncommitted and excluded. No merge or default-branch push was performed.
