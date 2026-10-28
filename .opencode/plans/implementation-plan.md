@@ -370,19 +370,20 @@ recommendations are not execution instructions.
 - Implemented trusted Slidev/TopoLoop components, JSON-only narrative, explicit scene readiness/reset/still frames, source/static ZIPs, PDF, executive Markdown and silent H264 MP4 with ffprobe validation.
 - Local host and constrained UBI renders passed. Full six-scene reference: 119.966667-second silent H264 at 1280x720/30 fps; 226.673-second render, peak 2,046,562,304 bytes. PDF text, topology, execution and conclusions visually inspected; two Node boundary tests pass. Broader live fixture/resource acceptance remains open. Google TTS stays Phase 2.
 
-### 6.6 Isolate cluster execution — ✅ packaging; OCP acceptance open
+### 6.6 Isolate cluster execution — ✅ restricted OCP render; failure acceptance open
 - Published renderer digest `sha256:f65ec5e266f743ce2ace49f978db1c99e68d8430527c9d4710ee56a4bfdab76d` under `quay.io/aicatalyst/autopoc-executive-renderer`. Added Job/RBAC/launcher configuration; renderer has no workload token or RoleBinding.
 - Constrained local test: arbitrary UID, read-only root, network disabled, 2 CPUs/3 GiB/4 GiB scratch; 68.539 seconds, peak 2,465,705,984 bytes for short diagnostic. No runtime dependency downloads.
-- OCP reference outputs remain unverified: test PVC attach failed; scratch-only export failed before renewed authentication. Forced OOM/disk/admission acceptance and worker-image rollout remain open.
+- ✅ 28 October: published image completed six-scene rendering through its normal entrypoint under restricted-v2, UID1000880000, read-only root/no workload token, 2 CPUs/3 GiB/4 GiB scratch. Runtime178.895s; memory peak1,841,668,096 bytes; scratch46,609,764 bytes. Five output hashes verified after export; six-page PDF, silent H264120s1280x720/30fps verified. Forced OOM/disk/admission acceptance and worker-image rollout remain open.
 
 ### 6.7 Publish executive links and validate end to end — implementation ✅; live validation in progress
 - Implemented independent output validation/publication, durable receipts and report-link revisions after blog completion. Partial failures retain valid presentation/PDF artifacts.
 - Google service account is invalid. User authorized temporary personal OAuth; all six reference artifacts uploaded and downloaded for hash verification. Checkpoint complete; report links persisted in the local reference Git remote after completed-blog state. Personal credentials stay local; cluster Secret unchanged.
 - Current verification: 366 supported tests passed, 83.48% coverage; pinned Ruff clean; Pyright zero errors; two Node tests passed. Astra's five implementation findings closed with scoped re-review.
-- Remaining acceptance: real OCP render/publication and failure scenarios, model-service narrative review and main-worker build/rollout. No original PoC test replay; no claim of production rollout.
+- Remaining acceptance: unattended OCP publication and failure scenarios, model-service narrative review and main-worker build/rollout. OCP offline rendering now passes. New cluster outputs remain local because the temporary personal OAuth file was removed from /tmp; original verified Drive reference remains available. No original PoC test replay; no claim of production rollout.
 
 ### 6.8 PR-readiness corrections — ✅ 28 October 2026
 - Fixed the timeout test's `/proc` check/read race with a bounded wait for child termination; it still fails if the child survives. Production timeout behavior is unchanged.
 - Removed trailing whitespace from the two sample font-license copies without changing their text.
 - Fresh verification: 366 supported tests passed, 83.48% coverage; focused renderer suite 11 passed; Ruff clean. Unrelated `opencode.json` remains excluded.
-- Renewed OCP access. The repository shell sets a different kubeconfig from the default used by `oc login`; acceptance commands explicitly select the renewed `/home/aavraham/.kube/config`. A fresh isolated reference Job is in progress; this does not yet close cluster acceptance.
+- Renewed OCP access. The repository shell sets a different kubeconfig from the default used by `oc login`; acceptance commands explicitly select the renewed `/home/aavraham/.kube/config`.
+- ✅ Restricted OCP render/export passed. The first new attempt rejected ConfigMap symlinks; the passing harness copies input to a regular scratch file. Production path validation is unchanged. Updated AGENTS.md and prepared a reviewable PR description; PR creation has not been requested explicitly.

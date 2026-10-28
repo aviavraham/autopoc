@@ -36,9 +36,27 @@ observation and removed whitespace in the two sample license copies. The fresh
 supported suite passes 366 tests with 83.48% coverage. Renewed cluster access is
 available in the default kubeconfig; the repository shell's separate
 `KUBECONFIG=/home/aavraham/.kube/kubeconfig` override is stale. Run acceptance
-commands with `KUBECONFIG=/home/aavraham/.kube/config` explicitly. A new isolated
-OCP reference is in progress; retain the open acceptance items below until its
-outputs are verified. Personal Google credentials remain local.
+commands with `KUBECONFIG=/home/aavraham/.kube/config` explicitly.
+
+The new isolated OCP reference **passed** through the published image's normal
+entrypoint: Job `autopoc-executive-acceptance-20261028-2`, namespace `autopoc-test`,
+SCC `restricted-v2`, UID `1000880000`, no workload token and read-only image root.
+Limits were 2 CPUs, 3 GiB memory and 4 GiB scratch. Rendering took 178.895 seconds,
+peaked at 1,841,668,096 bytes and used 46,609,764 scratch bytes. All five generated
+artifacts were exported and their hashes verified; ffprobe confirms a silent
+120-second H264 video at 1280x720/30 fps, and the PDF has six pages. The execution
+slide was visually inspected. This validates offline OCP rendering, not the full
+worker/model-review/service-account-publication path.
+
+Outputs are saved at
+`/home/aavraham/chatgpt/repositories/autopoc/presentations/omnigent-2026-10-20/output/ocp-executive-2026-10-28-2/`.
+The initial new attempt confirmed that ConfigMap input symlinks are rejected;
+the passing harness copies that sanitized sealed ZIP to a regular scratch file,
+as production verified downloads do. Path-validation policy was not weakened.
+The previous temporary personal OAuth file in `/tmp` is no longer present, so
+these new cluster outputs were not uploaded. The earlier Drive links below
+continue to identify the verified local reference. Renew local OAuth if another
+personal upload is needed; no personal token was deployed to OCP.
 
 Evidence capture/verification, sealed inputs, the trusted six-scene renderer,
 silent H264 video, retry-safe Drive publication and independent recovery/report
@@ -55,11 +73,11 @@ at 2,465,705,984 bytes. The image predates the optional local OAuth credential
 injection added afterward; normal service-account operation is unchanged.
 
 Cluster RBAC was applied and server validation passed; the renderer has no
-workload API token or Job creation permission. Full cluster acceptance is still
-open: the first test PVC could not attach, and subsequent scratch-only test
-outputs were not successfully verified/exported before access expired. Do not
-claim a successful OCP render from these tests. OOM, scratch exhaustion and
-admission-failure acceptance also remain open.
+workload API token or Job creation permission. The original 26 October tests did
+not yield verified outputs: the first PVC could not attach, and later scratch-only
+attempts were not successfully exported. The passing 28 October regular-file
+reference above now establishes restricted OCP rendering. Forced OOM, scratch
+exhaustion, admission-failure and full publication acceptance remain open.
 
 The configured Google service account returns `invalid_grant: account not found`.
 The user authorized temporary personal Drive OAuth. Sign-in and Drive API access
@@ -96,8 +114,7 @@ controller that used only the saved artifact remote and Drive checkpoint, with
 no original worker staging directory. This is a local recovery acceptance check,
 not an OCP worker-deletion test.
 
-Next: renew OCP access locally,
-finish actual cluster/failure acceptance with working service credentials, then
+Next: finish resource-failure and full publication acceptance with working service credentials, then
 build/deploy the main AutoPoC worker containing these tools and skills. The main
 worker was not rebuilt or rolled out during this implementation. Model-service
 narrative review acceptance remains open: reference receipts are explicitly

@@ -215,10 +215,11 @@ records the presentation and does not depend on original UI clips.
 | Preserve report/artifact history and indexed test attempts | ✅ Done — capture, collector/verifier, immutable Git writer and fixtures |
 | Implement durable render inputs, upload intents and independent recovery | ✅ Code/recovery tests and actual personal Drive reference publication |
 | Implement executive Slidev/TopoLoop rendering and silent MP4 | ✅ Full six-scene/two-minute local reference verified and uploaded |
-| Isolate and verify the renderer Job under resource failures | Packaging/RBAC ✅; OCP render and resource-failure acceptance open |
-| Publish report links and run cluster acceptance | Link/reconciliation code and personal Drive reference ✅; cluster acceptance open |
+| Isolate and verify the renderer Job under resource failures | Packaging/RBAC and restricted OCP render ✅; forced resource-failure acceptance open |
+| Publish report links and run cluster acceptance | Link/reconciliation, personal Drive reference and OCP offline render ✅; unattended publication open |
 | Approve the design and implement report integration, rendering, video generation and publishing | Implementation authorized 26 October; in progress |
-| Correct PR-readiness test race and sample license whitespace | ✅ 28 October — 366 supported tests passed; fresh OCP reference validation in progress |
+| Correct PR-readiness test race and sample license whitespace | ✅ 28 October — 366 supported tests passed; committed caac1e3 |
+| Verify a restricted OCP reference through the published image entrypoint | ✅ 28 October — six-page PDF, silent120sMP4, all output hashes verified; 178.895s, peak1,841,668,096 bytes |
 
 Verification: 366 supported tests, 83.48% coverage, pinned Ruff clean, Pyright
 zero errors and two Node tests passed. Renderer image published to Quay by digest;
