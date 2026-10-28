@@ -742,6 +742,8 @@ def register_cluster_commands(subparsers) -> None:
                 )
                 result = reconcile_outputs(args.repo, checkpoint["run_id"], args.state, drive)
         print(json.dumps(result, indent=2))
+        if args.command == "executive-dispatch" and result.get("status") in {"partial", "failed"}:
+            raise SystemExit(1)
 
     seal = subparsers.add_parser(
         "executive-seal", help="Seal reviewed narrative and original evidence"

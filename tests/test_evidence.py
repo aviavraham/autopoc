@@ -380,3 +380,24 @@ def test_verifier_scans_all_index_metadata(tmp_path, field, value):
             target.writestr(name, raw)
     with pytest.raises(EvidenceError):
         verify_bundle(modified)
+
+
+def test_basic_auth_header_is_rejected_like_a_bare_basic_credential():
+    """A header-prefixed Basic credential must fail closed, not slip past the guard."""
+    from autopoc.evidence import EvidenceError, sanitize_text
+
+    with pytest.raises(EvidenceError, match="Suspicious"):
+        sanitize_text(
+            'curl -H "Authorization: Basic YWRtaW46UzNjci10LVAhc3N3MHJk" https://poc.example.com'
+        )
+
+
+def test_suffixed_secret_key_names_are_redacted_in_prose():
+    from autopoc.evidence import sanitize_text
+
+    for text in (
+        "secret_key: AbCdEf1234567890xyz",
+        "api_key_id: AbCdEf1234567890xyz",
+        "client_secret_value: AbCdEf1234567890xyz",
+    ):
+        assert "AbCdEf1234567890xyz" not in sanitize_text(text), text

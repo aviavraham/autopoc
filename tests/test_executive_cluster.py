@@ -300,3 +300,40 @@ def test_unknown_job_creation_reconciles_existing_job_instead_of_duplicate(
     second = submit_renderer(source, "run-1", "autopoc-test", wait_seconds=0)
     assert first["job"]["uid"] == second["job"]["uid"] == "job-uid"
     assert len(submissions) == 1
+
+
+def test_dispatch_exits_nonzero_when_renderer_admission_fails(repository, tmp_path, monkeypatch):
+    import argparse
+
+    from autopoc import executive_cluster
+
+    source, _ = repository
+    run = tmp_path / "run"
+    run.mkdir()
+    drive = Drive()
+
+    def kubectl(arguments, payload=None):
+        raise RuntimeError("admission webhook denied the request")
+
+    monkeypatch.setattr(executive_cluster, "_kubectl", kubectl)
+    monkeypatch.setattr(executive_cluster, "_drive", lambda: drive)
+    parser = argparse.ArgumentParser()
+    executive_cluster.register_cluster_commands(parser.add_subparsers(dest="command"))
+    args = parser.parse_args(
+        [
+            "executive-dispatch",
+            "--repo",
+            str(source),
+            "--inputs",
+            str(package(run)),
+            "--namespace",
+            "autopoc-test",
+            "--folder-id",
+            "folder",
+            "--wait-seconds",
+            "0",
+        ]
+    )
+    with pytest.raises(SystemExit) as exit_info:
+        args.func(args)
+    assert exit_info.value.code == 1

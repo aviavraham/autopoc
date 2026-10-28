@@ -138,8 +138,10 @@ def sanitize_text(value: str) -> str:
         flags=re.DOTALL,
     )
     value = re.sub(r"(?i)\bBearer\s+[^\s\"\'<>]+", "Bearer " + REDACTED, value)
+    # Never consume a bare auth scheme as if it were the credential: doing so
+    # leaves the payload behind and strips the anchor the residual guard needs.
     value = re.sub(
-        r"""(?i)((?:password|passwd|secret|token|api[_-]?key|authorization|credential)["']?\s*[=:]\s*)("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\s,;"'<>]+)""",
+        r"""(?i)((?:password|passwd|secret|token|api[_-]?key|authorization|credential)[A-Za-z0-9_-]*["']?\s*[=:]\s*)("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|(?!(?:basic|bearer|digest|negotiate)\b)[^\s,;"'<>]+)""",
         lambda match: (
             match[1] + (match[2][0] + REDACTED + match[2][-1] if match[2][0] in "\"'" else REDACTED)
         ),
