@@ -380,3 +380,9 @@ recommendations are not execution instructions.
 - Google service account is invalid. User authorized temporary personal OAuth; all six reference artifacts uploaded and downloaded for hash verification. Checkpoint complete; report links persisted in the local reference Git remote after completed-blog state. Personal credentials stay local; cluster Secret unchanged.
 - Current verification: 366 supported tests passed, 83.48% coverage; pinned Ruff clean; Pyright zero errors; two Node tests passed. Astra's five implementation findings closed with scoped re-review.
 - Remaining acceptance: real OCP render/publication and failure scenarios, model-service narrative review and main-worker build/rollout. No original PoC test replay; no claim of production rollout.
+
+### 6.8 PR-readiness corrections — ✅ 28 October 2026
+- Fixed the timeout test's `/proc` check/read race with a bounded wait for child termination; it still fails if the child survives. Production timeout behavior is unchanged.
+- Removed trailing whitespace from the two sample font-license copies without changing their text.
+- Fresh verification: 366 supported tests passed, 83.48% coverage; focused renderer suite 11 passed; Ruff clean. Unrelated `opencode.json` remains excluded.
+- Renewed OCP access. The repository shell sets a different kubeconfig from the default used by `oc login`; acceptance commands explicitly select the renewed `/home/aavraham/.kube/config`. A fresh isolated reference Job is in progress; this does not yet close cluster acceptance.

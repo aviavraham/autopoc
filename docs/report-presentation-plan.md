@@ -1,6 +1,6 @@
 # AutoPoC presentation session handoff and automation plan
 
-Updated: 26 October 2026.
+Updated: 28 October 2026.
 
 ## Executive summary feature scope
 
@@ -30,6 +30,15 @@ The [evidence collector plan](superpowers/plans/2026-10-26-presentation-evidence
 is a prerequisite within this feature, rather than its complete scope.
 
 ## Implementation status — 26 October 2026
+
+PR-readiness follow-up on 28 October: fixed a race in the timeout test's `/proc`
+observation and removed whitespace in the two sample license copies. The fresh
+supported suite passes 366 tests with 83.48% coverage. Renewed cluster access is
+available in the default kubeconfig; the repository shell's separate
+`KUBECONFIG=/home/aavraham/.kube/kubeconfig` override is stale. Run acceptance
+commands with `KUBECONFIG=/home/aavraham/.kube/config` explicitly. A new isolated
+OCP reference is in progress; retain the open acceptance items below until its
+outputs are verified. Personal Google credentials remain local.
 
 Evidence capture/verification, sealed inputs, the trusted six-scene renderer,
 silent H264 video, retry-safe Drive publication and independent recovery/report

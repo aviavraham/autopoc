@@ -218,6 +218,7 @@ records the presentation and does not depend on original UI clips.
 | Isolate and verify the renderer Job under resource failures | Packaging/RBAC ✅; OCP render and resource-failure acceptance open |
 | Publish report links and run cluster acceptance | Link/reconciliation code and personal Drive reference ✅; cluster acceptance open |
 | Approve the design and implement report integration, rendering, video generation and publishing | Implementation authorized 26 October; in progress |
+| Correct PR-readiness test race and sample license whitespace | ✅ 28 October — 366 supported tests passed; fresh OCP reference validation in progress |
 
 Verification: 366 supported tests, 83.48% coverage, pinned Ruff clean, Pyright
 zero errors and two Node tests passed. Renderer image published to Quay by digest;

@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import subprocess
+import time
 import zipfile
 from pathlib import Path
 
@@ -217,7 +218,15 @@ def test_renderer_timeout_kills_child_processes(tmp_path):
     pid = int(pid_path.read_text())
     status = Path(f"/proc/{pid}/stat")
     # A killed child may briefly remain a zombie while the container init reaps it.
-    assert not status.exists() or status.read_text().split()[2] == "Z"
+    deadline = time.monotonic() + 2
+    while time.monotonic() < deadline:
+        try:
+            if status.read_text().split()[2] == "Z":
+                return
+        except (FileNotFoundError, ProcessLookupError):
+            return
+        time.sleep(0.01)
+    pytest.fail("Renderer child remained running after the process-group timeout")
 
 
 def test_partial_cli_exits_unsuccessfully_with_result_receipt(monkeypatch, capsys):
