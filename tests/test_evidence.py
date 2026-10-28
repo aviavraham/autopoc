@@ -401,3 +401,24 @@ def test_suffixed_secret_key_names_are_redacted_in_prose():
         "client_secret_value: AbCdEf1234567890xyz",
     ):
         assert "AbCdEf1234567890xyz" not in sanitize_text(text), text
+
+
+def test_known_constraint_basic_guard_also_rejects_ordinary_prose():
+    """Pins a deliberate false positive. The residual guard cannot distinguish
+    `Basic <base64>` from English, because base64 shares the alphabet. Keeping
+    it strict is intentional; the wording constraint is documented for report
+    authors in .opencode/skills/run-poc/references/executive-summary.md. If the
+    guard is ever narrowed, update that note and the poc_report prompt too."""
+    from autopoc.evidence import EvidenceError, sanitize_text
+
+    for credential in ("Basic YWRtaW46UzNjci10LVAhc3N3MHJk", "Basic dXNlcjpwYXNzd29yZDEyMw=="):
+        with pytest.raises(EvidenceError, match="Suspicious"):
+            sanitize_text(credential)
+    with pytest.raises(EvidenceError, match="Suspicious"):
+        sanitize_text("The server supports Basic authentication on /login.")
+    # Documented rephrasings that let a report describe the scheme and still seal.
+    for allowed in (
+        "HTTP Basic credentials were rejected by the endpoint.",
+        "The endpoint uses the Basic scheme.",
+    ):
+        assert sanitize_text(allowed) == allowed

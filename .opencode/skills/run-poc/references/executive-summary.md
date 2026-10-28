@@ -33,6 +33,19 @@ worker stopped waiting. An existing Job is reconciled by name and UID.
   and staged canonical report. Missing report: `skipped`. Missing storage:
   `blocked_storage`. Missing historical attempts remain explicit; never replay
   tests or manufacture successful results to fill them.
+- **Known constraint — the word "basic".** The residual-secret guard in
+  `sanitize_text` fails closed on `basic` followed by 12 or more characters
+  from the base64 alphabet, which that alphabet shares with ordinary English.
+  `evidence-create` therefore aborts with `Suspicious evidence text` on prose
+  such as "Basic authentication" or "basic configuration defaults", and the
+  run produces no deck, PDF or video. Shorter following words ("basic
+  networking") pass, so the behaviour depends on word length, not meaning.
+  This is deliberate: the guard stays strict rather than risk publishing a
+  real `Basic <base64>` credential. Note the tension with
+  `.vale/styles/RedHat/TermsErrors.yml`, which rewrites "basic auth" to
+  "Basic authentication". If a report legitimately documents the scheme,
+  rephrase it (for example "HTTP Basic credentials were rejected") before
+  rerunning `evidence-create`; do not weaken the guard to unblock a run.
 
 ## Generate and review data
 
