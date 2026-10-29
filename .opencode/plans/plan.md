@@ -153,3 +153,76 @@ Implement comprehensive cleanup functionality to address resource accumulation a
 | URL-encode branch names in GitHub protection API paths | ✅ Done |
 | Require status checks and invalidate stale approvals | ✅ Done |
 | Add regression coverage for the hardened policy | ✅ Done |
+
+---
+
+# AutoPoC Report Video Feature Ticket
+
+## Phase 1: Ticket Definition ✅
+
+| Task | Status |
+|------|--------|
+| Define scope and Definition of Done for report-driven explanatory videos | ✅ Done |
+| Create Jira Feature AIPCC-32887 in the AIPCC project | ✅ Done |
+
+## Phase 2: Slidev Feasibility Epic ✅
+
+| Task | Status |
+|------|--------|
+| Fill Jira Epic AIPCC-33008 with Slidev feasibility scope and Definition of Done | ✅ Done |
+
+## Phase 3: Headless Presentation and UI Evidence Requirements ✅
+
+| Task | Status |
+|------|--------|
+| Document the headless post-report presentation step and proposed execution approach | ✅ Done |
+| Document UI screenshots, scenario recordings, and Playwright traces during original tests | ✅ Done |
+| Document evidence preservation, source linkage, and remaining output/runtime decisions | ✅ Done |
+
+Details: [Presentation session handoff and automation plan](../../docs/report-presentation-plan.md).
+
+## Phase 4: Sample Presentation and Recording Feasibility — Historical milestone
+
+| Task | Status |
+|------|--------|
+| Archive evidence from a representative completed end-to-end PoC | ✅ Done — Omnigent run autopoc-omnigent-8554, reports, original test JSON, sanitized runner/build logs and later observations |
+| Generate and verify a sample Slidev presentation and PDF headlessly | ✅ Done — 14 main slides plus 4 appendix slides, including animated TopoLoop setup and scenario walkthroughs, static browser build and 18-page PDF |
+| Evaluate recording/composition | Executive recording transferred to Phase 6; UI clip composition is optional later work |
+
+Sample: `presentations/omnigent-2026-10-20/`. Original browser traces and UI
+recordings were not captured by this run's five HTTP checks. The included UI
+screenshot is explicitly a later observation. The Phase 1 executive video
+records the presentation and does not depend on original UI clips.
+
+## Phase 5: Presentation Automation Handoff
+
+| Task | Status |
+|------|--------|
+| Document completed work, repositories/tools, reproduction commands, evidence limits, and integration points | ✅ Done |
+| Define the evidence-bundle contract and implementation sequence for post-report generation | ✅ Done — roadmap documented; implementation pending |
+| Add local HTTP instructions for development and built previews, prerequisites, URLs, and server shutdown | ✅ Done |
+| Prepare the evidence collector implementation plan from the saved handoff | ✅ Done — `docs/superpowers/plans/2026-10-26-presentation-evidence.md`; implementation pending |
+| Implement evidence preservation, generic renderer, Job integration, silent video and durable publication | Core implementation ✅ — active rollout/acceptance is defined in Phase 6 |
+
+## Phase 6: Executive Presentation and Video Scope
+
+| Task | Status |
+|------|--------|
+| Specify an automatic executive deck and presentation video covering purpose, strategy, execution, and report-based platform suitability | ✅ Done — full design documented; implementation pending |
+| Record silent video for Phase 1 and Google TTS voice-over for Phase 2 | ✅ Done — user preference captured |
+| Check the expanded design with an independent builder review | ✅ Done — clarified unattended content/publication checks |
+| Incorporate the Astra assessment across the design and active plans | ✅ Done — implementation review also closed five findings |
+| Preserve report/artifact history and indexed test attempts | ✅ Done — capture, collector/verifier, immutable Git writer and fixtures |
+| Implement durable render inputs, upload intents and independent recovery | ✅ Code/recovery tests and actual personal Drive reference publication |
+| Implement executive Slidev/TopoLoop rendering and silent MP4 | ✅ Full six-scene/two-minute local reference verified and uploaded |
+| Isolate and verify the renderer Job under resource failures | Packaging/RBAC and restricted OCP render ✅; forced resource-failure acceptance open |
+| Publish report links and run cluster acceptance | Link/reconciliation, personal Drive reference and OCP offline render ✅; unattended publication open |
+| Approve the design and implement report integration, rendering, video generation and publishing | Implementation authorized 26 October; in progress |
+| Correct PR-readiness test race and sample license whitespace | ✅ 28 October — 366 supported tests passed; committed caac1e3 |
+| Verify a restricted OCP reference through the published image entrypoint | ✅ 28 October — six-page PDF, silent120sMP4, all output hashes verified; 178.895s, peak1,841,668,096 bytes |
+| Push the feature branch and open a draft PR in the user's fork | ✅ [aviavraham/autopoc#1](https://github.com/aviavraham/autopoc/pull/1), targeting fork master |
+
+Verification: 366 supported tests, 83.48% coverage, pinned Ruff clean, Pyright
+zero errors and two Node tests passed. Renderer image published to Quay by digest;
+main worker rebuild/rollout remains open. Personal Google OAuth credentials are
+local only while the production service-account credential is repaired.
