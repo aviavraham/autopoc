@@ -284,7 +284,8 @@ recommendations are not execution instructions.
 | Phase 4: Sample presentation and recording feasibility | Sample complete; video work transferred | Omnigent archive and Slidev/PDF complete; executive recording belongs to Phase 6, original UI clip composition is optional later work |
 | Phase 5: Presentation automation handoff | Documentation ✅ Done; implementation pending | Session record, repositories/tools, reproduction and staged integration roadmap documented |
 | Phase 6: Executive presentation and video scope | Core implementation merged ✅; rollout/acceptance open | Fork master merge verified 3 November; restricted OCP render and personal Drive reference passed; unattended publication, failure acceptance, model review and worker rollout remain |
-| Phase 7: Upstream security remediation | Dependency fix verified ✅; integration pending | Four vulnerable transitive pins regenerated; clean audit and 371 Python tests passed; fork-master merge requires user approval |
+| Phase 7: Upstream security remediation | ✅ Done | User merged fork PR #2; upstream PR #66 updated to 231fc31 and all six CI jobs, including security, passed |
+| Phase 8: Default Red Hat presentation branding | Implementation/local acceptance ✅; OCP rollout pending | 379 Python/eight Node tests and full constrained offline UBI render passed; draft fork PR #3 ready for review; new registry publication and OCP validation remain |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -406,7 +407,7 @@ recommendations are not execution instructions.
 - [PR CI run 41645246344](https://github.com/aicatalyst-team/autopoc/actions/runs/41645246344): lint, renderer tests, typecheck, Python tests and worker image build passed. Security failed: pip-audit reports 10 findings across certifi, opentelemetry-api, pyasn1 and urllib3 (the certifi advisory appears twice).
 - [Upstream master CI run 41590181862](https://github.com/aicatalyst-team/autopoc/actions/runs/41590181862) has the same audit findings; its other CI jobs passed. These dependency findings therefore also exist before the executive feature is merged. No dependency changes, PR comments, pushes or merges were made during this check.
 
-## Phase 7: Upstream Security Remediation — Fix verified; integration pending
+## Phase 7: Upstream Security Remediation — ✅ Done
 
 ### 7.1 Fix and verify vulnerable dependency pins — ✅ 3 November 2026
 - Reproduced PR #66's security failure locally: the pinned lock produced the same 10 reported findings across four transitive dependencies.
@@ -417,3 +418,54 @@ recommendations are not execution instructions.
 ### 7.2 Publish the reviewable security fix — ✅ 3 November 2026
 - Pushed only `codex/fix-upstream-security` and opened [fork PR #2](https://github.com/aviavraham/autopoc/pull/2), targeting the fork's `master`. GitHub reports it mergeable with no conflicts; no fork CI checks are currently reported.
 - Attached fork PR #2 and upstream PR #66 to this chat. Neither default branch was pushed or merged; applying the fix to upstream PR #66 remains pending user merge approval.
+
+### 7.3 Confirm user merge and upstream security recovery — ✅ 3 November 2026
+- The user merged fork PR #2 as `231fc31`; upstream PR #66 automatically adopted that source revision. Fresh GitHub inspection confirms all six checks passed: lint, renderer tests, typecheck, security, Python tests and image build. Upstream PR #66 itself remains open.
+
+## Phase 8: Default Red Hat Presentation Branding — Implementation/local acceptance ✅; OCP rollout pending
+
+### 8.1 Inspect references and define the branding phase — ✅ 3 November 2026
+- Read the supplied 107-page standard template, inspected representative title/content/color pages visually, recorded its SHA-256 and checked official Red Hat typography, color and logo standards.
+- User confirmed Red Hat branding must be the default for newly generated presentations, PDFs and videos. Proposed a red opening scene and light content theme, local fonts/corporate assets, branded TopoLoop status colors and consistent source/browser/PDF/video outputs.
+- Added [the branding design](../../docs/superpowers/specs/2026-11-03-red-hat-presentation-branding-design.md), including factual-content preservation, six-scene timing, legacy input/recovery compatibility, packaging, visual QA and rollout acceptance. An independent builder check reported no important unanswered questions.
+- Created `codex/red-hat-presentation-branding` from merged fork master `231fc31`. Unrelated local files remain excluded. No renderer implementation or deployment is claimed.
+
+### 8.2 Save all required branding resources in the repository — ✅ 3 November 2026
+- User explicitly required local repository copies of every needed branding component. Saved nine official WOFF2 font files (Display/Text/Mono, Regular/Medium/Bold), unmodified official corporate/hat SVGs, upstream font license/authorship notices and a per-file source/hash/size manifest under `renderer/assets/redhat/`.
+- Fonts are pinned to RedHatOfficial/RedHatFont commit `6bb1048a6402b0076ea04f42951ec66263cd1437`. Saved the supplied 107-page PDF unchanged under `docs/branding/` and documented its provenance; it is a design reference, not a runtime background.
+- Verified all 13 upstream-file hashes/sizes, WOFF2 headers and font families, self-contained SVG structure and both logo previews. The reference PDF matches its original size and SHA-256. No dependency or renderer-behavior changes were made; future source/site packaging must include required local assets and licenses.
+- Updated the design to require all later-added artwork, fonts, components and styling to live in the repository, without runtime CDN or operator-local-file dependencies.
+
+### 8.3 Approve the visual design and prepare implementation — ✅ 3 November 2026
+- User explicitly approved the design and requested implementation. Added the ordered implementation plan with version/packaging, shared layouts and visual acceptance tasks; execution is in progress on the existing feature branch.
+
+### 8.4 Implement branding and compatible packaging — ✅ 3 November 2026; acceptance in progress
+- Bundle official assets/fonts with provenance, implement the shared slide shell and diagram palette, and bind template revision 2 through sealing, rendering and source/recovery packaging while preserving revision-1 recovery.
+
+#### 8.4.1 Bind template revision and local source packaging — ✅ 3 November 2026
+- New seals default to revision 2; revision-1 verification/recovery remains supported, with explicit legacy sealing for the original pinned image. The new wrapper rejects fresh v1 rendering and preserves matching complete legacy output reuse.
+- Forwarded sealed versions to Node and source/recovery metadata. Added allowlisted local assets/public files and renderer helpers to editable archives.
+- Watched the new boundary/archive tests fail, then pass: 35 affected Python tests passed. Layout, Node validation and visual acceptance remain in progress.
+
+#### 8.4.2 Implement the shared brand shell and offline validation — ✅ 3 November 2026
+- Implemented six branded scenes using local Display/Text/Mono fonts, a red opening, light content, unmodified corporate/hat SVGs, source references and readable footer bands. Added a renderer-owned light TopoLoop palette with orange failures and green successes; vendored source is unchanged.
+- Verified asset inventory/hashes before deck preparation, copied assets/notices to source and browser trees, awaited fonts/logos, and added scene overflow checks before PDF/video capture. Updated the renderer image definition to package all helpers and local assets.
+- Seven Node and 25 Python input/render tests pass, including failing-first asset/version cases and a regression preventing publication of a static deck after content validation fails. Initial browser preflight and six-page PDF generation passed; full video/image/cluster acceptance follows in 8.5.
+
+### 8.5 Verify and roll out branded artifacts — Local acceptance ✅; OCP rollout pending
+- Verify representative successful/failed fixtures, every PDF page and video frames, offline assets, meaningful compatibility/overflow tests, the supported checks and a restricted OpenShift render before updating deployment configuration.
+
+#### 8.5.1 Resolve review findings and verify local behavior — ✅ 3 November 2026
+- Independent code review found one important diagram-text clipping gap, with no critical/minor findings. Added failing browser/Node regressions, then fixed graph-region bounds and deterministic checks of PDF stills, act transitions and original log events. Expanded the scenario terminal layout without dropping evidence text.
+- All 379 Python tests pass with 85.62% coverage; eight Node tests pass. Actual browser checks cover six scenes, oversized claims/titles/counters/diagram labels, missing fonts/logos and zero external asset requests. Archived Omnigent, synthetic failure/incomplete and twelve-node fixtures rendered locally; all six Omnigent PDF pages were inspected.
+- Full two-minute rendering in the rebuilt constrained image remains in progress. OCP acceptance/publication and deployment configuration changes are not claimed.
+
+#### 8.5.2 Validate constrained UBI rendering and source recovery — ✅ 3 November 2026
+- Built reviewed image `d8e792a29858`, local digest `sha256:cf628a4323262e6ee152e7b9825f5705c8b8cac76cf9e34d5143f12eb9bc53ac`. Normal-entrypoint render passed with read-only root, no networking, UID28128/group0, 2 CPUs, 3 GiB memory and 4 GiB scratch.
+- Original reviewed Omnigent evidence produced a six-page PDF, silent120.000s H264 MP4 at1280x720/30fps, source/browser ZIPs and Markdown. Runtime213.81s; peak memory2,504,695,808 bytes; scratch45,614,563 bytes. Status is `generated_unpublished`, not deployed/published.
+- Verified all output hashes/sizes, all13 original asset hashes in both archives, embedded PDF fonts and source preparation after extraction. Inspected all six final PDF pages and the late login video frame that previously clipped its duration log.
+- Local ignored outputs: `presentations/omnigent-2026-10-20/output/redhat-branding-2026-11-03/`. No PoC replay. Registry publication, restricted OCP acceptance and coordinated worker/renderer rollout remain pending.
+
+#### 8.5.3 Publish the reviewable feature branch — ✅ 3 November 2026
+- Pushed `codex/red-hat-presentation-branding`, opened [draft fork PR #3](https://github.com/aviavraham/autopoc/pull/3) targeting fork master and attached it to this chat. GitHub reports no conflicts; no fork CI checks are reported.
+- Updated renderer/configuration/workflow docs with local assets, v2/v1 compatibility, overflow handling and rollout requirements. No default branch was merged/pushed; deployed configuration is unchanged.
