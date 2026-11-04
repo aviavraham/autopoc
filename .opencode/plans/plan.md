@@ -327,3 +327,4 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Publish report and verify new original evidence | ✅ Canonical report published; first bundle independently verified (16 members, exact five-pass counts, no client keys) |
 | Recover reporting and review corrected narrative | ✅ Scoped profile parsed; same-model independent API reviews completed; corrected report/evidence and exact approved v2 seal verified; no tests replayed |
 | Verify new branded artifacts and publication outcome | In progress; restricted offline renderer submitted with exact reviewed seal; known Google service-account blocker remains separate |
+| Complete and publish conditional DeepSeek blog | ✅ Best v8 accepted at 7.75 under PoC threshold; immutable blog e9f08c6 and bookkeeping report 9e697ea published; Docs blocked; overlong reviewer loop recorded |
