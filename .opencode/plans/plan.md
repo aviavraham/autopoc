@@ -316,5 +316,6 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Prepare independent source and cluster run | ✅ Fresh run ac05c639abd848998db29ce2352d9a0f, dedicated source branch/namespace/PVC and run-only MaaS Secret; protected fork verified; previous run unchanged |
 | Submit the DeepSeek worker | ✅ Server dry-run passed; fresh Job submitted with explicit model, inline profile and genuine in-image tool preflight |
 | Verify actual in-cluster model selection/tool use | ✅ Exact worker completed pwd/MODEL_READY; exported session confirms DeepSeek on all assistant turns; main pipeline Running |
-| Execute all phases or record explicit mandatory failure | Pending; new original attempts/results required |
+| Complete fresh DeepSeek intake/evaluation | ✅ Own pinned-source digest and strategy evaluation written; both persisted phases completed |
+| Execute remaining phases or record explicit mandatory failure | In progress; fork adoption underway; no new build/deployment/test success yet |
 | Verify new branded artifacts and publication outcome | Pending; known Google service-account blocker remains separate |

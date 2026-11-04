@@ -681,3 +681,7 @@ recommendations are not execution instructions.
 
 - Fresh init smoke in exact worker image completed one permitted pwd tool call and MODEL_READY final response. The exported session independently confirms every assistant turn selected rits/deepseek-ai/DeepSeek-V4.1-Flash-1017, OpenCode 1.15.10. This handles the known JSON-output omission without mistaking it for model failure. Saved sanitized proof privately.
 - Main worker autopoc-openshell-deepseek-20261104-jdfvn is Running with explicit EnMaaS model/profile and the new PVC; no alternate provider was used. Full PoC success remains pending.
+
+### 10.5 Complete fresh DeepSeek intake and evaluation — ✅ 4 November 2026
+
+- New worker cloned and pinned the requested source, inspected the actual Rust/Helm/SDK interfaces, and wrote its own repo digest and strategy evaluation. Persisted intake/evaluate statuses are completed; no earlier Qwen outcome was substituted. Fork adoption is underway on the separately prepared source branch. New builds/deployment/tests remain pending.
