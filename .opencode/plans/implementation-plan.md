@@ -708,3 +708,8 @@ recommendations are not execution instructions.
 
 - Verified openshell-deepseek-gateway-1 is Complete/published. All three source-built components succeeded on build 1 without resetting/retrying or substituting prior images. Exact new sandbox digest d9bf4b254da59fe6aabab28e53c00a9a2e196482145881e9b3c6f2eac0dd501d and supervisor digest 31628156930b786f4197020dd03fb7135bad44f94b0a399baf1c5039f1e8c7f9 are retained; gateway's published digest is separately verified through Build status. During the longer gateway compile, observed active rustc/cargo and final gateway/prover crates under the requested 4 CPU/16Gi limits; no false stall/restart was introduced.
 - Build success does not establish deployment health or workload isolation. DeepSeek proceeds to its generated Helm values in the separate namespace, then new original capture.
+
+### 10.11 Verify the new DeepSeek control plane and begin original capture — ✅ 4 November 2026
+
+- Confirmed new gateway and supervisor Pods are 1/1 Ready in poc-openshell-deepseek; gateway is on the preselected eu-gb-2 worker and its new 10Gi PVC is Bound. Gateway's fresh image digest is 11805fd6052122b5aa972eb1570ce387b2965eab824fcb6198f2ee2f790b0295; build duration 2327s. Previous namespace is untouched.
+- Worker reconciled its own Helm install, waited for supervisor-token projection, and began real capture. First captured outcomes: gateway_health pass, four dependent sandbox checks error due to workload-template setup. DeepSeek diagnosed the template naming constraint, committed a focused harness/template correction and resumed genuine validation. This retains failure history and does not establish passing sandbox/isolation results yet.
