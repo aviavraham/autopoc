@@ -564,6 +564,11 @@ recommendations are not execution instructions.
 - Fork setup is complete through operator actions. Prepared Job `autopoc-openshell-20261104-r4` to reuse the same run ID, source pin and PVC. Its recovery initializer configures only the exact fork remote/autopoc branch, preserves original errors and records their resolution, then advances to planning. The new token is referenced only for this Job; the shared batch Secret remains unchanged.
 - Resume instructions explicitly prohibit unrelated repository probes, alternate destinations/credentials and default-branch writes, and require immediate stop on 401/403. The worker continues from phase 4; no completed PoC phase or validation test is replayed. Server dry-run passed and the Job was submitted.
 
-### 9.8 Execute remaining phases and verify new-project outputs — In progress
+### 9.8 Publish the new PoC plan and staged evaluation — ✅ 4 November 2026
+
+- Verified actual GitHub artifact publication with the dedicated run credential: plan revision `fd8650d7837a3e70382bfe9c9efcb185ee5456edd58314d44e3d0080746867a2`, commit `af11dd785b6bf978549b9be70c83084eb9b2ebf6`; evaluation revision `f4aaea5b09642d06044a25456f91a803d9f1feee78a2a606a7c630ad9df9147d`, commit `cf562a10dde0116e5f7f524cfe204aaf65801756`. Both are append-only entries under this run on `autopoc-artifacts`.
+- Configured the worker's global GitHub credential helper for the separate temporary artifact repositories. These successful publications establish write access; worker Administration permission remains unnecessary after operator-completed fork protection. Source main remains protected and untouched by AutoPoC pushes.
+
+### 9.9 Execute remaining phases and verify new-project outputs — In progress
 
 - Confirm recovery initialization, complete planning/containerization/build/deployment/validation/reporting or record a new explicit mandatory failure. Preserve original attempts and report actual media/storage outcomes separately.

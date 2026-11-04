@@ -277,6 +277,7 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Record the fork authentication failure and retain recovery state | ✅ Worker stopped after HTTP 403 and out-of-scope permission probes; state/logs backed up; operator created/protected the exact fork and pushed only autopoc |
 | Verify dedicated token and recover completed fork setup | ✅ Separate run Secret exists; pinned autopoc synchronization passed; operator verified main protection; no broader worker Administration permission required |
 | Resume remaining phases with exact repository scope | In progress; Job r4 submitted at planning with preserved run ID, original failures and workspace; 401/403 must stop the worker |
+| Publish the new PoC plan and staged evaluation | ✅ Plan af11dd7 and evaluation cf562a1 are verified on the immutable artifact branch; dedicated credential worked |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
 
 ## Hosted Model Options Review — ✅ Done, 4 November 2026
