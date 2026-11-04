@@ -676,3 +676,8 @@ recommendations are not execution instructions.
 ### 10.3 Execute and verify the full new run — In progress
 
 - Continue through the eleven phases or a precise mandatory failure, preserve actual new-run results and model provenance, and verify any generated media separately. Do not import prior counts or rerun tests just for presentation evidence.
+
+### 10.4 Verify actual DeepSeek tool execution in the cluster — ✅ 4 November 2026
+
+- Fresh init smoke in exact worker image completed one permitted pwd tool call and MODEL_READY final response. The exported session independently confirms every assistant turn selected rits/deepseek-ai/DeepSeek-V4.1-Flash-1017, OpenCode 1.15.10. This handles the known JSON-output omission without mistaking it for model failure. Saved sanitized proof privately.
+- Main worker autopoc-openshell-deepseek-20261104-jdfvn is Running with explicit EnMaaS model/profile and the new PVC; no alternate provider was used. Full PoC success remains pending.
