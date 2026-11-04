@@ -263,7 +263,7 @@ local only while the production service-account credential is repaired.
 
 Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-red-hat-presentation-branding-design.md).
 
-## Phase 9: OpenShell PoC — Source build ✅; deployment and validation pending
+## Phase 9: OpenShell PoC — Source build and deployment ✅; validation in progress
 
 | Task | Status |
 |------|--------|
@@ -283,8 +283,9 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Recover execution after repetitive compiler probes | ✅ Job r4 stopped with history retained; compiler/reference fix signed off; Job r5 submitted with same run/PVC, retry count 2, bounded context and remaining original deadline |
 | Independently check gateway compiler prerequisite | ✅ Official package paths verified; standalone C++20 program compiled with GCC15 and ran in UBI9 minimal; full gateway build still pending |
 | Retain worker interruption and recovery | ✅ Context overflow observed; same OpenCode session automatically compacted and resumed without a restart/configuration change |
-| Provide missing chart PDB permission | ✅ Reviewed and operator-applied PDB-only Role/RoleBinding in poc-openshell; worker access verified; Helm retry pending |
-| Correct generated RBAC guidance before handoff | Pending; ordering does not bypass Kubernetes escalation checks; access was operator-provisioned |
+| Provide missing chart PDB permission | ✅ Reviewed namespace-only role reapplied after worker cleanup; worker server dry-run and Helm revision 2 upgrade succeeded |
+| Correct generated RBAC guidance before handoff | ✅ Signed-off source a606f758c documents operator authority; false ordering guidance removed; final PDB restored |
+| Complete and reproduce deployment recovery | ✅ Gateway/supervisor 1/1 Ready; IBM disk quota diagnosed; same-zone placement committed; operator attribution corrected; original tests beginning |
 | Review security/suitability claims against original controls | Pending; planned generic denied-connection failure and NetworkPolicy presence alone do not establish enforcement; filesystem policy coverage remains untested |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
 
