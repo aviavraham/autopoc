@@ -279,7 +279,8 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Resume remaining phases with exact repository scope | In progress; Job r4 submitted at planning with preserved run ID, original failures and workspace; 401/403 must stop the worker |
 | Publish the new PoC plan and staged evaluation | ✅ Plan af11dd7 and evaluation cf562a1 are verified on the immutable artifact branch; dedicated credential worked |
 | Commit source containerization definitions | ✅ Gateway/supervisor/sandbox UBI Dockerfiles and build context committed as d441ca245 on autopoc |
-| Build source images with bounded retries | In progress; sandbox and supervisor build 2 Complete with verified digests; gateway compiler-selection fix under investigation |
+| Build source images with bounded retries | In progress; sandbox/supervisor retained; operator fix fd44e465 selects compiler and GNU linker; gateway build 3 running with bounded resources |
+| Recover execution after repetitive compiler probes | ✅ Job r4 stopped with history retained; compiler/reference fix signed off; Job r5 submitted with same run/PVC, retry count 2, bounded context and remaining original deadline |
 | Independently check gateway compiler prerequisite | ✅ Official package paths verified; standalone C++20 program compiled with GCC15 and ran in UBI9 minimal; full gateway build still pending |
 | Retain worker interruption and recovery | ✅ Context overflow observed; same OpenCode session automatically compacted and resumed without a restart/configuration change |
 | Review security/suitability claims against original controls | Pending; planned generic denied-connection failure and NetworkPolicy presence alone do not establish enforcement; filesystem policy coverage remains untested |
