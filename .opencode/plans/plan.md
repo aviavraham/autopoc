@@ -307,3 +307,14 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Read EnMaaS onboarding and map its OpenCode recipe to AutoPoC | ✅ Confirmed v1 provider schema, gateway/authentication and exact GLM/DeepSeek IDs; noted conflicting sample capability/limit metadata; no key access, inference or runtime changes |
 | Try DeepSeek with the user's MaaS key | ✅ API response/function round trip and local/worker OpenCode pwd tests passed; worker final reply verified by session export because JSON output omitted it |
 | Save a reusable DeepSeek configuration and activation instructions | ✅ Secret-free opt-in profile and configuration docs; actual key substitution/model precedence verified; active Qwen PoC and shared credentials unchanged |
+
+## Phase 10: OpenShell with Red Hat EnMaaS DeepSeek — In progress
+
+| Task | Status |
+|------|--------|
+| Discover saved provider profile and verify API access | ✅ Existing exact-model profile/key found; fresh authenticated response passed; secrets not displayed |
+| Prepare independent source and cluster run | ✅ Fresh run ac05c639abd848998db29ce2352d9a0f, dedicated source branch/namespace/PVC and run-only MaaS Secret; protected fork verified; previous run unchanged |
+| Submit the DeepSeek worker | ✅ Server dry-run passed; fresh Job submitted with explicit model, inline profile and genuine in-image tool preflight |
+| Verify actual in-cluster model selection/tool use | In progress; init smoke gates the main pipeline |
+| Execute all phases or record explicit mandatory failure | Pending; new original attempts/results required |
+| Verify new branded artifacts and publication outcome | Pending; known Google service-account blocker remains separate |

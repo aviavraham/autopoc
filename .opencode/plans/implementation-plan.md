@@ -287,6 +287,7 @@ recommendations are not execution instructions.
 | Phase 7: Upstream security remediation | ✅ Done | User merged fork PR #2; upstream PR #66 updated to 231fc31 and all six CI jobs, including security, passed |
 | Phase 8: Default Red Hat presentation branding | Implementation/local/OCP offline acceptance ✅; publication rollout open | Matching images published; new-project restricted OCP v2 render and manual QA passed; unattended Google dispatch/publication remains blocked |
 | Phase 9: OpenShell PoC with fork branding updates | ✅ Run complete with partial validation; cloud publication blocked | Source builds/deployment/report/blog complete; final 3 pass, 1 error, 1 skip preserved; restricted OCP Red Hat PDF/video accepted and exported; Google account remains invalid |
+| Phase 10: OpenShell with EnMaaS DeepSeek | In progress | Fresh isolated run ac05c639abd848998db29ce2352d9a0f; verified saved profile/API access, source branch, protected fork, new namespace/PVC and per-run key; Job submitted with tool preflight |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -658,3 +659,20 @@ recommendations are not execution instructions.
 - Used a bounded reconciliation helper to fast-forward the clean persistent OpenShell source checkout to signed-off 95ad05e and reconcile actual selected input dd362ae6, accepted offline-render metadata, corrected report 5f12aa3 and blog ec93cc3. Canonical report/blog/seal hashes match stored bytes exactly; original final execution, statuses and attempts were not changed. Saved final private state locally and on the retained workspace PVC.
 - Removed only the temporary reconciliation Pods and acceptance ConfigMaps/egress policies after export. Successful/failed Job records, source deployment and workspace remain available; no unrelated workload, shared Secret, default branch or CronJob was changed.
 - Added tracked new-project deliverable/provenance/recovery documentation and updated the main presentation handoff with measured v2 OCP acceptance and the manual-review limitation. Media status is generated_unpublished; Google dispatch/publication and Docs upload remain blocked by the real account failure. The run task is complete with its partial validation result, not a successful isolation certification.
+
+## Phase 10: OpenShell with Red Hat EnMaaS DeepSeek — In progress
+
+### 10.1 Discover and validate the existing provider setup — ✅ 4 November 2026
+
+- User requested running AutoPoC with the setup created by another agent. Found committed deploy/providers/enmaas-deepseek.json and its configuration guide (4f317ba), plus the protected local MaaS key. Exact selected model is enmaas/rits/deepseek-ai/DeepSeek-V4.1-Flash-1017 at the EnMaaS Chat Completions endpoint. Fresh authenticated API request passed without displaying the key. Prior smoke records establish the exact worker's tool compatibility; a new in-cluster genuine tool round trip gates this run.
+
+### 10.2 Prepare and submit a fresh isolated DeepSeek run — ✅ 4 November 2026
+
+- Fresh run ac05c639abd848998db29ce2352d9a0f on original pinned NVIDIA f4a6137. Preserved all earlier Qwen run evidence, deployment, source branch and image tags. Created fresh autopoc-deepseek-20261104-ac05c639 on the exact existing fork at the pinned commit using a normal push; operator independently verified main protection (review, enforced admins, Helm Lint, no force/deletion). Worker adopts that attestation rather than requiring broader Administration access.
+- Created poc-openshell-deepseek, namespace-specific runtime/validation/PDB grants, new 10GiB worker workspace and separate run-only EnMaaS Secret. No shared credential/config/CronJob change. Worker remains on the verified eu-gb-1 node; new gateway/sandbox placement is preconfigured for eu-gb-2 worker nsrd9, which has storage/CPU headroom, to avoid the known GPU-node disk quota. These are operator-prepared conditions, not proof of new-run success.
+- Mounted the saved provider profile and injected it as inline per-run configuration, selected the exact model explicitly on the CLI, and referenced the EnMaaS key through the dedicated Secret. Main worker has no alternate Anthropic/Vertex provider credentials. No unsupported model-limit metadata was invented or copied from GLM. Global uncommitted opencode.json remains untouched.
+- Submitted Job autopoc-openshell-deepseek-20261104 after server dry-run, with fresh state/PVC, four-hour deadline, normal fork/artifact pushes, unique new image tags/build names, original attempt capture, default Red Hat v2, same-model content review and explicit known Google publication blocker. In-image model/tool preflight is running; no analysis/build/deployment/test success is yet claimed.
+
+### 10.3 Execute and verify the full new run — In progress
+
+- Continue through the eleven phases or a precise mandatory failure, preserve actual new-run results and model provenance, and verify any generated media separately. Do not import prior counts or rerun tests just for presentation evidence.
