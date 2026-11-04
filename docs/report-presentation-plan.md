@@ -1,6 +1,39 @@
 # AutoPoC presentation session handoff and automation plan
 
-Updated: 3 November 2026.
+Updated: 4 November 2026.
+
+## OpenShell reference — 4 November 2026
+
+The branding feature was exercised on NVIDIA/OpenShell using the fork's
+`560503d` worker. All three runtime images built from pinned source plus the
+documented container/compiler changes. Gateway and supervisor deployed on
+OpenShift 4.21.8. Original validation finished with 3 pass, 1 error and 1 skip:
+health, metrics and mTLS API passed; IBM's disk-attachment quota blocked the
+sandbox lifecycle and the dependent network-policy check was skipped. Operator
+assistance and all earlier attempts are retained in the report.
+
+The published revision-2 renderer, pinned at `sha256:adb000ed14305bc3cbd2b9d7d6bc967f98bb26265e52d15ec40f5c08e570beca`,
+passed offline restricted OpenShift acceptance with a separately reviewed
+evidence/narrative seal. Job `autopoc-openshell-redhat-20261104-3` used
+`restricted-v2`, UID 1000880000, no workload token or Google credential,
+read-only root, egress denial, and 2 CPU/3Gi memory/4Gi scratch limits. It took
+222.59 seconds, peaked at 1,894,318,080 bytes and left 30,753,779 scratch bytes.
+All five artifact hashes, packaged branding assets, six PDF pages with embedded
+fonts, and a silent 120-second H264 video were verified. Final PDF pages and
+late error/skip frames passed manual visual review.
+
+An initial limitations overflow was rejected automatically. A later automatic
+pass still had overlapping diagram labels and a transcript/scoreboard collision.
+Reviewed shorter text, explicit node placement and removal of that transcript
+panel resolved the reference output. Automatic collision detection remains a
+follow-up; this does not establish unattended layout acceptance for arbitrary
+model-generated graphs. No PoC tests were replayed for the media.
+
+See the [run ledger and local deliverables](../presentations/openshell-2026-11-04/README.md)
+for exact inputs, immutable report/blog revisions and recovery details. Media
+remain `generated_unpublished`: the Google service account is invalid, so
+production download/dispatch/publication and report-link reconciliation remain
+blocked. This acceptance harness does not establish those paths.
 
 ## Branding phase — 3 November 2026
 
@@ -27,10 +60,10 @@ finding was fixed with regressions; preflight samples PDF stills, every act and
 original log state. No PoC tests were replayed.
 
 New seals use template revision 2. Revision 1 checkpoints retain their original
-renderer digest and remain recoverable. Publish and validate the new renderer
-digest in restricted OCP, then coordinate the worker/configuration rollout;
-those steps remain open. Earlier implementation/reference status below is
-historical context.
+renderer digest and remain recoverable. Matching worker/renderer digests are now
+published and revision-2 restricted OCP rendering is accepted above. Coordinated
+unattended publication/rollout and remaining failure acceptance stay open.
+Earlier implementation/reference status below is historical context.
 
 Draft PR: [aviavraham/autopoc#1](https://github.com/aviavraham/autopoc/pull/1),
 from `codex/aipcc-33008-slidev-epic` to `master` in the user's fork. The user

@@ -294,6 +294,7 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Review and seal corrected concise narrative with diagrams | ✅ Separate configured-model review approved exact corrected evidence; both graphs validated; selected v2 seal 9cafce08 retained |
 | Test new-project branded renderer on restricted OpenShift | ✅ Third render accepted after separate reviews and manual QA; restricted-v2/UID1000880000, 222.59s, 1.89GB peak; six-page PDF and silent120s video verified |
 | Complete and qualify conditional blog | ✅ Multi-reviewer workflow finished; operator factual corrections signed off as 95ad05e; corrected immutable blog ec93cc3 published; Google Docs blocked |
+| Reconcile final state and clean acceptance harness | ✅ Persistent source/report/blog/seal hashes agree; original results retained; temporary helpers/ConfigMaps/policies removed; deployment/workspace kept |
 | Reconcile and verify branded presentation/PDF/video artifacts | ✅ All local packaged hashes/assets/seal and final visual layout verified; generated_unpublished; Google publication remains blocked |
 
 ## Hosted Model Options Review — ✅ Done, 4 November 2026
