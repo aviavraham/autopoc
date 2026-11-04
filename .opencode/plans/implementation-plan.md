@@ -718,3 +718,13 @@ recommendations are not execution instructions.
 
 - Final captured execution reports all five planned scenarios pass: gateway health, actual Linux/non-root/marker execution, workspace marker persistence across stop/start, policy-approved example.com access and denied api.github.com access with a matching policy-denial log. Earlier workload-template naming failures remain in the original index; they were not erased or converted into pass records.
 - Operator independently read the original index, checked this new run ID/final execution and five pass outcomes, and corroborated the denied host through the live supervisor's original DENIED log (no application requests or tests replayed). Full filesystem/CNI/OIDC/HA/portability certification is not inferred from these checks. New report/media preparation is next.
+
+### 10.13 Publish the DeepSeek report and verify original evidence — ✅ 4 November 2026
+
+- Worker wrote and published its canonical report, then created evidence bundle 9c492ed74ede0b7c04708ee4007eb3046fe9f106bf8c8ec716a40134ee764db7. Operator independently verified all hashes, sixteen members, the correct new run/final five-pass result and absence of client key/private-key material. Canonical report hash f1b59f0e997e2f1b62f11338d7e8c22a19951cd61648c118e486197e1cc29eea. Narrative was generated with actual image times and explicit untested-scope limitations.
+
+### 10.14 Recover the report-review workspace permission — In progress
+
+- Exact OpenCode log showed a content-review child waiting on external_directory access to /workspace/repos/openshell/* (permission.asked), not an EnMaaS/authentication failure. Saved the original session/state and suspended the waiting worker. The real five passing results and all ten original attempts remain intact.
+- Submitted same-run report-only recovery Job with the same DeepSeek model/key and the original deadline (21:56:31 UTC). Only this run's config now permits its own /workspace/** for reviewer children, following OpenCode's documented permission syntax. No personal/home paths, shared settings, source behavior or deployment permissions were broadened.
+- Recovery also reconciles the worker's stale apply.pending flag against independently verified readiness/tests and requires a fresh evidence snapshot/review/seal. It refreshes the in-cluster kubeconfig for the replacement Pod and prohibits any test/rebuild/deploy replay. Actual child-review completion remains to be verified.
