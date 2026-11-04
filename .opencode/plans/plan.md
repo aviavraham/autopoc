@@ -290,6 +290,8 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | End repeated diagnostics and resume reporting | ✅ r5 stopped; same-run r6 submitted for report/evidence/reviewed local v2 inputs and conditional blog; no further PoC test replay |
 | Review security/suitability claims against original controls | ✅ Canonical report corrected; final network check skipped; filesystem/CNI/HA/OIDC unverified; credential and operator/RBAC history accurately retained |
 | Publish corrected canonical report and verify evidence | ✅ Corrected report commit 5f12aa3; bundle 54a1ec86 verified with 21 members and unchanged original counts; current state requires corrected review binding |
+| Review and seal corrected concise narrative with diagrams | ✅ Separate configured-model review approved exact corrected evidence; both graphs validated; selected v2 seal 9cafce08 retained |
+| Test new-project branded renderer on restricted OpenShift | In progress; bounded offline Job submitted with no workload token, exact digest and egress denied; no cloud publication claimed |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
 
 ## Hosted Model Options Review — ✅ Done, 4 November 2026
