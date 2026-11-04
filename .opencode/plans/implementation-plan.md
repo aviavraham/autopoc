@@ -723,8 +723,15 @@ recommendations are not execution instructions.
 
 - Worker wrote and published its canonical report, then created evidence bundle 9c492ed74ede0b7c04708ee4007eb3046fe9f106bf8c8ec716a40134ee764db7. Operator independently verified all hashes, sixteen members, the correct new run/final five-pass result and absence of client key/private-key material. Canonical report hash f1b59f0e997e2f1b62f11338d7e8c22a19951cd61648c118e486197e1cc29eea. Narrative was generated with actual image times and explicit untested-scope limitations.
 
-### 10.14 Recover the report-review workspace permission — In progress
+### 10.14 Recover reporting and approve the exact new narrative — ✅ 4 November 2026
 
 - Exact OpenCode log showed a content-review child waiting on external_directory access to /workspace/repos/openshell/* (permission.asked), not an EnMaaS/authentication failure. Saved the original session/state and suspended the waiting worker. The real five passing results and all ten original attempts remain intact.
 - Submitted same-run report-only recovery Job with the same DeepSeek model/key and the original deadline (21:56:31 UTC). Only this run's config now permits its own /workspace/** for reviewer children, following OpenCode's documented permission syntax. No personal/home paths, shared settings, source behavior or deployment permissions were broadened.
-- Recovery also reconciles the worker's stale apply.pending flag against independently verified readiness/tests and requires a fresh evidence snapshot/review/seal. It refreshes the in-cluster kubeconfig for the replacement Pod and prohibits any test/rebuild/deploy replay. Actual child-review completion remains to be verified.
+- Recovery also reconciles the worker's stale apply.pending flag against independently verified readiness/tests and requires a fresh evidence snapshot/review/seal. It refreshes the in-cluster kubeconfig for the replacement Pod and prohibits any test/rebuild/deploy replay. The replacement profile parsed successfully. The worker completed independent stateless reviews through the same DeepSeek EnMaaS endpoint; this does not prove a new Task child was exercised.
+
+- Recovery published corrected report commit aa1a95a2b9017d238fc2ac941e3dbc05736332a6, canonical SHA 5b492f617086fcb20b2d27592da82299bbf2fc3ab4a5c83225945fb6b74e74c5. Recollected bundle 671776db2d8baaf94790692a8bb98e8d0d4eb99d19c229fb88709344fab7ef80 reflects apply.completed and preserves all original attempts. Independently verified five pass outcomes and no private-key material.
+- Genuine separate DeepSeek review found graph/content issues, which were corrected and re-reviewed. Approved narrative 1a2e357c178d666e463c44fa1fd245cf499cd012ae08814cb098912d719882cb binds the corrected evidence; review SHA 68fc6245d98c579e870584ca5c00adda86e99a1c3849a0bfce97a5d439564986. Selected v2 seal c9ef24915b9bbc2f179a821a99918390a743e48b906977b85536f896f2266492 independently verified.
+
+### 10.15 Verify the new restricted branded render — In progress
+
+- Submitted separate bounded offline acceptance Job autopoc-openshell-deepseek-redhat-20261104 with the exact trusted renderer digest, no credentials/API token, read-only root, nonroot security, egress denied and regular hash-checked scratch input. Export, artifact integrity and visual acceptance remain pending. Google durable storage is still blocked; this does not claim cloud publication.

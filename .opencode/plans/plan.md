@@ -325,5 +325,5 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Deploy and verify new control plane | ✅ Both Pods Ready; eu-gb-2 gateway PVC Bound; first captured health check passed |
 | Complete fresh sandbox/network validation | ✅ Final original capture 5 pass; prior naming errors retained; operator independently checked index and original api.github.com DENIED log |
 | Publish report and verify new original evidence | ✅ Canonical report published; first bundle independently verified (16 members, exact five-pass counts, no client keys) |
-| Recover review-child workspace access | In progress; exact external_directory prompt diagnosed; report-only recovery submitted with scoped per-run path and same original deadline/results |
-| Verify new branded artifacts and publication outcome | Pending; known Google service-account blocker remains separate |
+| Recover reporting and review corrected narrative | ✅ Scoped profile parsed; same-model independent API reviews completed; corrected report/evidence and exact approved v2 seal verified; no tests replayed |
+| Verify new branded artifacts and publication outcome | In progress; restricted offline renderer submitted with exact reviewed seal; known Google service-account blocker remains separate |
