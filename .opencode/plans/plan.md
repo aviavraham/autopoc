@@ -273,3 +273,11 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Publish matching worker/renderer and launch the run | ✅ Both images published by digest; durable Job autopoc-openshell-20261104 submitted with the existing Qwen configuration |
 | Execute all mandatory phases and preserve original test evidence | In progress; model preflight and worker startup precede pipeline execution |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
+
+## Hosted Model Options Review — ✅ Done, 4 November 2026
+
+| Task | Status |
+|------|--------|
+| Inspect alternatives to the cluster Qwen agent model | ✅ Confirmed existing Anthropic/Vertex credential wiring and committed Vertex Claude default; OpenCode also supports other hosted providers with configuration/credential wiring |
+| Verify model selection and distinguish application LLM routing | ✅ Current Qwen selection is explicit in uncommitted opencode.json; Python LLM settings do not configure OpenCode; OGX routes PoC application requests separately |
+| Record validation limits and preserve active configuration | ✅ Local CLI help checked; Anthropic/Vertex catalogs unavailable locally; no cloud inference, provider change or deployment performed |

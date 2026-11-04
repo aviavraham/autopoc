@@ -496,3 +496,21 @@ recommendations are not execution instructions.
 ### 9.3 Execute and verify the PoC — In progress
 
 - Monitor original attempts, record every phase outcome, preserve failure states and validate any generated branded artifacts from this new project. No result may be inferred from Job submission alone.
+
+## Hosted Model Options Review — ✅ Done, 4 November 2026
+
+### Progress
+
+| Phase | Status | Notes |
+|-------|--------|-------|
+| Inspect alternatives to cluster Qwen | ✅ Done | Reviewed active configuration, committed default, launchers, Python settings and official OpenCode documentation; no inference or deployment performed |
+
+### Review configuration and hosted provider paths — ✅
+
+- The uncommitted `opencode.json` selects `vllm/qwen3.8-27b-abliterated` and hardcodes the cluster endpoint. The committed default is `google-vertex/claude-opus-4-6@default`. Preserved the user's existing configuration.
+- Anthropic direct and Vertex are the smallest configuration changes: `scripts/run-autopoc.sh` and base Job/CronJob manifests already inject Anthropic credentials and Vertex project/location/service-account settings. A working provider credential and explicit model selection are still required; the prior OpenShell preparation recorded a Google service-account refresh failure, not successful Vertex access.
+- OpenCode also documents OpenAI, OpenRouter, Bedrock, Azure and hosted OpenAI-compatible providers. These require provider-specific configuration/authentication and, where absent, credential injection into the Kubernetes workload. Provider support does not establish model availability or PoC success.
+- The entrypoint only executes OpenCode. `LLM_BASE_URL`, `LLM_MODEL` and fallback fields retained in Python settings are not translated into OpenCode provider/model selection. The launcher currently has no `--model` option; OpenCode itself supports `run --model provider/model`.
+- `OGX_*` controls LLM access for deployed PoC applications separately. Replacing the agent model alone does not remove any application-side Qwen dependency.
+- Verification: inspected files and git diff; local OpenCode 1.14.19 help confirms `--model`; local Anthropic/Vertex model listings returned `Provider not found`, so no authenticated cloud access was verified. The worker Dockerfile pins OpenCode 1.15.10, which was not executed during this review.
+- References: [OpenCode providers](https://opencode.ai/docs/providers/), [model selection](https://docs.opencode.ai/docs/models/), [CLI](https://opencode.ai/docs/cli/). Runtime configuration, credentials and cluster resources were not changed.
