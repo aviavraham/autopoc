@@ -259,11 +259,12 @@ local only while the production service-account credential is repaired.
 | Validate PDF/video layouts, offline assets and recovery compatibility | ✅ Constrained UBI reference: six-page PDF, silent120sMP4, asset/output hashes and extracted source preparation verified; 213.81s, peak2,504,695,808 bytes |
 | Resolve independent review and verify local rendering behavior | ✅ Diagram clipping regression RED→GREEN; 379 Python tests, 85.62% coverage, eight Node tests; real-browser layout/asset checks passed |
 | Push feature branch and prepare a reviewable PR | ✅ [Draft fork PR #3](https://github.com/aviavraham/autopoc/pull/3); no merge or deployment configuration changes |
-| Publish new renderer digest, validate restricted OCP behavior and roll out worker/renderer | Pending; local validation does not establish OCP deployment/publication |
+| Publish matching images and validate restricted OCP renderer | ✅ Both registry digests published; new-project v2 rendering passed restricted OCP and manual QA |
+| Roll out unattended Google dispatch/publication | Pending; configured service account invalid; offline acceptance does not establish publication |
 
 Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-red-hat-presentation-branding-design.md).
 
-## Phase 9: OpenShell PoC — Deployment and original validation ✅; reporting in progress
+## Phase 9: OpenShell PoC — ✅ Run completed with partial validation; cloud publication blocked
 
 | Task | Status |
 |------|--------|
@@ -276,12 +277,12 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Complete intake and evaluation | ✅ Persisted run a189bdf54ac849778a8ed7b228db599f has both phases completed and no errors; source pin verified |
 | Record the fork authentication failure and retain recovery state | ✅ Worker stopped after HTTP 403 and out-of-scope permission probes; state/logs backed up; operator created/protected the exact fork and pushed only autopoc |
 | Verify dedicated token and recover completed fork setup | ✅ Separate run Secret exists; pinned autopoc synchronization passed; operator verified main protection; no broader worker Administration permission required |
-| Resume remaining phases with exact repository scope | In progress; Job r4 submitted at planning with preserved run ID, original failures and workspace; 401/403 must stop the worker |
+| Resume remaining phases with exact repository scope | ✅ Same run retained through workers r4-r6; report, evidence and conditional blog completed; original final 3 pass/1 error/1 skip preserved |
 | Publish the new PoC plan and staged evaluation | ✅ Plan af11dd7 and evaluation cf562a1 are verified on the immutable artifact branch; dedicated credential worked |
 | Commit source containerization definitions | ✅ Gateway/supervisor/sandbox UBI Dockerfiles and build context committed as d441ca245 on autopoc |
 | Build source images with bounded retries | ✅ Sandbox/supervisor build 2 and gateway build 3 Complete; all image digests verified; gateway release compile 23m06s; original failures and operator correction retained |
 | Recover execution after repetitive compiler probes | ✅ Job r4 stopped with history retained; compiler/reference fix signed off; Job r5 submitted with same run/PVC, retry count 2, bounded context and remaining original deadline |
-| Independently check gateway compiler prerequisite | ✅ Official package paths verified; standalone C++20 program compiled with GCC15 and ran in UBI9 minimal; full gateway build still pending |
+| Independently check gateway compiler prerequisite | ✅ Official package paths verified; standalone C++20 program compiled with GCC15 and ran in UBI9 minimal; actual gateway build 3 subsequently passed |
 | Retain worker interruption and recovery | ✅ Context overflow observed; same OpenCode session automatically compacted and resumed without a restart/configuration change |
 | Provide missing chart PDB permission | ✅ Reviewed namespace-only role reapplied after worker cleanup; worker server dry-run and Helm revision 2 upgrade succeeded |
 | Correct generated RBAC guidance before handoff | ✅ Signed-off source a606f758c documents operator authority; false ordering guidance removed; final PDB restored |
@@ -291,8 +292,9 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Review security/suitability claims against original controls | ✅ Canonical report corrected; final network check skipped; filesystem/CNI/HA/OIDC unverified; credential and operator/RBAC history accurately retained |
 | Publish corrected canonical report and verify evidence | ✅ Corrected report commit 5f12aa3; bundle 54a1ec86 verified with 21 members and unchanged original counts; current state requires corrected review binding |
 | Review and seal corrected concise narrative with diagrams | ✅ Separate configured-model review approved exact corrected evidence; both graphs validated; selected v2 seal 9cafce08 retained |
-| Test new-project branded renderer on restricted OpenShift | In progress; bounded offline Job submitted with no workload token, exact digest and egress denied; no cloud publication claimed |
-| Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
+| Test new-project branded renderer on restricted OpenShift | ✅ Third render accepted after separate reviews and manual QA; restricted-v2/UID1000880000, 222.59s, 1.89GB peak; six-page PDF and silent120s video verified |
+| Complete and qualify conditional blog | ✅ Multi-reviewer workflow finished; operator factual corrections signed off as 95ad05e; corrected immutable blog ec93cc3 published; Google Docs blocked |
+| Reconcile and verify branded presentation/PDF/video artifacts | ✅ All local packaged hashes/assets/seal and final visual layout verified; generated_unpublished; Google publication remains blocked |
 
 ## Hosted Model Options Review — ✅ Done, 4 November 2026
 

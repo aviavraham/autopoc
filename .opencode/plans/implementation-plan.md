@@ -285,8 +285,8 @@ recommendations are not execution instructions.
 | Phase 5: Presentation automation handoff | Documentation ✅ Done; implementation pending | Session record, repositories/tools, reproduction and staged integration roadmap documented |
 | Phase 6: Executive presentation and video scope | Core implementation merged ✅; rollout/acceptance open | Fork master merge verified 3 November; restricted OCP render and personal Drive reference passed; unattended publication, failure acceptance, model review and worker rollout remain |
 | Phase 7: Upstream security remediation | ✅ Done | User merged fork PR #2; upstream PR #66 updated to 231fc31 and all six CI jobs, including security, passed |
-| Phase 8: Default Red Hat presentation branding | Implementation/local acceptance ✅; OCP rollout pending | 379 Python/eight Node tests and full constrained offline UBI render passed; draft fork PR #3 ready for review; new registry publication and OCP validation remain |
-| Phase 9: OpenShell PoC with fork branding updates | Source build ✅; deployment/validation next | Same run/Job r5; all three images published by verified digest after operator compiler correction; original failures preserved; deployment/tests/media pending |
+| Phase 8: Default Red Hat presentation branding | Implementation/local/OCP offline acceptance ✅; publication rollout open | Matching images published; new-project restricted OCP v2 render and manual QA passed; unattended Google dispatch/publication remains blocked |
+| Phase 9: OpenShell PoC with fork branding updates | ✅ Run complete with partial validation; cloud publication blocked | Source builds/deployment/report/blog complete; final 3 pass, 1 error, 1 skip preserved; restricted OCP Red Hat PDF/video accepted and exported; Google account remains invalid |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -471,7 +471,7 @@ recommendations are not execution instructions.
 - Pushed `codex/red-hat-presentation-branding`, opened [draft fork PR #3](https://github.com/aviavraham/autopoc/pull/3) targeting fork master and attached it to this chat. GitHub reports no conflicts; no fork CI checks are reported.
 - Updated renderer/configuration/workflow docs with local assets, v2/v1 compatibility, overflow handling and rollout requirements. No default branch was merged/pushed; deployed configuration is unchanged.
 
-## Phase 9: OpenShell PoC — Source build ✅; deployment and validation pending
+## Phase 9: OpenShell PoC — ✅ Run completed with partial validation; cloud publication blocked
 
 ### 9.1 Select project and prepare the updated worker — ✅ 4 November 2026
 
@@ -508,7 +508,7 @@ recommendations are not execution instructions.
 - Verified the worker's persisted state for run `a189bdf54ac849778a8ed7b228db599f`: intake and evaluation are completed, pinned source commit is `f4a6137513b777c9b362be54baf388f7d45398aa`, and no errors are recorded. The staged repository digest and evaluation were written by the worker.
 - Fork safety/protection is now in progress. Build, deployment and test phases remain pending.
 
-### 9.6 Record mandatory fork failure and preserve recovery state — ✅ 4 November 2026; resumption blocked
+### 9.6 Record mandatory fork failure and preserve recovery state — ✅ 4 November 2026; initial block recovered in 9.7
 
 - Monitor original attempts, record every phase outcome, preserve failure states and validate any generated branded artifacts from this new project. No result may be inferred from Job submission alone.
 
@@ -599,7 +599,7 @@ recommendations are not execution instructions.
 - Validated the same pinned worker's configuration parser with per-run `context=200000`, `output=16000`, automatic compaction/pruning and a 14000-token reserve. The user's working-tree config, provider/model, shared credential Secrets and CronJobs are unchanged.
 - Submitted Job `autopoc-openshell-20261104-r5` on the same PVC/run ID. Its initializer safely fast-forwards the clean source checkout to fd44e465, records operator assistance and partial image digests, preserves counters/errors, and resumes at build. It retains the remainder of the original four-hour window, rather than starting a new time allowance. Resume instructions require short log excerpts, no redundant probes/rebuilds, genuine original test capture and explicit isolation coverage limitations.
 
-### 9.12 Complete deployment, original validation and branded output verification — In progress
+### 9.12 Complete deployment, original validation and branded output verification — ✅ 4 November 2026
 
 - Monitor the existing gateway-3 build and recovered worker, then complete remaining phases or record a new explicit mandatory failure. No application deployment/test/media success is claimed at this checkpoint.
 
@@ -638,3 +638,16 @@ recommendations are not execution instructions.
 - A separate configured-model review actually opened the corrected ZIP, verified all 21 member hashes and report SHA, inspected report/plan/evaluation/state/attempts and all narrative/graph claims. It approved with no findings. Verified its review binds narrative d2c945a28d4b5e9634a4138535cff9a10c45c72cb3ccfd140a60446787c625f4 and corrected evidence 54a1ec8647ced009608813405c9d22819d0eb0117cafc6686d4e9555c41d2b5d.
 - Sealed input 9cafce081ca4b80955a18faaa28a9fd05d78032d6202c5323c2fe45d6d9c0163 passed normal v2 sealing against exact renderer digest adb000ed. Saved regular copies locally and on the run PVC; the earlier longer/null-graph draft seal remains historical, not the selected final input.
 - Submitted offline acceptance Job autopoc-openshell-redhat-20261104 after server dry-run: pinned renderer, no workload token/Google credentials, read-only root, nonroot/restricted security, 2 CPU/3Gi limits, 4Gi scratch and an egress-deny policy selecting only this acceptance Pod. ConfigMap input is hash-checked and copied to a regular scratch file before normal entrypoint verification. This validates rendering independently of the still-blocked production Google dispatch/publication path; success is not yet claimed.
+
+### 9.18 Accept the restricted OCP Red Hat render after visual QA — ✅ 4 November 2026
+
+- First acceptance render correctly rejected four limitations exceeding the fixed-height block. A limitations-only revision passed separate configured-model re-review. Second render passed automatic checks but manual PDF/video review found overlapping auto-placed graph labels and a transcript/scoreboard collision. Retained those attempts as history, not deliverables.
+- Explicit graph coordinates/anchors, shorter runner labels and removal of the transcript panel fixed the data layout without changing counts, paths, outcomes or feature code. Separate configured-model re-review approved narrative 4f8e40cd6eaa8463955f969d14a33e901a059a3842936f70349272b22eeb130f against unchanged corrected evidence. Selected v2 seal dd362ae6985df9772882956494998794809b6acbf19c93e7ec7a3b2a2f5b64e5.
+- Job autopoc-openshell-redhat-20261104-3 completed via the pinned renderer's normal entrypoint: restricted-v2, UID 1000880000, read-only root, no workload token/Google credential, egress denied, 2 CPU/3Gi memory/4Gi scratch. Measured 222.59s, peak 1,894,318,080 bytes and final scratch 30,753,779 bytes.
+- Exported all five artifacts and manifest. Current output hashes/sizes, ZIP integrity, exact recovery seal, all packaged repository brand resources/notices and unchanged original results verified. PDF has six pages and embedded Red Hat fonts; video is silent H264, 1280x720/30fps, exactly 120s. Visually reviewed every final PDF page and late error/skip video frames; labels and scoreboard are readable. Local files and reproduction/provenance documented under presentations/openshell-2026-11-04/.
+- Automatic preflight does not catch every label/panel collision; retain manual visual review. Offline OCP rendering is accepted; production Google dispatch/publication and failure-injection acceptance remain open. No PoC tests were replayed for media.
+
+### 9.19 Complete and qualify the conditional blog — ✅ 4 November 2026
+
+- Worker r6 completed report/evidence/seal and conditional blog without further PoC tests. Three passes out of five made the blog eligible. Four specialized reviewers and targeted re-reviews reached aggregate 8.78 with no dimension below 6.0; original reviewer records remain in the source branch.
+- Operator factual review removed unproved freed-slot/other-workload causal claims, a blanket software-bug exclusion, incorrect gRPC expansion, UID causality and overstatements of tested OpenShift AI/security scope. Source correction 95ad05e was signed off and pushed only to autopoc. Markdown/HTML structure checks passed; published corrected blog revision e78959b0eb1cda6c0c317248fc9363340347e0402339d96da771d3c7a9f36cf9, commit ec93cc3dd2b2ddc53dfe421aa35cee53a524d98b, preserving earlier immutable revisions. No Google Docs success/link is claimed.
