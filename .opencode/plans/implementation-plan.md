@@ -498,7 +498,12 @@ recommendations are not execution instructions.
 - Initial Job never reached its model check: IBM CSI reported the selected node had reached its maximum of 12 secondary disks. Preserved the first Job as suspended. The first replacement CPU candidate had insufficient unreserved CPU and was suspended before startup.
 - Compared CPU reservations and disk attachments, then submitted `autopoc-openshell-20261104-r2` on `ocp-gb-xz56l-worker-1-hhkzb`, reusing the same empty workspace. Kubernetes reported `SuccessfulAttachVolume`; the worker image is pulling. No OpenShell validation attempt has been executed or replayed by these infrastructure retries.
 
-### 9.4 Execute and verify the PoC — In progress
+### 9.4 Verify model access and correct the launcher — ✅ 4 November 2026
+
+- In-cluster model preflight verified the configured Qwen endpoint and model. The r2 worker then exited before intake because the launcher's array-valued `--file` option consumed the following prompt as another filename. Saved its private log and retained the failed Job.
+- Corrected only the per-run launch arguments to use the full prompt positionally. Server dry-run passed; `autopoc-openshell-20261104-r3` is Running, loaded the run-poc skill, created its eleven-phase checklist and began pipeline setup. Same image digests, model, namespace and persistent workspace; no PoC test replay.
+
+### 9.5 Execute and verify the PoC — In progress
 
 - Monitor original attempts, record every phase outcome, preserve failure states and validate any generated branded artifacts from this new project. No result may be inferred from Job submission alone.
 

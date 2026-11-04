@@ -272,7 +272,8 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Renew cluster access and inspect required credentials | ✅ User renewed login; registry/GitHub access verified; Drive service-account account not found remains an explicit publication blocker |
 | Publish matching worker/renderer and launch the run | ✅ Both images published by digest; durable Job autopoc-openshell-20261104 submitted with the existing Qwen configuration |
 | Resolve workspace scheduling failures before pipeline startup | ✅ IBM per-node disk quota and a full CPU reservation diagnosed; replacement Job r2 attached the same workspace successfully on a node with capacity |
-| Execute all mandatory phases and preserve original test evidence | In progress; Job r2 image startup and model preflight precede pipeline execution |
+| Verify model access and start the worker | ✅ In-cluster model preflight passed; corrected per-run prompt arguments; Job r3 Running and run-poc skill loaded |
+| Execute all mandatory phases and preserve original test evidence | In progress; original pipeline setup has begun |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
 
 ## Hosted Model Options Review — ✅ Done, 4 November 2026
