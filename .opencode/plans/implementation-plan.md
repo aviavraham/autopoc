@@ -509,6 +509,7 @@ recommendations are not execution instructions.
 | Phase | Status | Notes |
 |-------|--------|-------|
 | Inspect alternatives to cluster Qwen | ✅ Done | Reviewed active configuration, committed default, launchers, Python settings and official OpenCode documentation; no inference or deployment performed |
+| Review Red Hat EnMaaS onboarding | ✅ Done | Read authenticated Source page and OpenCode v1 recipe; identified gateway/authentication and exact hosted model IDs; credential/inference checks remain unperformed |
 
 ### Review configuration and hosted provider paths — ✅
 
@@ -519,3 +520,12 @@ recommendations are not execution instructions.
 - `OGX_*` controls LLM access for deployed PoC applications separately. Replacing the agent model alone does not remove any application-side Qwen dependency.
 - Verification: inspected files and git diff; local OpenCode 1.14.19 help confirms `--model`; local Anthropic/Vertex model listings returned `Provider not found`, so no authenticated cloud access was verified. The worker Dockerfile pins OpenCode 1.15.10, which was not executed during this review.
 - References: [OpenCode providers](https://opencode.ai/docs/providers/), [model selection](https://docs.opencode.ai/docs/models/), [CLI](https://opencode.ai/docs/cli/). Runtime configuration, credentials and cluster resources were not changed.
+
+### Review EnMaaS connection details — ✅ 4 November 2026
+
+- Read the user-linked [EnMaaS onboarding page](https://source.redhat.com/departments/products_and_global_engineering/workload_management/enmaas#tool-opencode) through the authenticated browser. It explicitly documents OpenCode v1's singular `provider` schema and `@ai-sdk/openai-compatible` runtime, matching the worker's major version.
+- Gateway base URL: `https://api.enmaas.devshift.net/v1`. Chat Completions uses bearer authentication; Messages uses `x-api-key` plus `anthropic-version`. The documented environment variable is `ENMAAS_KEY`; AutoPoC could instead reference its existing injected `LLM_API_KEY` variable without recording any secret in JSON.
+- Exact hosted model IDs documented: `rits/zai-org/glm-5-3` and `rits/deepseek-ai/DeepSeek-V4.1-Flash-1017`. A pinned OpenCode selection would be `enmaas/<exact-model-id>`. Catalog results are credential-dependent and may omit usable hosted models; absence from discovery alone is not proof of denied inference.
+- The page also describes commercial model routing subject to gateway support, credentials and budget. Do not infer that every upstream model is available to this key. Provider runtime availability must be verified in the actual worker.
+- The page's explicit GLM limit is 1,000,000 context tokens and 65,536 output tokens, while its example JSON declares 1,048,576 context tokens. Its generic text-only warning also conflicts with the v1 DeepSeek image example. Use text requests and conservative documented limits until independently verified; do not copy GLM metadata onto DeepSeek.
+- Documentation review only: no key read or stored, no inference request, no provider configuration or active Job changed. An authenticated response and a harmless function-tool round trip remain necessary before claiming AutoPoC compatibility for the user's key/model.
