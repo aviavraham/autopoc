@@ -279,7 +279,7 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Resume remaining phases with exact repository scope | In progress; Job r4 submitted at planning with preserved run ID, original failures and workspace; 401/403 must stop the worker |
 | Publish the new PoC plan and staged evaluation | ✅ Plan af11dd7 and evaluation cf562a1 are verified on the immutable artifact branch; dedicated credential worked |
 | Commit source containerization definitions | ✅ Gateway/supervisor/sandbox UBI Dockerfiles and build context committed as d441ca245 on autopoc |
-| Build source images with bounded retries | In progress; attempt 1 failed on unavailable libclang/musl-gcc package names; original logs retained |
+| Build source images with bounded retries | In progress; retry 1 fixes committed as fa723cd4; all three second attempts Running; first package failures retained |
 | Review security/suitability claims against original controls | Pending; planned generic denied-connection failure and NetworkPolicy presence alone do not establish enforcement; filesystem policy coverage remains untested |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
 
