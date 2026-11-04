@@ -321,5 +321,6 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Complete DeepSeek plan and container definitions | ✅ New immutable plan published; reference-based UBI definitions committed/pushed on dedicated branch |
 | Build fresh sandbox runtime | ✅ Build 1 Complete/pushed, digest d9bf4b25, unique deepseek-ac05c639 tag; earlier output unchanged |
 | Build fresh supervisor runtime | ✅ Supervisor build 1 Complete/pushed with its new DeepSeek tag; sandbox retained |
-| Complete gateway build and execute or record mandatory failure | In progress; gateway still Running; deployment and new validation pending |
+| Complete fresh gateway image / build phase | ✅ All three new build-1 outputs Complete/published; no build retries or old image substitution |
+| Deploy and run original validation or record mandatory failure | In progress; separate namespace/Helm values prepared; no validation success inferred from builds |
 | Verify new branded artifacts and publication outcome | Pending; known Google service-account blocker remains separate |

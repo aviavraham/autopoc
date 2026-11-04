@@ -703,3 +703,8 @@ recommendations are not execution instructions.
 ### 10.9 Complete the fresh supervisor image — ✅ 4 November 2026
 
 - Verified openshell-deepseek-supervisor-1 is Complete and pushed its new deepseek-ac05c639 tag. Sandbox and supervisor are retained valid outputs; only gateway remains Running. No deployment or validation outcome is inferred from build success.
+
+### 10.10 Complete all three fresh source builds — ✅ 4 November 2026
+
+- Verified openshell-deepseek-gateway-1 is Complete/published. All three source-built components succeeded on build 1 without resetting/retrying or substituting prior images. Exact new sandbox digest d9bf4b254da59fe6aabab28e53c00a9a2e196482145881e9b3c6f2eac0dd501d and supervisor digest 31628156930b786f4197020dd03fb7135bad44f94b0a399baf1c5039f1e8c7f9 are retained; gateway's published digest is separately verified through Build status. During the longer gateway compile, observed active rustc/cargo and final gateway/prover crates under the requested 4 CPU/16Gi limits; no false stall/restart was introduced.
+- Build success does not establish deployment health or workload isolation. DeepSeek proceeds to its generated Helm values in the separate namespace, then new original capture.
