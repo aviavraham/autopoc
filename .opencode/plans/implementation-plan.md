@@ -690,3 +690,8 @@ recommendations are not execution instructions.
 
 - Persisted fork status is completed after the new worker adopted the operator-prepared branch and configured its remotes. Original main protection and previous source branch remain unchanged; no Administration expansion was required. Main-session export written to a regular file independently confirms EnMaaS/DeepSeek on all 40 assistant turns observed at this checkpoint (pipe export of a larger session was truncated; file export succeeded).
 - Worker is preparing the SDK/Helm/test tooling and its fresh PoC plan. New runtime images and application validation have not yet been produced.
+
+### 10.7 Publish the DeepSeek plan and start fresh source builds — ✅ 4 November 2026
+
+- Worker generated/staged a fresh PoC plan and published it under the new run's append-only artifact path. It reused the supplied, previously compiled UBI Dockerfiles as explicit references, made its own scoped adjustments, committed them and pushed normally to the dedicated DeepSeek source branch. Plan/containerize phases are completed in state.
+- Started distinct openshell-deepseek-{gateway,supervisor,sandbox}-1 binary builds in autopoc-test-builds. All three are Running with new unique target tags; earlier builds, f4a6137 tags and deployment remain untouched. No new image/deployment/test success is claimed yet.
