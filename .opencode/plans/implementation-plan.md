@@ -685,3 +685,8 @@ recommendations are not execution instructions.
 ### 10.5 Complete fresh DeepSeek intake and evaluation — ✅ 4 November 2026
 
 - New worker cloned and pinned the requested source, inspected the actual Rust/Helm/SDK interfaces, and wrote its own repo digest and strategy evaluation. Persisted intake/evaluate statuses are completed; no earlier Qwen outcome was substituted. Fork adoption is underway on the separately prepared source branch. New builds/deployment/tests remain pending.
+
+### 10.6 Adopt the verified fork using DeepSeek — ✅ 4 November 2026
+
+- Persisted fork status is completed after the new worker adopted the operator-prepared branch and configured its remotes. Original main protection and previous source branch remain unchanged; no Administration expansion was required. Main-session export written to a regular file independently confirms EnMaaS/DeepSeek on all 40 assistant turns observed at this checkpoint (pipe export of a larger session was truncated; file export succeeded).
+- Worker is preparing the SDK/Helm/test tooling and its fresh PoC plan. New runtime images and application validation have not yet been produced.

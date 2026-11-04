@@ -317,5 +317,6 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Submit the DeepSeek worker | ✅ Server dry-run passed; fresh Job submitted with explicit model, inline profile and genuine in-image tool preflight |
 | Verify actual in-cluster model selection/tool use | ✅ Exact worker completed pwd/MODEL_READY; exported session confirms DeepSeek on all assistant turns; main pipeline Running |
 | Complete fresh DeepSeek intake/evaluation | ✅ Own pinned-source digest and strategy evaluation written; both persisted phases completed |
-| Execute remaining phases or record explicit mandatory failure | In progress; fork adoption underway; no new build/deployment/test success yet |
+| Adopt prepared fork and source branch | ✅ DeepSeek persisted fork completion; main-session export confirms EnMaaS model throughout; prior branch/protection unchanged |
+| Execute remaining phases or record explicit mandatory failure | In progress; SDK/Helm preparation and new plan underway; no new build/deployment/test success yet |
 | Verify new branded artifacts and publication outcome | Pending; known Google service-account blocker remains separate |
