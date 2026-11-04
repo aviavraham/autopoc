@@ -263,7 +263,7 @@ local only while the production service-account credential is repaired.
 
 Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-red-hat-presentation-branding-design.md).
 
-## Phase 9: OpenShell PoC — Source build and deployment ✅; validation in progress
+## Phase 9: OpenShell PoC — Deployment and original validation ✅; reporting in progress
 
 | Task | Status |
 |------|--------|
@@ -286,6 +286,8 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Provide missing chart PDB permission | ✅ Reviewed namespace-only role reapplied after worker cleanup; worker server dry-run and Helm revision 2 upgrade succeeded |
 | Correct generated RBAC guidance before handoff | ✅ Signed-off source a606f758c documents operator authority; false ordering guidance removed; final PDB restored |
 | Complete and reproduce deployment recovery | ✅ Gateway/supervisor 1/1 Ready; IBM disk quota diagnosed; same-zone placement committed; operator attribution corrected; original tests beginning |
+| Finish original validation and retain partial outcome | ✅ Three captures/15 attempts retained; final 3 pass, 1 error, 1 skip; sandbox storage attachment failure observed; network enforcement untested |
+| End repeated diagnostics and resume reporting | ✅ r5 stopped; same-run r6 submitted for report/evidence/reviewed local v2 inputs and conditional blog; no further PoC test replay |
 | Review security/suitability claims against original controls | Pending; planned generic denied-connection failure and NetworkPolicy presence alone do not establish enforcement; filesystem policy coverage remains untested |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
 
