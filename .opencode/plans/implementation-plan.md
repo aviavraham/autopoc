@@ -515,6 +515,7 @@ recommendations are not execution instructions.
 |-------|--------|-------|
 | Inspect alternatives to cluster Qwen | ✅ Done | Reviewed active configuration, committed default, launchers, Python settings and official OpenCode documentation; no inference or deployment performed |
 | Review Red Hat EnMaaS onboarding | ✅ Done | Read authenticated Source page and OpenCode v1 recipe; identified gateway/authentication and exact hosted model IDs; credential/inference checks remain unperformed |
+| Try DeepSeek through EnMaaS | ✅ Done | Authenticated API response/tool round trip, local OpenCode and existing worker image tool/session checks passed; opt-in configuration saved; no full PoC run or shared configuration changed |
 
 ### Review configuration and hosted provider paths — ✅
 
@@ -534,3 +535,12 @@ recommendations are not execution instructions.
 - The page also describes commercial model routing subject to gateway support, credentials and budget. Do not infer that every upstream model is available to this key. Provider runtime availability must be verified in the actual worker.
 - The page's explicit GLM limit is 1,000,000 context tokens and 65,536 output tokens, while its example JSON declares 1,048,576 context tokens. Its generic text-only warning also conflicts with the v1 DeepSeek image example. Use text requests and conservative documented limits until independently verified; do not copy GLM metadata onto DeepSeek.
 - Documentation review only: no key read or stored, no inference request, no provider configuration or active Job changed. An authenticated response and a harmless function-tool round trip remain necessary before claiming AutoPoC compatibility for the user's key/model.
+
+### Try DeepSeek through EnMaaS — ✅ 4 November 2026
+
+- User authorized the DeepSeek trial and supplied the key through `/home/aavraham/.config/enmaas/key` (mode 0600, outside Git). Loaded it directly into request headers/process environment without displaying or committing it.
+- Tested exact model `rits/deepseek-ai/DeepSeek-V4.1-Flash-1017` at the EnMaaS Chat Completions endpoint. Plain response returned `OK`; a forced `echo_probe` function call returned correct arguments and the follow-up returned `TOOL_OK` (three requests, 882 total reported tokens).
+- Isolated local OpenCode 1.14.19 completed a single permitted `pwd` tool call and returned `TOOL_OK`. The existing worker image `e7e1fe0fa9d3ba8a2c772872a534352fc160c825d5c35d90f81c42f7f45be2a3`, OpenCode 1.15.10, also completed `pwd` and generated `TOOL_OK`, independently confirmed in its exported session.
+- Worker 1.15.10 JSON command output omitted final text despite a completed stored reply. Reproduced with plain/tool prompts; explicit client token limits did not change the symptom. Recorded as a command-output limitation, not an inference/tool failure; no unrelated OpenCode upgrade attempted.
+- Added opt-in `deploy/providers/enmaas-deepseek.json`, referencing existing `LLM_API_KEY` injection and declaring text-only input. Updated `docs/configuration.md` with local/new-Job activation, precedence and validation limits. Verified JSON parsing, actual secret substitution and inline model precedence over the working-tree Qwen default without printing resolved credentials.
+- Sanitized smoke evidence is under `/tmp/autopoc-enmaas-deepseek-20261104/`. No full eleven-phase PoC was launched, active Job restarted, shared Secret changed or default `opencode.json` modification committed.

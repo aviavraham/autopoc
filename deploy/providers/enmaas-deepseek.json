@@ -1,0 +1,23 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "enmaas/rits/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "provider": {
+    "enmaas": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Red Hat EnMaaS",
+      "options": {
+        "baseURL": "https://api.enmaas.devshift.net/v1",
+        "apiKey": "{env:LLM_API_KEY}"
+      },
+      "models": {
+        "rits/deepseek-ai/DeepSeek-V4.1-Flash-1017": {
+          "name": "DeepSeek V4.1 Flash (EnMaaS)",
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          }
+        }
+      }
+    }
+  }
+}

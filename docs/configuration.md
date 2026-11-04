@@ -45,6 +45,41 @@ cp .env.example .env
 
 *One of `ANTHROPIC_API_KEY`, `VERTEX_PROJECT`, or `LLM_BASE_URL` is required.
 
+## DeepSeek through Red Hat EnMaaS (OpenCode v1)
+
+`deploy/providers/enmaas-deepseek.json` selects
+`enmaas/rits/deepseek-ai/DeepSeek-V4.1-Flash-1017` through the EnMaaS
+Chat Completions endpoint. It reads the MaaS key from `LLM_API_KEY`, which
+the existing Job, CronJob and launcher already inject. Keep the key in a
+protected environment variable or Kubernetes Secret; the JSON contains no key.
+This configuration enables text input only and does not assume GLM's model limits.
+
+For a local run, make `LLM_API_KEY` available from your credential store, then:
+
+```bash
+OPENCODE_CONFIG_CONTENT="$(cat deploy/providers/enmaas-deepseek.json)" \
+  opencode run --model enmaas/rits/deepseek-ai/DeepSeek-V4.1-Flash-1017 \
+  "Reply with exactly OK."
+```
+
+For a new Kubernetes run, store this JSON in a ConfigMap and inject its key as
+`OPENCODE_CONFIG_CONTENT` using `configMapKeyRef`, or mount it over the worker's
+`/opt/autopoc/opencode.json`. Set that run's `LLM_API_KEY` to the MaaS key;
+do not reuse a Qwen credential. The inline configuration takes precedence over
+the project default; `OPENCODE_CONFIG` alone can be overridden by that default.
+The profile file is not bundled in existing worker images, so mount it explicitly.
+These settings do not change the separate `OGX_*` routing for PoC applications.
+
+See the [internal EnMaaS OpenCode guide](https://source.redhat.com/departments/products_and_global_engineering/workload_management/enmaas#tool-opencode).
+Model discovery is credential-dependent, so the exact model ID is pinned locally.
+
+Validation on 4 November 2026: authenticated Chat Completions and a function-tool
+round trip passed. Local OpenCode 1.14.19 and the existing worker's OpenCode
+1.15.10 both completed a harmless `pwd` call and generated `TOOL_OK`. In the
+worker version, JSON command output omitted the final text; session export
+confirmed the completed reply. This validates model/tool compatibility, not a
+complete eleven-phase PoC or cluster deployment. Existing runs remain unchanged.
+
 ## Executive presentation and silent video
 
 Set `AUTOPOC_EXECUTIVE_IMAGE` in `autopoc-credentials` to the tested renderer
