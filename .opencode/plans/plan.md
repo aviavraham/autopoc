@@ -283,6 +283,8 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Recover execution after repetitive compiler probes | ✅ Job r4 stopped with history retained; compiler/reference fix signed off; Job r5 submitted with same run/PVC, retry count 2, bounded context and remaining original deadline |
 | Independently check gateway compiler prerequisite | ✅ Official package paths verified; standalone C++20 program compiled with GCC15 and ran in UBI9 minimal; full gateway build still pending |
 | Retain worker interruption and recovery | ✅ Context overflow observed; same OpenCode session automatically compacted and resumed without a restart/configuration change |
+| Provide missing chart PDB permission | ✅ Reviewed and operator-applied PDB-only Role/RoleBinding in poc-openshell; worker access verified; Helm retry pending |
+| Correct generated RBAC guidance before handoff | Pending; ordering does not bypass Kubernetes escalation checks; access was operator-provisioned |
 | Review security/suitability claims against original controls | Pending; planned generic denied-connection failure and NetworkPolicy presence alone do not establish enforcement; filesystem policy coverage remains untested |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
 

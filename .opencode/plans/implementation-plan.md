@@ -604,3 +604,9 @@ recommendations are not execution instructions.
 - Monitor the existing gateway-3 build and recovered worker, then complete remaining phases or record a new explicit mandatory failure. No application deployment/test/media success is claimed at this checkpoint.
 
 - Build acceptance: verified `openshell-gateway-3` is Complete and pushed with digest `sha256:6ae7ed04496c84faf68eeca9daa36a9164398c823e193e15d08f164840b4d576`. Its full release compilation finished in 23m06s, validating the GCC15 compiler/linker correction against the actual gateway/prover build. Sandbox/supervisor build-2 digests remain retained. All three source images are now built/published; this establishes build success only, not deployment health or isolation validation.
+
+### 9.13 Provide the chart's missing namespace-scoped PDB permission — ✅ 4 November 2026
+
+- First Helm install rolled back because the existing worker identity lacked `policy/poddisruptionbudgets` management in `poc-openshell`. The worker cannot legitimately grant itself permissions it does not already hold.
+- Reviewed its proposed Role/RoleBinding as data and asserted exactly two RBAC objects: only get/list/watch/create/update/patch/delete for PDBs in `poc-openshell`, bound only to `autopoc-test/autopoc-runner`. Operator server dry-run and apply passed; impersonated `can-i create poddisruptionbudgets.policy` now returns yes. No SCC or cluster-admin grant was made.
+- Follow-up before final handoff: the generated `kubernetes/worker-rbac.yaml` comment incorrectly suggests RoleBinding-before-Role bypasses the self-escalation guard. The actual operator grant resolved access. Correct that guidance/report attribution after the worker's source edits are settled; preserve the authorization failure and operator intervention in history.
