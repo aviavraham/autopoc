@@ -572,3 +572,5 @@ recommendations are not execution instructions.
 ### 9.9 Execute remaining phases and verify new-project outputs — In progress
 
 - Confirm recovery initialization, complete planning/containerization/build/deployment/validation/reporting or record a new explicit mandatory failure. Preserve original attempts and report actual media/storage outcomes separately.
+
+- Operator review checkpoint for final report/narrative: the five-case plan's denied-network probe uses a documentation address and accepts generic connection failure, which alone cannot prove policy caused the denial. NetworkPolicy presence also does not prove CNI enforcement. Require a reachable-target control/separate enforcement evidence before claiming isolation validation, or explicitly retain coverage gaps. Filesystem policy is not independently exercised by the five planned cases. Preserve original capture assertions/counts and never replay tests merely for slides. Review details saved privately in `/tmp/autopoc-openshell-20261104/plan-review.json`.
