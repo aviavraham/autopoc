@@ -287,7 +287,7 @@ recommendations are not execution instructions.
 | Phase 7: Upstream security remediation | ✅ Done | User merged fork PR #2; upstream PR #66 updated to 231fc31 and all six CI jobs, including security, passed |
 | Phase 8: Default Red Hat presentation branding | Implementation/local/OCP offline acceptance ✅; publication rollout open | Matching images published; new-project restricted OCP v2 render and manual QA passed; unattended Google dispatch/publication remains blocked |
 | Phase 9: OpenShell PoC with fork branding updates | ✅ Run complete with partial validation; cloud publication blocked | Source builds/deployment/report/blog complete; final 3 pass, 1 error, 1 skip preserved; restricted OCP Red Hat PDF/video accepted and exported; Google account remains invalid |
-| Phase 10: OpenShell with EnMaaS DeepSeek | In progress | Fresh isolated run ac05c639abd848998db29ce2352d9a0f; verified saved profile/API access, source branch, protected fork, new namespace/PVC and per-run key; Job submitted with tool preflight |
+| Phase 10: OpenShell with EnMaaS DeepSeek | ✅ Done | Exact-model run completed; 5 final pass, all 3 source builds first attempt, report/blog published and branded offline media verified; Google publication blocked |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -660,7 +660,7 @@ recommendations are not execution instructions.
 - Removed only the temporary reconciliation Pods and acceptance ConfigMaps/egress policies after export. Successful/failed Job records, source deployment and workspace remain available; no unrelated workload, shared Secret, default branch or CronJob was changed.
 - Added tracked new-project deliverable/provenance/recovery documentation and updated the main presentation handoff with measured v2 OCP acceptance and the manual-review limitation. Media status is generated_unpublished; Google dispatch/publication and Docs upload remain blocked by the real account failure. The run task is complete with its partial validation result, not a successful isolation certification.
 
-## Phase 10: OpenShell with Red Hat EnMaaS DeepSeek — In progress
+## Phase 10: OpenShell with Red Hat EnMaaS DeepSeek — ✅ Done, 4 November 2026
 
 ### 10.1 Discover and validate the existing provider setup — ✅ 4 November 2026
 
@@ -673,9 +673,9 @@ recommendations are not execution instructions.
 - Mounted the saved provider profile and injected it as inline per-run configuration, selected the exact model explicitly on the CLI, and referenced the EnMaaS key through the dedicated Secret. Main worker has no alternate Anthropic/Vertex provider credentials. No unsupported model-limit metadata was invented or copied from GLM. Global uncommitted opencode.json remains untouched.
 - Submitted Job autopoc-openshell-deepseek-20261104 after server dry-run, with fresh state/PVC, four-hour deadline, normal fork/artifact pushes, unique new image tags/build names, original attempt capture, default Red Hat v2, same-model content review and explicit known Google publication blocker. In-image model/tool preflight is running; no analysis/build/deployment/test success is yet claimed.
 
-### 10.3 Execute and verify the full new run — In progress
+### 10.3 Execute and verify the full new run — ✅ 4 November 2026
 
-- Continue through the eleven phases or a precise mandatory failure, preserve actual new-run results and model provenance, and verify any generated media separately. Do not import prior counts or rerun tests just for presentation evidence.
+- Completed the eleven-phase run with original five-pass validation, immutable report/blog, independently reviewed and verified offline Red Hat media. Original errors/results retained; Google publication remains explicitly blocked.
 
 ### 10.4 Verify actual DeepSeek tool execution in the cluster — ✅ 4 November 2026
 
@@ -732,7 +732,7 @@ recommendations are not execution instructions.
 - Recovery published corrected report commit aa1a95a2b9017d238fc2ac941e3dbc05736332a6, canonical SHA 5b492f617086fcb20b2d27592da82299bbf2fc3ab4a5c83225945fb6b74e74c5. Recollected bundle 671776db2d8baaf94790692a8bb98e8d0d4eb99d19c229fb88709344fab7ef80 reflects apply.completed and preserves all original attempts. Independently verified five pass outcomes and no private-key material.
 - Genuine separate DeepSeek review found graph/content issues, which were corrected and re-reviewed. Approved narrative 1a2e357c178d666e463c44fa1fd245cf499cd012ae08814cb098912d719882cb binds the corrected evidence; review SHA 68fc6245d98c579e870584ca5c00adda86e99a1c3849a0bfce97a5d439564986. Selected v2 seal c9ef24915b9bbc2f179a821a99918390a743e48b906977b85536f896f2266492 independently verified.
 
-### 10.15 Verify the new restricted branded render — In progress
+### 10.15 Verify the new restricted branded render — ✅ 4 November 2026
 
 - Submitted separate bounded offline acceptance Job autopoc-openshell-deepseek-redhat-20261104 with the exact trusted renderer digest, no credentials/API token, read-only root, nonroot security, egress denied and regular hash-checked scratch input. Export, artifact integrity and visual acceptance remain pending. Google durable storage is still blocked; this does not claim cloud publication.
 
@@ -741,3 +741,14 @@ recommendations are not execution instructions.
 - Worker selected best draft v8, aggregate 7.75, accepted under the non-interactive PoC >=7.0 rule rather than claiming the general 8.0 target. Genuine four-role DeepSeek API reviews are retained. The worker unnecessarily continued to v11 beyond the skill's nine-iteration ceiling before selecting v8; this is a workflow limitation, not evidence of an improved result.
 - Blog revision 1d13de78567e157000434afd45f9555ca80f13891f8b39591f4facf1d7dea57f, commit e9f08c609b589ff444a6b9d7ab8d1e4ac62201b7, was published append-only. Markdown, SEO and HTML bytes copied locally for review. Google Docs remains blocked. Final report bookkeeping revision 1a1053badda53ac136bb42795a6c1c781dfd001c9001d82934199ce04212ee1c, commit 9e697ea1e0468e277d8d36d0c0fdc0ea41de4c91, records blog completion; presentation evidence intentionally retains the earlier pre-blog report revision.
 - First render completed automatically in 215.636s, but visual review found namespace-caption/node-label overlap in the late deny act. Kept it as history. Removed that group/caption and corrected a misleading shared PVC edge; execution and persistence had separate claims. A genuine new same-model review approved exact revised narrative 9382ca0ca060df7a636bea4911add461fe8a85b22774e9fc5702bd700450f9b5 against unchanged evidence, then resealed as e35a1cbf2aebe3b7c2ecaf8c0f72578d274c4ea7b208b38a07f56f7f5dc5493a and submitted bounded acceptance Job -2. Final visual acceptance remains pending.
+
+- Final selected narrative 388609a3dd17771af217553dcb08f2b5dbd144bba86f3eb9b5874bcfb6ce3569 passed genuine same-model re-review against unchanged evidence. Sealed input 296f5503c725f6527e2bae76d48093c52d47483f840e4c7fb69219396ea1f2f1 uses compact vertical tiers and four acts covering all five checks (health/execution combined). Frozen camera projection at 500 instants passed estimated collision and clipping checks; earlier geometry/caption/orbit/intro-clipping attempts remain historical.
+- Acceptance Job autopoc-openshell-deepseek-redhat-20261104-4 completed under restricted-v2/UID1000880000, read-only root, no API token/Google credentials, egress denied, 2 CPU/3Gi/4Gi scratch. Measured 213.735s, peak 2,013,990,912 bytes, final scratch 30,562,722 bytes. Exported exact five artifacts plus manifest; all hashes/sizes/ZIPs, bundled repository brand assets/notices and selected recovery seal verified. Six-page PDF embeds Red Hat fonts; silent H264 video is 1280x720/30fps/120s. Visually inspected every PDF page and opening/each-act video frames without label collisions/clipping.
+
+### 10.17 Reconcile final DeepSeek run and preserve recovery — ✅ 4 November 2026
+
+- Worker reporting Job and final acceptance Job completed. Fresh independent checks confirm gateway/supervisor Ready with zero restarts and all three new build-1 images Complete. Source branch head 0bd92c27e5b871bc38d423c19f17e8ebc2674a84 verified remotely. Published canonical report and blog bytes fetched from Git match local hashes.
+- Bounded same-PVC helper verified original raw attempt index byte-for-byte against the captured index, canonical report/blog bytes and selected reviewed seal; reconciled final media acceptance and git-published blog status without changing tests/deployment. Sanitized evidence index and private raw index intentionally have different hashes; both are preserved correctly. Final original execution remains five pass, two executions/ten attempts; no tests replayed for media.
+- Saved selected regular seal and independent-review response on the retained PVC, plus final state locally. Added presentations/openshell-deepseek-2026-11-04 documentation and credential-free run profile. Media is generated_unpublished; Google production dispatch/publication and Docs remain blocked by account-not-found. Prior Qwen run and user's uncommitted configuration remain untouched.
+
+- Final verification rechecked completed Jobs, selected seal/artifact hashes, final original counts and media encoding. Removed only the two temporary reconciliation helpers and four acceptance ConfigMap/egress-policy pairs after export; deployment, new workspace, selected recovery input and Job history are retained.

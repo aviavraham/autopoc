@@ -308,7 +308,7 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Try DeepSeek with the user's MaaS key | ✅ API response/function round trip and local/worker OpenCode pwd tests passed; worker final reply verified by session export because JSON output omitted it |
 | Save a reusable DeepSeek configuration and activation instructions | ✅ Secret-free opt-in profile and configuration docs; actual key substitution/model precedence verified; active Qwen PoC and shared credentials unchanged |
 
-## Phase 10: OpenShell with Red Hat EnMaaS DeepSeek — In progress
+## Phase 10: OpenShell with Red Hat EnMaaS DeepSeek — ✅ Done, 4 November 2026
 
 | Task | Status |
 |------|--------|
@@ -326,5 +326,6 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Complete fresh sandbox/network validation | ✅ Final original capture 5 pass; prior naming errors retained; operator independently checked index and original api.github.com DENIED log |
 | Publish report and verify new original evidence | ✅ Canonical report published; first bundle independently verified (16 members, exact five-pass counts, no client keys) |
 | Recover reporting and review corrected narrative | ✅ Scoped profile parsed; same-model independent API reviews completed; corrected report/evidence and exact approved v2 seal verified; no tests replayed |
-| Verify new branded artifacts and publication outcome | In progress; restricted offline renderer submitted with exact reviewed seal; known Google service-account blocker remains separate |
+| Verify new branded artifacts and publication outcome | ✅ Final restricted render accepted in 213.735s after separate reviews, 500-frame projection checks and manual six-page/all-act QA; exact recovery input/assets verified; generated_unpublished |
 | Complete and publish conditional DeepSeek blog | ✅ Best v8 accepted at 7.75 under PoC threshold; immutable blog e9f08c6 and bookkeeping report 9e697ea published; Docs blocked; overlong reviewer loop recorded |
+| Reconcile and preserve the final DeepSeek run | ✅ Raw original attempt index unchanged; final 5 pass, 2 executions/10 attempts; report/blog hashes verified from Git, selected media seal saved to PVC and final state reconciled; Google publication blocked |

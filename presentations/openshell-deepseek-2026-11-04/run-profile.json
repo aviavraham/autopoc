@@ -1,0 +1,142 @@
+{
+  "run_id": "ac05c639abd848998db29ce2352d9a0f",
+  "source_repo": "https://github.com/NVIDIA/OpenShell",
+  "source_pin": "f4a6137513b777c9b362be54baf388f7d45398aa",
+  "source_branch": "autopoc-deepseek-20261104-ac05c639",
+  "namespace": "poc-openshell-deepseek",
+  "model": "enmaas/rits/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "provider_profile": "deploy/providers/enmaas-deepseek.json",
+  "source_commit": "0bd92c27e5b871bc38d423c19f17e8ebc2674a84",
+  "worker_image": "quay.io/aicatalyst/autopoc-opencode@sha256:74edde1b4589df2fbed1d969d1516d1a0385f898d8bd25adf68ab7d0c50bab54",
+  "renderer_image": "quay.io/aicatalyst/autopoc-executive-renderer@sha256:adb000ed14305bc3cbd2b9d7d6bc967f98bb26265e52d15ec40f5c08e570beca",
+  "final_execution_id": "a23ddad8e73849acb7f3bf68b8e09c18",
+  "results": {
+    "gateway_health": "pass",
+    "sandbox_process_execution": "pass",
+    "sandbox_workspace_persistence": "pass",
+    "network_allow_control": "pass",
+    "network_deny_enforcement": "pass"
+  },
+  "original_execution_count": 2,
+  "original_attempt_count": 10,
+  "evidence_sha256": "671776db2d8baaf94790692a8bb98e8d0d4eb99d19c229fb88709344fab7ef80",
+  "input_sha256": "296f5503c725f6527e2bae76d48093c52d47483f840e4c7fb69219396ea1f2f1",
+  "narrative_sha256": "388609a3dd17771af217553dcb08f2b5dbd144bba86f3eb9b5874bcfb6ce3569",
+  "review_sha256": "223ee6d68d4f8749fa45aa290b476f0265c67523657d289fd3a34fe00fc248f6",
+  "report": {
+    "canonical_report_sha256": "8d36e30dfc8cb34a66c3cf8512603786fa6505ed2b4130dfd659385e8ef21ee2",
+    "canonical_report_revision": "1a1053badda53ac136bb42795a6c1c781dfd001c9001d82934199ce04212ee1c",
+    "canonical_report_commit": "9e697ea1e0468e277d8d36d0c0fdc0ea41de4c91"
+  },
+  "blog": {
+    "artifact_commit": "e9f08c609b589ff444a6b9d7ab8d1e4ac62201b7",
+    "artifact_revision": "1d13de78567e157000434afd45f9555ca80f13891f8b39591f4facf1d7dea57f",
+    "artifact_path": "runs/ac05c639abd848998db29ce2352d9a0f/blog/1d13de78567e157000434afd45f9555ca80f13891f8b39591f4facf1d7dea57f",
+    "final_sha256": "9cdfee20dbbc4c45b10ec826521aaa56f8e9fad7a8c0e47cf41fe6fa3b900a30",
+    "review_best_version": "v8",
+    "review_overall": 7.75,
+    "review_status": "accepted under PoC auto-accept threshold (>=7.0); general 8.0 target not met"
+  },
+  "cloud_publication": "blocked_storage",
+  "render_status": "generated_unpublished",
+  "builds": [
+    {
+      "build": "openshell-deepseek-gateway-1",
+      "image": "quay.io/aicatalyst/openshell-gateway:deepseek-ac05c639",
+      "digest": "sha256:11805fd6052122b5aa972eb1570ce387b2965eab824fcb6198f2ee2f790b0295"
+    },
+    {
+      "build": "openshell-deepseek-sandbox-1",
+      "image": "quay.io/aicatalyst/openshell-sandbox:deepseek-ac05c639",
+      "digest": "sha256:d9bf4b254da59fe6aabab28e53c00a9a2e196482145881e9b3c6f2eac0dd501d"
+    },
+    {
+      "build": "openshell-deepseek-supervisor-1",
+      "image": "quay.io/aicatalyst/openshell-supervisor:deepseek-ac05c639",
+      "digest": "sha256:31628156930b786f4197020dd03fb7135bad44f94b0a399baf1c5039f1e8c7f9"
+    }
+  ],
+  "deployment": [
+    {
+      "name": "openshell-0",
+      "ready": true,
+      "node": "ocp-gb-xz56l-worker-2-nsrd9",
+      "scc": "restricted-v2",
+      "images": [
+        {
+          "name": "openshell-gateway",
+          "image": "quay.io/aicatalyst/openshell-gateway:deepseek-ac05c639",
+          "image_id": "quay.io/aicatalyst/openshell-gateway@sha256:11805fd6052122b5aa972eb1570ce387b2965eab824fcb6198f2ee2f790b0295"
+        }
+      ]
+    },
+    {
+      "name": "openshell-supervisor-5544898c74-qgclq",
+      "ready": true,
+      "node": "ocp-gb-xz56l-gpu-l40s-vzwxt",
+      "scc": "restricted-v2",
+      "images": [
+        {
+          "name": "supervisor",
+          "image": "quay.io/aicatalyst/openshell-supervisor:deepseek-ac05c639",
+          "image_id": "quay.io/aicatalyst/openshell-supervisor@sha256:31628156930b786f4197020dd03fb7135bad44f94b0a399baf1c5039f1e8c7f9"
+        }
+      ]
+    }
+  ],
+  "offline_acceptance": {
+    "status": "verified",
+    "namespace": "autopoc-test",
+    "job": "autopoc-openshell-deepseek-redhat-20261104-4",
+    "scc": "restricted-v2",
+    "uid": 1000880000,
+    "service_account_token": false,
+    "read_only_root": true,
+    "cpu_limit": 2,
+    "memory_limit": "3Gi",
+    "scratch_limit": "4Gi",
+    "egress": "deny policy selecting this acceptance Pod only",
+    "receipt": {
+      "returncode": 0,
+      "elapsed_seconds": 213.735,
+      "input_sha256": "296f5503c725f6527e2bae76d48093c52d47483f840e4c7fb69219396ea1f2f1",
+      "memory_peak_bytes": 2013990912,
+      "scratch_bytes": 30562722
+    },
+    "local_directory": "/home/aavraham/chatgpt/repositories/autopoc/presentations/openshell-deepseek-2026-11-04/output/ocp-redhat",
+    "artifacts": {
+      "deck": {
+        "path": "static-site.zip",
+        "sha256": "250c23c85f776a7c08db7ae4cfd78f23582f62b7c5ba4bd752c52a42712019a7",
+        "size": 871177,
+        "status": "generated_unpublished"
+      },
+      "pdf": {
+        "path": "executive-summary.pdf",
+        "sha256": "048920456f74c7663a3f9572c432716dfd9c9b0951623aab8c28bb265ebfa4a4",
+        "size": 99088,
+        "status": "generated_unpublished"
+      },
+      "source": {
+        "path": "executable-source.zip",
+        "sha256": "30ebee40a92a0fb0bf5c9b03294cde40adc379ed0e21ec6a419f4e15c4649123",
+        "size": 835523,
+        "status": "generated_unpublished"
+      },
+      "summary": {
+        "path": "executive-summary.md",
+        "sha256": "3ba4d23b25c260764e16e9a5266a0144fd2131b653f3aae492a5942463bd037b",
+        "size": 2044,
+        "status": "generated_unpublished"
+      },
+      "video": {
+        "path": "executive-summary.mp4",
+        "sha256": "bbb05e2b277a76e048da89337a4923102b4fbd7de8b8da11a9540423fc8ca0ef",
+        "size": 1046078,
+        "status": "generated_unpublished"
+      }
+    },
+    "visual_qa": "All six PDF pages plus opening, execution, persistence, allow and deny video frames reviewed. No label collisions or clipping in selected output. Sampled camera projection of 500 frames also passed collision/clipping checks.",
+    "scope": "Offline OCP renderer acceptance; production Google dispatch/publication remains blocked."
+  }
+}
