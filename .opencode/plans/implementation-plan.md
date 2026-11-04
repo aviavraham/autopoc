@@ -569,7 +569,12 @@ recommendations are not execution instructions.
 - Verified actual GitHub artifact publication with the dedicated run credential: plan revision `fd8650d7837a3e70382bfe9c9efcb185ee5456edd58314d44e3d0080746867a2`, commit `af11dd785b6bf978549b9be70c83084eb9b2ebf6`; evaluation revision `f4aaea5b09642d06044a25456f91a803d9f1feee78a2a606a7c630ad9df9147d`, commit `cf562a10dde0116e5f7f524cfe204aaf65801756`. Both are append-only entries under this run on `autopoc-artifacts`.
 - Configured the worker's global GitHub credential helper for the separate temporary artifact repositories. These successful publications establish write access; worker Administration permission remains unnecessary after operator-completed fork protection. Source main remains protected and untouched by AutoPoC pushes.
 
-### 9.9 Execute remaining phases and verify new-project outputs — In progress
+### 9.9 Complete and publish source container definitions — ✅ 4 November 2026
+
+- Verified source branch commit `d441ca245ad346fb60d125477c2880420726bf71` on the exact OpenShell fork. It adds gateway/supervisor/sandbox UBI Dockerfiles, merged build-context exclusions, and copies of the plan/evaluation. Push was only to `autopoc`; the immutable plan/evaluation revisions remain on the artifact branch.
+- This establishes committed container definitions, not compiled images or deployment success. Build, deployment, original validation and media verification remain outstanding.
+
+### 9.10 Build, deploy, validate and review new-project outputs — In progress
 
 - Confirm recovery initialization, complete planning/containerization/build/deployment/validation/reporting or record a new explicit mandatory failure. Preserve original attempts and report actual media/storage outcomes separately.
 
