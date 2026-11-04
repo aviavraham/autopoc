@@ -503,7 +503,12 @@ recommendations are not execution instructions.
 - In-cluster model preflight verified the configured Qwen endpoint and model. The r2 worker then exited before intake because the launcher's array-valued `--file` option consumed the following prompt as another filename. Saved its private log and retained the failed Job.
 - Corrected only the per-run launch arguments to use the full prompt positionally. Server dry-run passed; `autopoc-openshell-20261104-r3` is Running, loaded the run-poc skill, created its eleven-phase checklist and began pipeline setup. Same image digests, model, namespace and persistent workspace; no PoC test replay.
 
-### 9.5 Execute and verify the PoC — In progress
+### 9.5 Complete OpenShell intake and evaluation — ✅ 4 November 2026
+
+- Verified the worker's persisted state for run `a189bdf54ac849778a8ed7b228db599f`: intake and evaluation are completed, pinned source commit is `f4a6137513b777c9b362be54baf388f7d45398aa`, and no errors are recorded. The staged repository digest and evaluation were written by the worker.
+- Fork safety/protection is now in progress. Build, deployment and test phases remain pending.
+
+### 9.6 Execute remaining phases and verify the PoC — In progress
 
 - Monitor original attempts, record every phase outcome, preserve failure states and validate any generated branded artifacts from this new project. No result may be inferred from Job submission alone.
 
