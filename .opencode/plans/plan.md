@@ -319,5 +319,6 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Complete fresh DeepSeek intake/evaluation | ✅ Own pinned-source digest and strategy evaluation written; both persisted phases completed |
 | Adopt prepared fork and source branch | ✅ DeepSeek persisted fork completion; main-session export confirms EnMaaS model throughout; prior branch/protection unchanged |
 | Complete DeepSeek plan and container definitions | ✅ New immutable plan published; reference-based UBI definitions committed/pushed on dedicated branch |
-| Build and execute remaining phases or record mandatory failure | In progress; three distinct openshell-deepseek builds Running with new tags; original deployment untouched |
+| Build fresh sandbox runtime | ✅ Build 1 Complete/pushed, digest d9bf4b25, unique deepseek-ac05c639 tag; earlier output unchanged |
+| Complete remaining builds and execute or record mandatory failure | In progress; gateway/supervisor still Running; deployment and new validation pending |
 | Verify new branded artifacts and publication outcome | Pending; known Google service-account blocker remains separate |

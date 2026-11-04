@@ -695,3 +695,7 @@ recommendations are not execution instructions.
 
 - Worker generated/staged a fresh PoC plan and published it under the new run's append-only artifact path. It reused the supplied, previously compiled UBI Dockerfiles as explicit references, made its own scoped adjustments, committed them and pushed normally to the dedicated DeepSeek source branch. Plan/containerize phases are completed in state.
 - Started distinct openshell-deepseek-{gateway,supervisor,sandbox}-1 binary builds in autopoc-test-builds. All three are Running with new unique target tags; earlier builds, f4a6137 tags and deployment remain untouched. No new image/deployment/test success is claimed yet.
+
+### 10.8 Complete the fresh sandbox runtime image — ✅ 4 November 2026
+
+- Verified Build openshell-deepseek-sandbox-1 is Complete and published quay.io/aicatalyst/openshell-sandbox:deepseek-ac05c639 with digest sha256:d9bf4b254da59fe6aabab28e53c00a9a2e196482145881e9b3c6f2eac0dd501d (807s). This is the new source-built output, not the earlier f4a6137 tag. Gateway and supervisor remain Running; deployment and actual validation remain pending.
