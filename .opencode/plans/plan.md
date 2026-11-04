@@ -323,5 +323,5 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Build fresh supervisor runtime | ✅ Supervisor build 1 Complete/pushed with its new DeepSeek tag; sandbox retained |
 | Complete fresh gateway image / build phase | ✅ All three new build-1 outputs Complete/published; no build retries or old image substitution |
 | Deploy and verify new control plane | ✅ Both Pods Ready; eu-gb-2 gateway PVC Bound; first captured health check passed |
-| Complete fresh sandbox/network validation | In progress; first template-setup errors retained; DeepSeek committed a targeted naming fix and continued original capture |
+| Complete fresh sandbox/network validation | ✅ Final original capture 5 pass; prior naming errors retained; operator independently checked index and original api.github.com DENIED log |
 | Verify new branded artifacts and publication outcome | Pending; known Google service-account blocker remains separate |

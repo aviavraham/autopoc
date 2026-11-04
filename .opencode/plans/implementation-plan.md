@@ -713,3 +713,8 @@ recommendations are not execution instructions.
 
 - Confirmed new gateway and supervisor Pods are 1/1 Ready in poc-openshell-deepseek; gateway is on the preselected eu-gb-2 worker and its new 10Gi PVC is Bound. Gateway's fresh image digest is 11805fd6052122b5aa972eb1570ce387b2965eab824fcb6198f2ee2f790b0295; build duration 2327s. Previous namespace is untouched.
 - Worker reconciled its own Helm install, waited for supervisor-token projection, and began real capture. First captured outcomes: gateway_health pass, four dependent sandbox checks error due to workload-template setup. DeepSeek diagnosed the template naming constraint, committed a focused harness/template correction and resumed genuine validation. This retains failure history and does not establish passing sandbox/isolation results yet.
+
+### 10.12 Complete and independently verify the new original validation — ✅ 4 November 2026
+
+- Final captured execution reports all five planned scenarios pass: gateway health, actual Linux/non-root/marker execution, workspace marker persistence across stop/start, policy-approved example.com access and denied api.github.com access with a matching policy-denial log. Earlier workload-template naming failures remain in the original index; they were not erased or converted into pass records.
+- Operator independently read the original index, checked this new run ID/final execution and five pass outcomes, and corroborated the denied host through the live supervisor's original DENIED log (no application requests or tests replayed). Full filesystem/CNI/OIDC/HA/portability certification is not inferred from these checks. New report/media preparation is next.
