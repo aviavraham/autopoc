@@ -288,7 +288,8 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Complete and reproduce deployment recovery | ✅ Gateway/supervisor 1/1 Ready; IBM disk quota diagnosed; same-zone placement committed; operator attribution corrected; original tests beginning |
 | Finish original validation and retain partial outcome | ✅ Three captures/15 attempts retained; final 3 pass, 1 error, 1 skip; sandbox storage attachment failure observed; network enforcement untested |
 | End repeated diagnostics and resume reporting | ✅ r5 stopped; same-run r6 submitted for report/evidence/reviewed local v2 inputs and conditional blog; no further PoC test replay |
-| Review security/suitability claims against original controls | Pending; planned generic denied-connection failure and NetworkPolicy presence alone do not establish enforcement; filesystem policy coverage remains untested |
+| Review security/suitability claims against original controls | ✅ Canonical report corrected; final network check skipped; filesystem/CNI/HA/OIDC unverified; credential and operator/RBAC history accurately retained |
+| Publish corrected canonical report and verify evidence | ✅ Corrected report commit 5f12aa3; bundle 54a1ec86 verified with 21 members and unchanged original counts; current state requires corrected review binding |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
 
 ## Hosted Model Options Review — ✅ Done, 4 November 2026
