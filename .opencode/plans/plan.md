@@ -262,3 +262,14 @@ local only while the production service-account credential is repaired.
 | Publish new renderer digest, validate restricted OCP behavior and roll out worker/renderer | Pending; local validation does not establish OCP deployment/publication |
 
 Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-red-hat-presentation-branding-design.md).
+
+## Phase 9: OpenShell PoC — Preflight/local worker ✅; launch blocked
+
+| Task | Status |
+|------|--------|
+| Select the new project and inspect deployment requirements | ✅ User selected NVIDIA/OpenShell; pinned f4a6137; Helm/OpenShift/runtime references inspected |
+| Prepare the fork's updated worker | ✅ Clean 560503d image built locally; template revision 2 and branding workflow smoke check passed |
+| Renew cluster access and inspect required credentials | Blocked: both saved kubeconfigs return Unauthorized; user login handoff opened |
+| Publish matching worker/renderer and launch the run | Pending; no Job or deployment started |
+| Execute all mandatory phases and preserve original test evidence | Pending |
+| Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |

@@ -286,6 +286,7 @@ recommendations are not execution instructions.
 | Phase 6: Executive presentation and video scope | Core implementation merged ✅; rollout/acceptance open | Fork master merge verified 3 November; restricted OCP render and personal Drive reference passed; unattended publication, failure acceptance, model review and worker rollout remain |
 | Phase 7: Upstream security remediation | ✅ Done | User merged fork PR #2; upstream PR #66 updated to 231fc31 and all six CI jobs, including security, passed |
 | Phase 8: Default Red Hat presentation branding | Implementation/local acceptance ✅; OCP rollout pending | 379 Python/eight Node tests and full constrained offline UBI render passed; draft fork PR #3 ready for review; new registry publication and OCP validation remain |
+| Phase 9: OpenShell PoC with fork branding updates | Preflight/local worker ✅; launch blocked on cluster login | NVIDIA/OpenShell pinned to f4a6137; worker built from 560503d with revision 2; no PoC Job, deployment or publication yet |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -469,3 +470,19 @@ recommendations are not execution instructions.
 #### 8.5.3 Publish the reviewable feature branch — ✅ 3 November 2026
 - Pushed `codex/red-hat-presentation-branding`, opened [draft fork PR #3](https://github.com/aviavraham/autopoc/pull/3) targeting fork master and attached it to this chat. GitHub reports no conflicts; no fork CI checks are reported.
 - Updated renderer/configuration/workflow docs with local assets, v2/v1 compatibility, overflow handling and rollout requirements. No default branch was merged/pushed; deployed configuration is unchanged.
+
+## Phase 9: OpenShell PoC — Preflight/local worker ✅; launch blocked
+
+### 9.1 Select project and prepare the updated worker — ✅ 4 November 2026
+
+- User selected `https://github.com/NVIDIA/OpenShell` for the new-project run using the fork's branding updates. Fork PR #3 remains open; no merge is required to test its explicit head.
+- Cloned and pinned OpenShell to `f4a6137513b777c9b362be54baf388f7d45398aa`. Inspected its Helm chart, OpenShift install guide and runtime support matrix. Actual cluster qualification, Agent Sandbox prerequisites and NetworkPolicy enforcement remain unverified.
+- Built a clean archived AutoPoC `560503d8c59b46cb08ede0f4f6c0b02ae898073f` as `localhost/autopoc-opencode:openshell-560503d`, image ID `e7e1fe0fa9d3ba8a2c772872a534352fc160c825d5c35d90f81c42f7f45be2a3`. Container smoke check confirmed template revision 2 and the updated branding workflow. Existing reviewed renderer remains available locally.
+- Preserved the unrelated working-tree model/provider configuration, coverage file and uv.lock; the image uses the committed configuration. Saved local preflight state, pinned run prompt and build log in `/tmp/autopoc-openshell-20261104/`.
+- Both saved kubeconfigs returned Unauthorized. The user supplied the cluster OAuth URL; its token login page is open for the user to authenticate and renew CLI access. No credentials were copied into planning documents.
+
+### 9.2 Launch and validate the full pipeline — Blocked on authentication
+
+- Renew cluster login, inspect configured credentials safely, publish the matching worker/renderer and pin per-run digests. Local Quay login is absent; cluster credential access cannot yet be checked.
+- Qualify the real cluster and run the eleven phases, preserving original validation attempts. Record mandatory failures explicitly. Reconcile branded presentation/video publication separately, including any storage failure.
+- No PoC Job, OpenShell fork, deployment, test result or new published artifact is claimed from this preflight.
