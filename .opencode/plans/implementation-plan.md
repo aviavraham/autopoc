@@ -286,7 +286,7 @@ recommendations are not execution instructions.
 | Phase 6: Executive presentation and video scope | Core implementation merged ✅; rollout/acceptance open | Fork master merge verified 3 November; restricted OCP render and personal Drive reference passed; unattended publication, failure acceptance, model review and worker rollout remain |
 | Phase 7: Upstream security remediation | ✅ Done | User merged fork PR #2; upstream PR #66 updated to 231fc31 and all six CI jobs, including security, passed |
 | Phase 8: Default Red Hat presentation branding | Implementation/local acceptance ✅; OCP rollout pending | 379 Python/eight Node tests and full constrained offline UBI render passed; draft fork PR #3 ready for review; new registry publication and OCP validation remain |
-| Phase 9: OpenShell PoC with fork branding updates | Intake/evaluation ✅; blocked at fork credentials | Run a189bdf54ac849778a8ed7b228db599f stopped before plan/build/deploy/tests; operator prepared protected fork; repository-scoped worker token required |
+| Phase 9: OpenShell PoC with fork branding updates | Intake/evaluation/fork ✅; continuation submitted | Dedicated run token successfully synchronized the pinned autopoc branch; operator verified protected main; Job r4 resumes the same run at planning |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -471,7 +471,7 @@ recommendations are not execution instructions.
 - Pushed `codex/red-hat-presentation-branding`, opened [draft fork PR #3](https://github.com/aviavraham/autopoc/pull/3) targeting fork master and attached it to this chat. GitHub reports no conflicts; no fork CI checks are reported.
 - Updated renderer/configuration/workflow docs with local assets, v2/v1 compatibility, overflow handling and rollout requirements. No default branch was merged/pushed; deployed configuration is unchanged.
 
-## Phase 9: OpenShell PoC — Intake/evaluation ✅; blocked at fork credentials
+## Phase 9: OpenShell PoC — Intake/evaluation/fork ✅; continuation submitted
 
 ### 9.1 Select project and prepare the updated worker — ✅ 4 November 2026
 
@@ -556,6 +556,14 @@ recommendations are not execution instructions.
 - Backed up private state and staged intake/evaluation/failure documents under `/tmp/autopoc-openshell-20261104/`; source checkout/state also remain on the 10 GiB workspace PVC. Temporary recovery Pod has no API token or project credentials.
 - User requested token-generation guidance. Resume requires a token restricted to `aicatalyst-team/openshell` with Contents and Administration read/write, stored in a separate per-run Secret. Do not change the shared batch token. Recovery instructions must explicitly prohibit probing unrelated repositories and must stop on authentication errors.
 
-### 9.7 Resume with scoped authentication and verify the remaining phases — Blocked on user token setup
+### 9.7 Verify the dedicated credential and submit same-run recovery — ✅ 4 November 2026
 
 - Preserve run ID, original completed phases and failure history. Verify exact-destination access, resume from fork, and continue through the remaining phases or a new explicit mandatory failure. Google Drive service-account repair remains a separate publication prerequisite.
+
+- User saved `autopoc-openshell-github/GITHUB_TOKEN` in `autopoc-test`. Verified repository/source reads and actual pinned-source synchronization to `autopoc` using that credential. Branch-protection API read is denied (403), so no broader token permission was requested: the operator separately verified existing main protection with local access.
+- Fork setup is complete through operator actions. Prepared Job `autopoc-openshell-20261104-r4` to reuse the same run ID, source pin and PVC. Its recovery initializer configures only the exact fork remote/autopoc branch, preserves original errors and records their resolution, then advances to planning. The new token is referenced only for this Job; the shared batch Secret remains unchanged.
+- Resume instructions explicitly prohibit unrelated repository probes, alternate destinations/credentials and default-branch writes, and require immediate stop on 401/403. The worker continues from phase 4; no completed PoC phase or validation test is replayed. Server dry-run passed and the Job was submitted.
+
+### 9.8 Execute remaining phases and verify new-project outputs — In progress
+
+- Confirm recovery initialization, complete planning/containerization/build/deployment/validation/reporting or record a new explicit mandatory failure. Preserve original attempts and report actual media/storage outcomes separately.
