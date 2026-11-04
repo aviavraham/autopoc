@@ -286,7 +286,7 @@ recommendations are not execution instructions.
 | Phase 6: Executive presentation and video scope | Core implementation merged ✅; rollout/acceptance open | Fork master merge verified 3 November; restricted OCP render and personal Drive reference passed; unattended publication, failure acceptance, model review and worker rollout remain |
 | Phase 7: Upstream security remediation | ✅ Done | User merged fork PR #2; upstream PR #66 updated to 231fc31 and all six CI jobs, including security, passed |
 | Phase 8: Default Red Hat presentation branding | Implementation/local acceptance ✅; OCP rollout pending | 379 Python/eight Node tests and full constrained offline UBI render passed; draft fork PR #3 ready for review; new registry publication and OCP validation remain |
-| Phase 9: OpenShell PoC with fork branding updates | Intake/evaluation/fork ✅; continuation submitted | Dedicated run token successfully synchronized the pinned autopoc branch; operator verified protected main; Job r4 resumes the same run at planning |
+| Phase 9: OpenShell PoC with fork branding updates | Planning/containerization ✅; two images built; gateway retry pending | Same run/Job r4; sandbox and supervisor published by digest; gateway C++ compiler selection under bounded recovery; deployment/tests/media not yet validated |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -471,7 +471,7 @@ recommendations are not execution instructions.
 - Pushed `codex/red-hat-presentation-branding`, opened [draft fork PR #3](https://github.com/aviavraham/autopoc/pull/3) targeting fork master and attached it to this chat. GitHub reports no conflicts; no fork CI checks are reported.
 - Updated renderer/configuration/workflow docs with local assets, v2/v1 compatibility, overflow handling and rollout requirements. No default branch was merged/pushed; deployed configuration is unchanged.
 
-## Phase 9: OpenShell PoC — Intake/evaluation/fork ✅; continuation submitted
+## Phase 9: OpenShell PoC — Source builds in progress; two of three images complete
 
 ### 9.1 Select project and prepare the updated worker — ✅ 4 November 2026
 
@@ -586,3 +586,5 @@ recommendations are not execution instructions.
 
 - Second build round: verified sandbox build `openshell-sandbox-2` is Complete and published as `quay.io/aicatalyst/openshell-sandbox:f4a6137` with digest `sha256:b8bd0d75926bbf006f90f2873e9c1d558a31ff80eb989dfe0a0c457cef68f391`. Gateway build 2 failed in vendored `z3-sys`: the current C++ toolchain lacks the `<format>` header. Its full private log is retained; supervisor build 2 remains running at this checkpoint.
 - Observed a worker ContextOverflowError at 230145 input + 32000 requested output against a 262144-token backend limit. OpenCode then automatically compacted the same session and resumed primary execution; no worker restart, model/provider switch or credential/configuration change was needed. Retain this interruption as an operational finding, not a PoC test result.
+
+- Verified supervisor build `openshell-supervisor-2` is Complete and published with digest `sha256:c9c177e7edcd1c23da60eab958109ddfb631e37f9adfbd4ee614de062a89dc96`. Sandbox and supervisor are now valid retained build outputs; gateway is the remaining build blocker. Worker investigation confirmed a newer GCC toolset is installed but CMake selected `/usr/bin/c++` (the older default); compiler selection is the targeted gateway correction.
