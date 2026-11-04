@@ -263,7 +263,7 @@ local only while the production service-account credential is repaired.
 
 Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-red-hat-presentation-branding-design.md).
 
-## Phase 9: OpenShell PoC — Preparation/Job submission ✅; execution starting
+## Phase 9: OpenShell PoC — Intake/evaluation ✅; blocked at fork credentials
 
 | Task | Status |
 |------|--------|
@@ -274,7 +274,8 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Resolve workspace scheduling failures before pipeline startup | ✅ IBM per-node disk quota and a full CPU reservation diagnosed; replacement Job r2 attached the same workspace successfully on a node with capacity |
 | Verify model access and start the worker | ✅ In-cluster model preflight passed; corrected per-run prompt arguments; Job r3 Running and run-poc skill loaded |
 | Complete intake and evaluation | ✅ Persisted run a189bdf54ac849778a8ed7b228db599f has both phases completed and no errors; source pin verified |
-| Execute remaining mandatory phases and preserve original test evidence | In progress; GitHub fork/protection checks underway |
+| Record the fork authentication failure and retain recovery state | ✅ Worker stopped after HTTP 403 and out-of-scope permission probes; state/logs backed up; operator created/protected the exact fork and pushed only autopoc |
+| Resume remaining phases with repository-scoped worker access | Blocked on user token setup; Contents and Administration read/write on aicatalyst-team/openshell only; separate run Secret planned |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
 
 ## Hosted Model Options Review — ✅ Done, 4 November 2026

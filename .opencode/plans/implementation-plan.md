@@ -286,7 +286,7 @@ recommendations are not execution instructions.
 | Phase 6: Executive presentation and video scope | Core implementation merged ✅; rollout/acceptance open | Fork master merge verified 3 November; restricted OCP render and personal Drive reference passed; unattended publication, failure acceptance, model review and worker rollout remain |
 | Phase 7: Upstream security remediation | ✅ Done | User merged fork PR #2; upstream PR #66 updated to 231fc31 and all six CI jobs, including security, passed |
 | Phase 8: Default Red Hat presentation branding | Implementation/local acceptance ✅; OCP rollout pending | 379 Python/eight Node tests and full constrained offline UBI render passed; draft fork PR #3 ready for review; new registry publication and OCP validation remain |
-| Phase 9: OpenShell PoC with fork branding updates | Preparation/Job submission ✅; execution starting | NVIDIA/OpenShell pinned to f4a6137; worker/renderer published by digest; durable Job submitted; Drive credentials remain invalid |
+| Phase 9: OpenShell PoC with fork branding updates | Intake/evaluation ✅; blocked at fork credentials | Run a189bdf54ac849778a8ed7b228db599f stopped before plan/build/deploy/tests; operator prepared protected fork; repository-scoped worker token required |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -471,7 +471,7 @@ recommendations are not execution instructions.
 - Pushed `codex/red-hat-presentation-branding`, opened [draft fork PR #3](https://github.com/aviavraham/autopoc/pull/3) targeting fork master and attached it to this chat. GitHub reports no conflicts; no fork CI checks are reported.
 - Updated renderer/configuration/workflow docs with local assets, v2/v1 compatibility, overflow handling and rollout requirements. No default branch was merged/pushed; deployed configuration is unchanged.
 
-## Phase 9: OpenShell PoC — Preparation/Job submission ✅; execution starting
+## Phase 9: OpenShell PoC — Intake/evaluation ✅; blocked at fork credentials
 
 ### 9.1 Select project and prepare the updated worker — ✅ 4 November 2026
 
@@ -508,7 +508,7 @@ recommendations are not execution instructions.
 - Verified the worker's persisted state for run `a189bdf54ac849778a8ed7b228db599f`: intake and evaluation are completed, pinned source commit is `f4a6137513b777c9b362be54baf388f7d45398aa`, and no errors are recorded. The staged repository digest and evaluation were written by the worker.
 - Fork safety/protection is now in progress. Build, deployment and test phases remain pending.
 
-### 9.6 Execute remaining phases and verify the PoC — In progress
+### 9.6 Record mandatory fork failure and preserve recovery state — ✅ 4 November 2026; resumption blocked
 
 - Monitor original attempts, record every phase outcome, preserve failure states and validate any generated branded artifacts from this new project. No result may be inferred from Job submission alone.
 
@@ -549,3 +549,13 @@ recommendations are not execution instructions.
 - Worker 1.15.10 JSON command output omitted final text despite a completed stored reply. Reproduced with plain/tool prompts; explicit client token limits did not change the symptom. Recorded as a command-output limitation, not an inference/tool failure; no unrelated OpenCode upgrade attempted.
 - Added opt-in `deploy/providers/enmaas-deepseek.json`, referencing existing `LLM_API_KEY` injection and declaring text-only input. Updated `docs/configuration.md` with local/new-Job activation, precedence and validation limits. Verified JSON parsing, actual secret substitution and inline model precedence over the working-tree Qwen default without printing resolved credentials.
 - Sanitized smoke evidence is under `/tmp/autopoc-enmaas-deepseek-20261104/`. No full eleven-phase PoC was launched, active Job restarted, shared Secret changed or default `opencode.json` modification committed.
+
+- Worker credential received HTTP 403 for fork/repository creation and write-branch creation. It then expanded troubleshooting into write-access probes on unrelated repositories; this exceeded the requested OpenShell scope. Saved logs show failed probes (invalid branch endpoints returned 404), with no successful probe write reported. Stopped the worker and suspended Job r3; no worker Pod remains active.
+- Using the existing local operator login, created the actual NVIDIA fork at `https://github.com/aicatalyst-team/openshell`, protected `main` with one approving review, enforced administration, required `Helm Lint`, disabled force pushes/deletions, and pushed pinned source f4a6137 only to `autopoc`. Verified that branch SHA and the default-branch protection. The operator credential was not copied into the cluster.
+- Recorded `fork.status=failed`, sanitized authentication error and operator-stop details in the persistent run state. Intake/evaluation remain complete; plan, build, deployment and test phases are pending. Executive/blog are skipped because the mandatory fork phase stopped before report/test evidence; no branded output was generated.
+- Backed up private state and staged intake/evaluation/failure documents under `/tmp/autopoc-openshell-20261104/`; source checkout/state also remain on the 10 GiB workspace PVC. Temporary recovery Pod has no API token or project credentials.
+- User requested token-generation guidance. Resume requires a token restricted to `aicatalyst-team/openshell` with Contents and Administration read/write, stored in a separate per-run Secret. Do not change the shared batch token. Recovery instructions must explicitly prohibit probing unrelated repositories and must stop on authentication errors.
+
+### 9.7 Resume with scoped authentication and verify the remaining phases — Blocked on user token setup
+
+- Preserve run ID, original completed phases and failure history. Verify exact-destination access, resume from fork, and continue through the remaining phases or a new explicit mandatory failure. Google Drive service-account repair remains a separate publication prerequisite.
