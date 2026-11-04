@@ -280,6 +280,7 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Publish the new PoC plan and staged evaluation | ✅ Plan af11dd7 and evaluation cf562a1 are verified on the immutable artifact branch; dedicated credential worked |
 | Commit source containerization definitions | ✅ Gateway/supervisor/sandbox UBI Dockerfiles and build context committed as d441ca245 on autopoc |
 | Build source images with bounded retries | In progress; sandbox and supervisor build 2 Complete with verified digests; gateway compiler-selection fix under investigation |
+| Independently check gateway compiler prerequisite | ✅ Official package paths verified; standalone C++20 program compiled with GCC15 and ran in UBI9 minimal; full gateway build still pending |
 | Retain worker interruption and recovery | ✅ Context overflow observed; same OpenCode session automatically compacted and resumed without a restart/configuration change |
 | Review security/suitability claims against original controls | Pending; planned generic denied-connection failure and NetworkPolicy presence alone do not establish enforcement; filesystem policy coverage remains untested |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
