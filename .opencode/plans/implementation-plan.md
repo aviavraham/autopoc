@@ -286,7 +286,7 @@ recommendations are not execution instructions.
 | Phase 6: Executive presentation and video scope | Core implementation merged ✅; rollout/acceptance open | Fork master merge verified 3 November; restricted OCP render and personal Drive reference passed; unattended publication, failure acceptance, model review and worker rollout remain |
 | Phase 7: Upstream security remediation | ✅ Done | User merged fork PR #2; upstream PR #66 updated to 231fc31 and all six CI jobs, including security, passed |
 | Phase 8: Default Red Hat presentation branding | Implementation/local acceptance ✅; OCP rollout pending | 379 Python/eight Node tests and full constrained offline UBI render passed; draft fork PR #3 ready for review; new registry publication and OCP validation remain |
-| Phase 9: OpenShell PoC with fork branding updates | Planning/containerization ✅; two images built; gateway retry pending | Same run/Job r4; sandbox and supervisor published by digest; gateway C++ compiler selection under bounded recovery; deployment/tests/media not yet validated |
+| Phase 9: OpenShell PoC with fork branding updates | Source build ✅; deployment/validation next | Same run/Job r5; all three images published by verified digest after operator compiler correction; original failures preserved; deployment/tests/media pending |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -471,7 +471,7 @@ recommendations are not execution instructions.
 - Pushed `codex/red-hat-presentation-branding`, opened [draft fork PR #3](https://github.com/aviavraham/autopoc/pull/3) targeting fork master and attached it to this chat. GitHub reports no conflicts; no fork CI checks are reported.
 - Updated renderer/configuration/workflow docs with local assets, v2/v1 compatibility, overflow handling and rollout requirements. No default branch was merged/pushed; deployed configuration is unchanged.
 
-## Phase 9: OpenShell PoC — Source builds in progress; two of three images complete
+## Phase 9: OpenShell PoC — Source build ✅; deployment and validation pending
 
 ### 9.1 Select project and prepare the updated worker — ✅ 4 November 2026
 
@@ -574,7 +574,7 @@ recommendations are not execution instructions.
 - Verified source branch commit `d441ca245ad346fb60d125477c2880420726bf71` on the exact OpenShell fork. It adds gateway/supervisor/sandbox UBI Dockerfiles, merged build-context exclusions, and copies of the plan/evaluation. Push was only to `autopoc`; the immutable plan/evaluation revisions remain on the artifact branch.
 - This establishes committed container definitions, not compiled images or deployment success. Build, deployment, original validation and media verification remain outstanding.
 
-### 9.10 Build, deploy, validate and review new-project outputs — In progress
+### 9.10 Build source images with bounded recovery — ✅ 4 November 2026
 
 - Confirm recovery initialization, complete planning/containerization/build/deployment/validation/reporting or record a new explicit mandatory failure. Preserve original attempts and report actual media/storage outcomes separately.
 
@@ -602,3 +602,5 @@ recommendations are not execution instructions.
 ### 9.12 Complete deployment, original validation and branded output verification — In progress
 
 - Monitor the existing gateway-3 build and recovered worker, then complete remaining phases or record a new explicit mandatory failure. No application deployment/test/media success is claimed at this checkpoint.
+
+- Build acceptance: verified `openshell-gateway-3` is Complete and pushed with digest `sha256:6ae7ed04496c84faf68eeca9daa36a9164398c823e193e15d08f164840b4d576`. Its full release compilation finished in 23m06s, validating the GCC15 compiler/linker correction against the actual gateway/prover build. Sandbox/supervisor build-2 digests remain retained. All three source images are now built/published; this establishes build success only, not deployment health or isolation validation.
