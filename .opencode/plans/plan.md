@@ -263,13 +263,13 @@ local only while the production service-account credential is repaired.
 
 Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-red-hat-presentation-branding-design.md).
 
-## Phase 9: OpenShell PoC — Preflight/local worker ✅; launch blocked
+## Phase 9: OpenShell PoC — Preparation/Job submission ✅; execution starting
 
 | Task | Status |
 |------|--------|
 | Select the new project and inspect deployment requirements | ✅ User selected NVIDIA/OpenShell; pinned f4a6137; Helm/OpenShift/runtime references inspected |
 | Prepare the fork's updated worker | ✅ Clean 560503d image built locally; template revision 2 and branding workflow smoke check passed |
-| Renew cluster access and inspect required credentials | Blocked: both saved kubeconfigs return Unauthorized; user login handoff opened |
-| Publish matching worker/renderer and launch the run | Pending; no Job or deployment started |
-| Execute all mandatory phases and preserve original test evidence | Pending |
+| Renew cluster access and inspect required credentials | ✅ User renewed login; registry/GitHub access verified; Drive service-account account not found remains an explicit publication blocker |
+| Publish matching worker/renderer and launch the run | ✅ Both images published by digest; durable Job autopoc-openshell-20261104 submitted with the existing Qwen configuration |
+| Execute all mandatory phases and preserve original test evidence | In progress; model preflight and worker startup precede pipeline execution |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |

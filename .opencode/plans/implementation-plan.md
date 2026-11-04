@@ -286,7 +286,7 @@ recommendations are not execution instructions.
 | Phase 6: Executive presentation and video scope | Core implementation merged ✅; rollout/acceptance open | Fork master merge verified 3 November; restricted OCP render and personal Drive reference passed; unattended publication, failure acceptance, model review and worker rollout remain |
 | Phase 7: Upstream security remediation | ✅ Done | User merged fork PR #2; upstream PR #66 updated to 231fc31 and all six CI jobs, including security, passed |
 | Phase 8: Default Red Hat presentation branding | Implementation/local acceptance ✅; OCP rollout pending | 379 Python/eight Node tests and full constrained offline UBI render passed; draft fork PR #3 ready for review; new registry publication and OCP validation remain |
-| Phase 9: OpenShell PoC with fork branding updates | Preflight/local worker ✅; launch blocked on cluster login | NVIDIA/OpenShell pinned to f4a6137; worker built from 560503d with revision 2; no PoC Job, deployment or publication yet |
+| Phase 9: OpenShell PoC with fork branding updates | Preparation/Job submission ✅; execution starting | NVIDIA/OpenShell pinned to f4a6137; worker/renderer published by digest; durable Job submitted; Drive credentials remain invalid |
 
 ## Phase 1: Ticket Definition ✅
 
@@ -471,7 +471,7 @@ recommendations are not execution instructions.
 - Pushed `codex/red-hat-presentation-branding`, opened [draft fork PR #3](https://github.com/aviavraham/autopoc/pull/3) targeting fork master and attached it to this chat. GitHub reports no conflicts; no fork CI checks are reported.
 - Updated renderer/configuration/workflow docs with local assets, v2/v1 compatibility, overflow handling and rollout requirements. No default branch was merged/pushed; deployed configuration is unchanged.
 
-## Phase 9: OpenShell PoC — Preflight/local worker ✅; launch blocked
+## Phase 9: OpenShell PoC — Preparation/Job submission ✅; execution starting
 
 ### 9.1 Select project and prepare the updated worker — ✅ 4 November 2026
 
@@ -481,8 +481,18 @@ recommendations are not execution instructions.
 - Preserved the unrelated working-tree model/provider configuration, coverage file and uv.lock; the image uses the committed configuration. Saved local preflight state, pinned run prompt and build log in `/tmp/autopoc-openshell-20261104/`.
 - Both saved kubeconfigs returned Unauthorized. The user supplied the cluster OAuth URL; its token login page is open for the user to authenticate and renew CLI access. No credentials were copied into planning documents.
 
-### 9.2 Launch and validate the full pipeline — Blocked on authentication
+### 9.2 Restore access, publish images and submit the Job — ✅ 4 November 2026
 
 - Renew cluster login, inspect configured credentials safely, publish the matching worker/renderer and pin per-run digests. Local Quay login is absent; cluster credential access cannot yet be checked.
 - Qualify the real cluster and run the eleven phases, preserving original validation attempts. Record mandatory failures explicitly. Reconcile branded presentation/video publication separately, including any storage failure.
 - No PoC Job, OpenShell fork, deployment, test result or new published artifact is claimed from this preflight.
+
+- Renewed CLI access with the user-provided login. Confirmed OpenShift 4.21.8, OVNKubernetes and a running Agent Sandbox controller. Runtime qualification remains part of the PoC.
+- Published worker `quay.io/aicatalyst/autopoc-opencode@sha256:74edde1b4589df2fbed1d969d1516d1a0385f898d8bd25adf68ab7d0c50bab54` and renderer `quay.io/aicatalyst/autopoc-executive-renderer@sha256:adb000ed14305bc3cbd2b9d7d6bc967f98bb26265e52d15ec40f5c08e570beca`. This publishes the reviewed branding renderer; it does not yet establish restricted OCP rendering acceptance.
+- Registry authentication and the pipeline GitHub identity verified. Google service-account refresh still returns account not found; cloud publication is explicitly blocked. The per-run configuration uses the user's existing Qwen provider with environment-referenced credentials, avoiding Vertex dependency. Shared CronJobs and credential Secrets remain unchanged.
+- Created namespace `poc-openshell`, narrow gateway runtime RBAC and additional runner sandbox/network/exec permissions only in that namespace. No privileged SCC or cluster-admin was granted. The chart must use `rbac.clusterScoped.create=false` and gateway ServiceAccount `openshell`.
+- Submitted `autopoc-openshell-20261104` in `autopoc-test` with per-run configuration, pinned images, model endpoint preflight and a 10 GiB persistent workspace. Server dry-run passed. Deployment, tests and executive outputs are not yet validated.
+
+### 9.3 Execute and verify the PoC — In progress
+
+- Monitor original attempts, record every phase outcome, preserve failure states and validate any generated branded artifacts from this new project. No result may be inferred from Job submission alone.
