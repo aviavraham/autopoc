@@ -271,7 +271,8 @@ Design: [Red Hat presentation branding](../../docs/superpowers/specs/2026-11-03-
 | Prepare the fork's updated worker | ✅ Clean 560503d image built locally; template revision 2 and branding workflow smoke check passed |
 | Renew cluster access and inspect required credentials | ✅ User renewed login; registry/GitHub access verified; Drive service-account account not found remains an explicit publication blocker |
 | Publish matching worker/renderer and launch the run | ✅ Both images published by digest; durable Job autopoc-openshell-20261104 submitted with the existing Qwen configuration |
-| Execute all mandatory phases and preserve original test evidence | In progress; model preflight and worker startup precede pipeline execution |
+| Resolve workspace scheduling failures before pipeline startup | ✅ IBM per-node disk quota and a full CPU reservation diagnosed; replacement Job r2 attached the same workspace successfully on a node with capacity |
+| Execute all mandatory phases and preserve original test evidence | In progress; Job r2 image startup and model preflight precede pipeline execution |
 | Reconcile and verify branded presentation/PDF/video artifacts | Pending; storage and cluster acceptance remain unverified |
 
 ## Hosted Model Options Review — ✅ Done, 4 November 2026

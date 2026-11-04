@@ -493,7 +493,12 @@ recommendations are not execution instructions.
 - Created namespace `poc-openshell`, narrow gateway runtime RBAC and additional runner sandbox/network/exec permissions only in that namespace. No privileged SCC or cluster-admin was granted. The chart must use `rbac.clusterScoped.create=false` and gateway ServiceAccount `openshell`.
 - Submitted `autopoc-openshell-20261104` in `autopoc-test` with per-run configuration, pinned images, model endpoint preflight and a 10 GiB persistent workspace. Server dry-run passed. Deployment, tests and executive outputs are not yet validated.
 
-### 9.3 Execute and verify the PoC — In progress
+### 9.3 Resolve initial workspace scheduling — ✅ 4 November 2026
+
+- Initial Job never reached its model check: IBM CSI reported the selected node had reached its maximum of 12 secondary disks. Preserved the first Job as suspended. The first replacement CPU candidate had insufficient unreserved CPU and was suspended before startup.
+- Compared CPU reservations and disk attachments, then submitted `autopoc-openshell-20261104-r2` on `ocp-gb-xz56l-worker-1-hhkzb`, reusing the same empty workspace. Kubernetes reported `SuccessfulAttachVolume`; the worker image is pulling. No OpenShell validation attempt has been executed or replayed by these infrastructure retries.
+
+### 9.4 Execute and verify the PoC — In progress
 
 - Monitor original attempts, record every phase outcome, preserve failure states and validate any generated branded artifacts from this new project. No result may be inferred from Job submission alone.
 
