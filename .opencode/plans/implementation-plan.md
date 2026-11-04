@@ -699,3 +699,7 @@ recommendations are not execution instructions.
 ### 10.8 Complete the fresh sandbox runtime image — ✅ 4 November 2026
 
 - Verified Build openshell-deepseek-sandbox-1 is Complete and published quay.io/aicatalyst/openshell-sandbox:deepseek-ac05c639 with digest sha256:d9bf4b254da59fe6aabab28e53c00a9a2e196482145881e9b3c6f2eac0dd501d (807s). This is the new source-built output, not the earlier f4a6137 tag. Gateway and supervisor remain Running; deployment and actual validation remain pending.
+
+### 10.9 Complete the fresh supervisor image — ✅ 4 November 2026
+
+- Verified openshell-deepseek-supervisor-1 is Complete and pushed its new deepseek-ac05c639 tag. Sandbox and supervisor are retained valid outputs; only gateway remains Running. No deployment or validation outcome is inferred from build success.
