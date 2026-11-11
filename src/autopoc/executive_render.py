@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import os
 import signal
@@ -13,7 +14,7 @@ import time
 import zipfile
 from pathlib import Path
 
-from autopoc.executive_inputs import CURRENT_TEMPLATE_VERSION, MAX_BYTES, TOPICS, verify_inputs
+from autopoc.executive_inputs import MAX_BYTES, TOPICS, verify_inputs
 
 TOPIC_TITLES = dict(
     zip(
@@ -87,7 +88,7 @@ def _reuse(output: Path, identity: str) -> dict:
         raise ValueError("Output directory conflicts with this render") from exc
 
 
-def _run_renderer(command: list[str], *, timeout: int, log_path: Path | None = None) -> None:
+def _run_renderer(command: list[str], *, timeout: float, log_path: Path | None = None) -> None:
     """Bound the entire renderer process tree, including Chromium and FFmpeg."""
     descriptor = (
         os.open(log_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
@@ -111,6 +112,9 @@ def _run_renderer(command: list[str], *, timeout: int, log_path: Path | None = N
             except ProcessLookupError:
                 pass
             process.wait()
+            raise
+        if process.returncode:
+            raise subprocess.CalledProcessError(process.returncode, command)
 
 
 def _runtime_metrics(
@@ -150,15 +154,13 @@ def _runtime_metrics(
     }
 
 
-def render_executive(inputs_path: Path, output_dir: Path, *, timeout: int = 600) -> dict:
+def render_executive(inputs_path: Path, output_dir: Path, *, timeout: int | None = None) -> dict:
     """Verify inputs, render within a deadline, and preserve independently usable outputs.
 
     Only a complete output with matching input identity and artifact hashes is reused.
     Partial output is retained for inspection; retry in a new empty directory.
     """
     started = time.monotonic()
-    if not 1 <= timeout <= 600:
-        raise ValueError("Renderer timeout must be between 1 and 600 seconds")
     _safe_path(inputs_path)
     if inputs_path.stat().st_size > MAX_BYTES:
         raise ValueError("Invalid sealed input size")
@@ -169,11 +171,16 @@ def render_executive(inputs_path: Path, output_dir: Path, *, timeout: int = 600)
         sealed = private / "render-inputs.zip"
         sealed.write_bytes(raw)
         validated = verify_inputs(sealed)
+        narrated = validated["versions"]["template"] in (3, 4)
+        maximum = 3000 if narrated else 600
+        timeout = maximum if timeout is None else timeout
+        if type(timeout) is not int or not 1 <= timeout <= maximum:
+            raise ValueError(f"Renderer timeout must be between 1 and {maximum} seconds")
         identity = _sha(raw)
         _safe_path(output_dir)
         if output_dir.exists() and any(output_dir.iterdir()):
             return _reuse(output_dir, identity)
-        if validated["versions"]["template"] != CURRENT_TEMPLATE_VERSION:
+        if validated["versions"]["template"] not in (2, 3, 4):
             raise ValueError("Legacy inputs require their original pinned renderer image")
         output_dir.mkdir(parents=True, mode=0o700, exist_ok=True)
         os.chmod(output_dir, 0o700)
@@ -183,17 +190,72 @@ def render_executive(inputs_path: Path, output_dir: Path, *, timeout: int = 600)
             for name in ("narrative.json", "scenes.json", "versions.json"):
                 (data / name).write_bytes(archive.read(name))
             evidence_hash = _sha(archive.read("evidence.zip"))
+            if validated["versions"]["schema"] == 3:
+                from autopoc.executive_story import derive_checks
+
+                # Only verified metadata and bytes frozen above enter the browser.
+                _json(data / "checks.json", derive_checks(validated["evidence_index"]))
+                _json(data / "visuals.json", validated["visuals"])
+                visual_root = data / "visuals/assets"
+                visual_root.mkdir(parents=True, mode=0o700)
+                with zipfile.ZipFile(io.BytesIO(archive.read("visuals.zip"))) as visuals:
+                    for asset in validated["visuals"]["assets"]:
+                        name = f"{asset['id']}.png"
+                        (visual_root / name).write_bytes(visuals.read(f"assets/{name}"))
         renderer = Path(os.environ.get("AUTOPOC_RENDERER_ROOT", "/opt/autopoc/renderer"))
         engine_output = private / "rendered"
         engine_output.mkdir(mode=0o700)
+        speech = engine_output / "speech"
+        speech_assets = Path(os.environ.get("AUTOPOC_SPEECH_ASSETS", "/opt/autopoc/speech-assets"))
+
+        def stage(command: list[str], name: str) -> None:
+            remaining = timeout - (time.monotonic() - started)
+            if remaining <= 0:
+                raise subprocess.TimeoutExpired(command, timeout)
+            _run_renderer(command, timeout=remaining, log_path=output_dir / name)
+
         try:
-            _run_renderer(
-                ["node", str(renderer / "render.mjs"), str(data), str(engine_output)],
-                timeout=timeout,
-                log_path=output_dir / "renderer.log",
-            )
-        except (OSError, subprocess.TimeoutExpired):
-            pass  # Independently completed deck/PDF remain useful after video failure or timeout.
+            command = ["node", str(renderer / "render.mjs"), str(data), str(engine_output)]
+            try:
+                stage(command + (["--stage", "prepare"] if narrated else []), "renderer.log")
+            except subprocess.CalledProcessError:
+                # A failed PDF export does not invalidate the checked browser deck.
+                prepared = engine_output / "presentation-manifest.json"
+                state = json.loads(prepared.read_text()) if prepared.is_file() else {}
+                artifacts = state.get("artifacts", {})
+                if (
+                    not narrated
+                    or artifacts.get("deck", {}).get("status") != "validated"
+                    or artifacts.get("pdf", {}).get("status") != "failed"
+                ):
+                    raise
+            if narrated:
+                # The prepare process has exited, including its closed Chromium browser.
+                stage(
+                    [
+                        os.environ.get(
+                            "AUTOPOC_SPEECH_PYTHON", "/opt/autopoc/speech-venv/bin/python"
+                        ),
+                        "-m",
+                        "autopoc.executive_speech",
+                        "--narrative",
+                        str(data / "narrative.json"),
+                        "--scenes",
+                        str(data / "scenes.json"),
+                        "--output-dir",
+                        str(speech),
+                        "--asset-root",
+                        str(speech_assets),
+                    ],
+                    "speech.log",
+                )
+                # No model process remains resident while the recording browser runs.
+                stage(
+                    command + ["--stage", "record", "--timeline", str(speech / "timeline.json")],
+                    "record.log",
+                )
+        except (OSError, subprocess.SubprocessError):
+            pass  # Independently completed deck/PDF remain useful after speech/video failure.
         engine_manifest = engine_output / "presentation-manifest.json"
         state = json.loads(engine_manifest.read_text()) if engine_manifest.is_file() else {}
         recovery = {
@@ -213,11 +275,24 @@ def render_executive(inputs_path: Path, output_dir: Path, *, timeout: int = 600)
             "source_hashes": validated["evidence_index"]["files"],
             "versions": validated["versions"],
             "scenes": state.get("scenes", []),
+            **(
+                {"narration": state.get("narration", {"engine": "kokoro", "voice": "af_heart"})}
+                if narrated
+                else {}
+            ),
             "status": "partial",
             "artifacts": {},
         }
 
         def artifact(key: str, name: str, content: bytes) -> None:
+            if narrated and len(content) > {"source": 512 * 1024**2, "video": 1024**3}.get(
+                key, 256 * 1024**2
+            ):
+                manifest["artifacts"][key] = {
+                    "status": "failed",
+                    "error": "Artifact exceeds format size limit",
+                }
+                return
             (output_dir / name).write_bytes(content)
             manifest["artifacts"][key] = {
                 "status": "generated_unpublished",
@@ -232,7 +307,15 @@ def render_executive(inputs_path: Path, output_dir: Path, *, timeout: int = 600)
             "recovery.json": json.dumps(recovery, indent=2).encode(),
         }
         # ponytail: fixed trusted template allowlist; extend only with reviewed renderer assets.
-        for name in ("slides.md", "package.json", "package-lock.json", "style.css"):
+        for name in (
+            "slides.md",
+            "package.json",
+            "package-lock.json",
+            "style.css",
+            "transcript.txt",
+            "checks.json",
+            "visuals.json",
+        ):
             path = source / name
             _safe_path(path)
             if path.is_file():
@@ -245,10 +328,66 @@ def render_executive(inputs_path: Path, output_dir: Path, *, timeout: int = 600)
                 for name in ("narrative.json", "scenes.json", "versions.json")
             }
         )
-        for name in ("render.mjs", "branding.mjs", "scene-validation.mjs", "README.md"):
+        if validated["versions"]["schema"] == 3:
+            for name in ("checks.json", "visuals.json"):
+                source_files[name] = (data / name).read_bytes()
+            # Keep inspectable reviewed assets even when preparation could not start.
+            for asset in validated["visuals"]["assets"]:
+                name = f"{asset['id']}.png"
+                source_files[f"public/visuals/{name}"] = (
+                    data / "visuals/assets" / name
+                ).read_bytes()
+        for name in (
+            "render.mjs",
+            "branding.mjs",
+            "scene-validation.mjs",
+            "storyboard.mjs",
+            "check-timing.mjs",
+            "audio.mjs",
+            "requirements.lock",
+            "pyproject.toml",
+            "README.md",
+        ):
             path = renderer / name
             if path.is_file():
                 source_files[name] = path.read_bytes()
+        if narrated:
+            for name in ("timeline.json", "transcript.txt", "captions.vtt"):
+                path = speech / name
+                _safe_path(path)
+                if path.is_file():
+                    # The spoken transcript is a different format from the deck's
+                    # own source/transcript.txt collected above. Keeping the bare
+                    # name would drop the one the deck actually shipped.
+                    key = "narration/transcript.txt" if name == "transcript.txt" else name
+                    source_files[key] = path.read_bytes()
+            source_files.update(
+                {f"narration/{k}": v for k, v in _tree(speech / "narration").items()}
+            )
+            # Retain identity and notices, never the 327MB model or voice tensors.
+            for name in ("manifest.json",):
+                path = speech_assets / name
+                _safe_path(path)
+                if path.is_file():
+                    source_files[f"speech-assets/{name}"] = path.read_bytes()
+            source_files.update(
+                {
+                    f"speech-assets/licenses/{k}": v
+                    for k, v in _tree(speech_assets / "licenses").items()
+                }
+            )
+            # The lexicon changed what was spoken, so recovery must be able to
+            # show which pronunciations the timeline identity refers to. Importing
+            # the speech module validates the lexicon at import time; speech itself
+            # runs out of process precisely so a bad lexicon cannot discard the
+            # deck and PDF, so this import must not either.
+            try:
+                from autopoc.executive_speech import LEXICON_PATH
+            except ValueError:
+                pass  # Recovery omits a lexicon the narration subprocess also rejected.
+            else:
+                if LEXICON_PATH.is_file():
+                    source_files["speech-assets/kokoro_lexicon.json"] = LEXICON_PATH.read_bytes()
         (output_dir / "render-inputs.zip").write_bytes(raw)
         _json(output_dir / "recovery.json", recovery)
         _zip(output_dir / "executable-source.zip", source_files)
@@ -260,6 +399,9 @@ def render_executive(inputs_path: Path, output_dir: Path, *, timeout: int = 600)
             "index.html" in static
             and state.get("artifacts", {}).get("deck", {}).get("status") == "validated"
         ):
+            for name in ("checks.json", "visuals.json"):
+                if name in source_files:
+                    static[name] = source_files[name]
             _zip(output_dir / "static-site.zip", static)
             artifact("deck", "static-site.zip", (output_dir / "static-site.zip").read_bytes())
         else:
@@ -280,14 +422,29 @@ def render_executive(inputs_path: Path, output_dir: Path, *, timeout: int = 600)
             f"Run: {validated['run_id']}",
             "Report: archived report.md in render-inputs.zip → evidence.zip.",
         ]
-        for topic, title in TOPIC_TITLES.items():
-            summary.append(f"\n## {title}\n")
-            summary.extend(
-                f"- {claim['text']} (Evidence: {', '.join(claim['sources'])})"
-                for claim in narrative[topic]
-            )
-        summary.append("\n## Limitations\n")
-        summary.extend(f"- {text}" for text in narrative["limitations"])
+        if narrated:
+            claims = {claim["id"]: claim for claim in narrative["claims"]}
+            for slide in narrative["slides"]:
+                summary.append(f"\n## {slide['title']}\n")
+                summary.extend(
+                    f"- {claims[id]['text']} (Evidence: {', '.join(claims[id]['sources'])})"
+                    for id in slide["bullet_claim_ids"]
+                )
+            if narrative["coverage_gaps"]:
+                summary.append("\n## Evidence gaps\n")
+                summary.extend(f"- {gap}" for gap in narrative["coverage_gaps"])
+            if narrative["conflicts"]:
+                summary.append("\n## Conflicting evidence\n")
+                summary.extend(f"- {conflict['text']}" for conflict in narrative["conflicts"])
+        else:
+            for topic, title in TOPIC_TITLES.items():
+                summary.append(f"\n## {title}\n")
+                summary.extend(
+                    f"- {claim['text']} (Evidence: {', '.join(claim['sources'])})"
+                    for claim in narrative[topic]
+                )
+            summary.append("\n## Limitations\n")
+            summary.extend(f"- {text}" for text in narrative["limitations"])
         for key, metadata in manifest["artifacts"].items():
             if metadata["status"] == "failed":
                 summary.append(
@@ -296,7 +453,11 @@ def render_executive(inputs_path: Path, output_dir: Path, *, timeout: int = 600)
             else:
                 summary.append(f"- [{key.title()}]({metadata['path']}) — generated, unpublished.")
         summary.append(
-            "- Silent video; animation timing is illustrative. No live tests were replayed."
+            (
+                "- Heart narration uses the exact reviewed script; animation timing is illustrative. No live tests were replayed."
+                if narrated
+                else "- Silent video; animation timing is illustrative. No live tests were replayed."
+            )
         )
         artifact("summary", "executive-summary.md", ("\n\n".join(summary) + "\n").encode())
         if all(a["status"] == "generated_unpublished" for a in manifest["artifacts"].values()):
@@ -315,7 +476,15 @@ def cmd_executive_render(args: argparse.Namespace) -> None:
     if args.inputs:
         if not args.output_dir:
             raise ValueError("Local rendering requires --output-dir")
-        result = render_executive(Path(args.inputs), Path(args.output_dir))
+        result = render_executive(
+            Path(args.inputs),
+            Path(args.output_dir),
+            **(
+                {"timeout": args.timeout_seconds}
+                if getattr(args, "timeout_seconds", None) is not None
+                else {}
+            ),
+        )
     else:
         from autopoc.executive_cluster import render_remote
 
@@ -332,6 +501,7 @@ def register_cli(subparsers) -> None:
     mode.add_argument("--inputs")
     mode.add_argument("--input-id")
     parser.add_argument("--output-dir")
+    parser.add_argument("--timeout-seconds", type=int, default=None)
     parser.add_argument("--input-sha256")
     parser.add_argument("--recovery-id")
     parser.add_argument("--recovery-sha256")

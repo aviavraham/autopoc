@@ -4,6 +4,21 @@ Run after phase 10 and reconcile on every startup/resume, including after the
 blog is completed. This extension never advances the PoC phase cursor, changes
 test outcomes, or reruns tests. Failure is non-blocking for the optional blog.
 
+## Narration mode selection
+
+First reconcile any existing checkpoint using its saved image/mode/policy.
+For a new run, `AUTOPOC_EXECUTIVE_NARRATION=kokoro` selects
+`executive-narration.md`: evidence-backed generic narrative schema 3, template 4,
+input policy 2,
+offline Heart speech and variable scenes timed from measured audio. New schema-3
+stories require a tested compatible image and reviewed local visuals archive,
+including an empty manifest when no image is available. Repository URLs may use
+any open-source Git host; infer project type only from retained source evidence.
+That reference supersedes the silent six-scene limits below for narrated runs.
+Unset/`none` keeps the silent schema-1/template-2 workflow below. Reject other
+values rather than silently choosing a mode. Use a compatible tested image
+digest; do not restyle or regenerate old checkpoints under new settings.
+
 ## Resume first
 
 Read `project.run_id` and the fork checkout from state. Run:
@@ -20,7 +35,7 @@ worker stopped waiting. An existing Job is reconciled by name and UID.
 
 ## Preconditions and original evidence
 
-- New presentations use the Red Hat-branded template revision 2. Use a newly
+- New **silent** presentations use the Red Hat-branded template revision 2. Use a newly
   built, tested revision-2 renderer digest together with the updated worker;
   never dispatch a new v2 seal to the original v1 image. Old checkpoints retain
   their original image and revision and are recovered without restyling them.
@@ -58,6 +73,50 @@ worker stopped waiting. An existing Job is reconciled by name and UID.
   "Basic authentication". If a report legitimately documents the scheme,
   rephrase it (for example "HTTP Basic credentials were rejected") before
   rerunning `evidence-create`; do not weaken the guard to unblock a run.
+
+## Optional retained logs, traces and setup details
+
+`evidence-create --supplemental-index PATH` adds schema-2 supplemental evidence
+without changing original scenario totals or attempts. Without the option,
+schema-1 collection is unchanged. Both the descriptor and supplied files must
+be regular non-symlink files under the state file's directory. Files are never
+discovered recursively or downloaded by the collector.
+
+Private descriptor example (paths are relative to the state directory):
+
+```json
+{
+  "schema_version": 1,
+  "run_id": "saved-run-id",
+  "records": [{
+    "id": "build-1", "kind": "log",
+    "path": "evidence/saved-run-id/staging/build-1.txt",
+    "sha256": "COMPUTE_FROM_THE_ORIGINAL_BYTES",
+    "provenance": {"run_id": "saved-run-id", "capture": "original"}
+  }]
+}
+```
+
+Kinds are `log`, `trace`, `deployment`, `analysis`, `test_definition`. Optional
+`execution_id` and `scenario_id` must refer to retained attempts. Compute hashes
+with a tool; never invent them. At most 32 records/512KiB each fit within the
+existing 20MiB bundle budget. Intentionally excerpt large sources before
+staging, preserving `provenance.excerpt: {start_line, end_line}`; no silent
+truncation. Missing traces are explicit gaps; a supplied bad source fails.
+
+Deployment JSON is `{run_id, observed: true|false, resources: [...]}`. The
+collector retains selected Kubernetes setup/status fields, excluding Secret
+objects/data, environment values, annotations and inline TLS keys. Trace JSON
+is `{run_id, spans: [...]}`; each span has `trace_id`, `span_id`, optional
+`parent_span_id`, `service`, `operation`, numeric `start_time` (seconds in the
+capture's clock), nonnegative `duration_seconds` and `status`. Retain original
+relations/timing; arbitrary attributes, headers and bodies are excluded.
+
+Published members are `supplemental/ID.txt` or `.json`, with a public descriptor
+that records sanitized hashes and selected capture provenance. Cite only those
+published bytes. Private paths and original input hashes stay in staging;
+provenance includes only capture identity/time/revision and excerpt coordinates.
+The existing sanitizer remains enforced for all output bytes.
 
 ## Generate and review data
 
@@ -152,4 +211,6 @@ journal slots, bounded to three attempts. Retain existing good outputs and
 prior report revisions; never reset completed PoC phases. Reconciliation
 alone does not regenerate content or call the model.
 
-Phase 1 is silent on-screen text. Google TTS narration is Phase 2.
+This legacy path is silent on-screen text. For offline Heart narration use the
+opt-in workflow above; Google TTS is not required. Drive authorization remains
+required for durable publication.
